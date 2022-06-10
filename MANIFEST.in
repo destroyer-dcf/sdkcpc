@@ -1,0 +1,11 @@
+include README.md
+include LICENSE
+recursive-include sdkcpc sdkcpc.yml
+recursive-include sdkcpc/resources gitignore
+recursive-include sdkcpc/resources/vscode tasks.json
+recursive-include sdkcpc/resources/vscode amstrad.json.code-snippets
+recursive-include sdkcpc/resources/idsk/darwin iDSK
+recursive-include sdkcpc/resources/idsk/linux iDSK
+recursive-include sdkcpc/resources/idsk/win32 iDSK.exe
+recursive-include sdkcpc/resources/idsk/win32 cyggcc_s-1.dll
+recursive-include sdkcpc/resources/idsk/win32 cygwin1.dll

@@ -1,0 +1,64 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "CPCPY: Build",
+            "type": "shell",
+            "windows": {
+                "command": "cpcpy_make.exe --clean"
+              },
+              "linux": {
+                "command": "cpcpy_make --clean"
+              },
+              "osx": {
+                "command": "cpcpy_make --clean"
+              },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "CPC: Build & Run",
+            "type": "shell",
+            "windows": {
+                "command": "cpcpy_rvm.exe"
+              },
+              "linux": {
+                "command": "cpcpy_rvm"
+              },
+              "osx": {
+                "command": "cpcpy_rvm"
+              },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },            
+            "dependsOn": [
+                "CPCPY: Build"
+               ]
+        },
+        {
+            "label": "CPC: Retro virtual Machine",
+            "type": "shell",
+            "windows": {
+                "command": "cpcpy_rvm.exe"
+              },
+              "linux": {
+                "command": "cpcpy_rvm"
+              },
+              "osx": {
+                "command": "cpcpy_rvm"
+              },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        }
+    ]
+}
