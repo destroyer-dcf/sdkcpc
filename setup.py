@@ -13,6 +13,7 @@ setup(
         name="sdkcpc", 
         version=VERSION,
         author="Destroyer",
+        license='LGPL v3',
         author_email="<destroyer.dcf@gmail.com>",
         description=DESCRIPTION,
         long_description=''.join(open('README.md', encoding='utf-8').readlines()),
@@ -32,7 +33,7 @@ setup(
         ], 
         python_requires='>=3.6',
         classifiers=[
-            'License :: OSI Approved :: MIT License',
+            'License :: OSI Approved :: LGPL v3',
             'Programming Language :: Python',
             'Programming Language :: Python :: 3',
             'Programming Language :: Python :: 3.6',
