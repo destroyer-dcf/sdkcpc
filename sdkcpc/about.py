@@ -19,8 +19,8 @@ def about():
     head("6128")
     ver =  __version__
     banner ="""\n[bold white] ╔═╗╔═╗╔═╗╔═╗╦ ╦ [bold white]┌─────────────┐[/]    [bold white]Created by: [bold green] © Destroyer - 2022[/]
-[bold white] ║  ╠═╝║  ╠═╝╚╦╝ [bold white]│ [red]■■■[green] ■■■[blue] ■■■ [white]│[/]    [bold white]Github    : [bold green] https://github.com/amstrad-cpc/cpcp_core.git[/]
-[bold white] ╚═╝╩  ╚═╝╩   ╩  [bold white]│ [red]■■■[green] ■■■[blue] ■■■ [white]│[/]    [bold white]Version   : [bold green] {ver}[/]
+[bold white] ║  ╠═╝║  ╠═╝╚╦╝ [bold white]│ [red bold]■■■[green] ■■■[blue] ■■■ [white]│[/]    [bold white]Github    : [bold green] https://github.com/amstrad-cpc/cpcp_core.git[/]
+[bold white] ╚═╝╩  ╚═╝╩   ╩  [bold white]│ [red bold]■■■[green] ■■■[blue] ■■■ [white]│[/]    [bold white]Version   : [bold green] {ver}[/]
 [yellow] SDK Amstrad CPC[bold white] └─────────────┘[/]    [bold white]Follow me : [bold green] https://faceboock.com/cpcpy[/]""".format(ver=ver)
 
 

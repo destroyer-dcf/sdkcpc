@@ -26,7 +26,7 @@ def getConfigKey(key):
             data = yaml.load(f, Loader=SafeLoader)
             print(f"[blue]{key}: [white]"+ data[key])
         except KeyError as e:
-            print('[red]The key %s does not exist' % str(e))
+            print('[red bold]The key %s does not exist' % str(e))
         except IndexError as e:
             print ('red]I got an IndexError - reason "%s"' % str(e))
 
@@ -38,9 +38,9 @@ def getConfigKeyProgram(key):
             data = yaml.load(f, Loader=SafeLoader)
             return data[key]
         except KeyError as e:
-            print('[red]The key %s does not exist' % str(e))
+            print('[red bold]The key %s does not exist' % str(e))
         except IndexError as e:
-            print ('[red]I got an IndexError - reason "%s"' % str(e))
+            print ('[red bold]I got an IndexError - reason "%s"' % str(e))
 
 # Verifica que exista la clave en el fichero de configuracion
 #   @Param: Nombre de la Clave
@@ -50,10 +50,10 @@ def checkConfigKey(key):
             data = yaml.load(f, Loader=SafeLoader)
             print("[yellow]Chage value Key: [white]" + data[key])
         except KeyError as e:
-            print('[red]The key %s does not exist' % str(e))
+            print('[red bold]The key %s does not exist' % str(e))
             exit(1)
         except IndexError as e:
-            print ('[red]I got an IndexError - reason "%s"' % str(e))
+            print ('[red bold]I got an IndexError - reason "%s"' % str(e))
 
 # Cambiar el valor de la clave por el especificado
 #   @Param: Nombre de la Clave

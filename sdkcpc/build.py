@@ -75,7 +75,7 @@ def build():
             raise Exception(_commando_idsk + ' does not exist')
     except:
         Error(Section_config["name.dsk.file"] + " not create!!!")
-        print("[blue]VERSION: [bold  white]"+ new_version +"\n[blue]BUILD  : [white]" + new_compilation +"\n[blue]STATUS : [red]ERROR")
+        print("[blue]VERSION: [bold  white]"+ new_version +"\n[blue]BUILD  : [white]" + new_compilation +"\n[blue]STATUS : [red bold]ERROR")
         sys.exit(1)
     console.print("")
     addDskFiles("OBJ",0)
@@ -106,7 +106,7 @@ def createDskFile(dskFile,new_version,new_compilation):
             raise Exception(_commando_idsk + ' does not exist')
     except:
         Error(dskFile + " not create!!!")
-        print("[blue]VERSION: [white]"+ new_version +"\n[blue]BUILD  : [white]" + new_compilation +"\n[blue]STATUS : [red]ERROR")
+        print("[blue]VERSION: [white]"+ new_version +"\n[blue]BUILD  : [white]" + new_compilation +"\n[blue]STATUS : [red bold]ERROR")
         sys.exit(1)
 
 def addDskFiles(folder,tipo):
@@ -192,4 +192,4 @@ def Warning(text):
 # Log ERROR message
 #   @Param text to write
 def Error(text):
-    print("[red]ERROR    [white]"+text)
+    print("[red bold]ERROR    [white]"+text)

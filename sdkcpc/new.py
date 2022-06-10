@@ -53,14 +53,14 @@ def createNewProject(nameProject,template):
             if answers["vscodeopen"] == "Yes":
                 openVscode(nameProject)
     else:
-        print(f"[red]The " + nameProject + " project exists on this path")
+        print(f"[red bold]The " + nameProject + " project exists on this path")
         sys.exit(1)
 
 # Cheque si el nombre de proyecto contiene espacios.
 #   @Param Nombre del Proyecto
 def checkNameProject(nameProject):
     if nameProject.find(' ') != -1:
-        print("[red]The project name cannot contain spaces")
+        print("[red bold]The project name cannot contain spaces")
         sys.exit(1)
 
 # Create makefile
@@ -118,7 +118,7 @@ def createVscode(project):
         shutil.copytree(path.dirname(path.abspath(__file__)) + "/resources/vscode",PWD + project + "/.vscode")
         print("[white]Create vscode files.")
     except OSError as err:
-        print("[red]"+err)
+        print("[red bold]"+err)
         sys.exit(1)
 
 # Inicializacion repositorio GIT
@@ -135,7 +135,7 @@ def gitInit(project):
         shutil.copy(path.dirname(path.abspath(__file__)) + "/resources/gitignore",PWD + project + "/.gitignore")
         print("[white]Create .gitignore file.")
     except OSError as err:
-        print("[bold red blink]"+err)
+        print("[bold red]"+err)
         sys.exit(1)
 
 # Open Visual Studio Code
