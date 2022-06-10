@@ -18,7 +18,7 @@ console = Console(width=80,color_system="windows",force_terminal=True)
 
 # Crea nuevo proyecto en la ruta actua.
 #   @Param Nombre del Proyecto
-def createNewProject(nameProject):
+def createNewProject(nameProject,template):
     head("6128")
     # chequeamos si el nombre del proyecto contiene espacios
     checkNameProject(nameProject)
@@ -31,7 +31,7 @@ def createNewProject(nameProject):
         os.makedirs(PWD + "/" + nameProject)
         createStructure(nameProject)
         # Creamos makefile del proyecto
-        makeFileTemplate(nameProject,build)
+        makeFileTemplate(nameProject,build,template)
         basFileTemplate(nameProject,build)
         if CONFIG["project.git"] == 1:
             console.print("[yellow]\nGit Repository")
@@ -41,7 +41,7 @@ def createNewProject(nameProject):
             console.print("[yellow]\nVisual Studio Code")
             createVscode(nameProject)
 
-        console.print("[green]Project " + nameProject + " Create successfully")
+        console.print("[green]\nProject " + nameProject + " Create successfully")
         console.rule("")
         footer()
         if CONFIG["project.vscode"] == 1:
@@ -64,11 +64,12 @@ def checkNameProject(nameProject):
         sys.exit(1)
 
 # Create makefile
-def makeFileTemplate(project_name, build):
+def makeFileTemplate(project_name, build,template):
 
     data = {
         "project_name": project_name,
-        "compilation" : build
+        "compilation" : build,
+        "template"    : template
     }
     
     template = """
@@ -79,19 +80,20 @@ version = 0.0.1
 [general]
 name = {{ project_name }}
 description = None
+template = {{ template }}
 authors = authors <authors@mail.com>
 
 [config]
-concatenate = No
-validate83 = Yes
-basfile = {{ project_name }}.bas
-dskfile = {{ project_name }}.dsk
+concatenate.files = No
+validate.83.files = Yes
+name.bas.file = {{ project_name }}.bas
+name.dsk.file = {{ project_name }}.dsk
 
 [rvm]
-model = 6128
+model.cpc = 6128
 
 [winape]
-model = 6128
+model.cpc = 6128
 
 [m4]
 ip = 0.0.0.0
@@ -160,6 +162,6 @@ def basFileTemplate(project_name, build):
 10 PRINT "HELLO WORLD"
     """
     j2_template = Template(template)
-    fichero = open(PWD + project_name + "/BASIC/" + project_name.upper() + ".BAS", 'w')
+    fichero = open(PWD + project_name + "/BASIC/" + project_name + ".bas", 'w')
     fichero.write(j2_template.render(data))
     fichero.close()

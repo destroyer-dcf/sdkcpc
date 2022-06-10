@@ -70,7 +70,7 @@ def main():
     args = parser.parse_args()
 
     if args.command == 'new':
-        createNewProject(args.name_project)
+        createNewProject(args.name_project,"Basic")
 
     elif args.command == 'new-8bp':
         print("new project 8bp")

@@ -13,11 +13,14 @@ setup(
         name="sdkcpc", 
         version=VERSION,
         author="Destroyer",
-        license='LGPL v3',
         author_email="<destroyer.dcf@gmail.com>",
         description=DESCRIPTION,
         long_description=''.join(open('README.md', encoding='utf-8').readlines()),
         long_description_content_type='text/markdown',
+        url="https://github.com/destroyer-dcf/sdkcpc",
+        project_urls={
+            "Bug Tracker": "https://github.com/destroyer-dcf/sdkcpc/issues",
+        },
         keywords=['executable'],
         include_package_data=True,
         packages=find_packages(),
@@ -33,7 +36,7 @@ setup(
         ], 
         python_requires='>=3.6',
         classifiers=[
-            'License :: OSI Approved :: LGPL v3',
+            'License :: OSI Approved :: MIT License',
             'Programming Language :: Python',
             'Programming Language :: Python :: 3',
             'Programming Language :: Python :: 3.6',
@@ -42,7 +45,6 @@ setup(
             'Programming Language :: Python :: 3.9',
             'Programming Language :: Python :: 3.10',
             'Operating System :: Microsoft :: Windows',
-            'Operating System :: OSX :: OSX',
             'Operating System :: POSIX :: Linux',
         ],
         entry_points={
