@@ -20,7 +20,7 @@ console = Console(width=80,color_system="windows",force_terminal=True)
 # Chequeamos si la estructura y el archivo project.cfg 
 # contienen errores.
 def checkProject():
-
+    validateGeneralSection(readProyectSection("general"))
     # Chequeamos que la carpeta sea un proyecto sdkcpc
     validateFolderProject()
     # Chequeamos que la carpeta que la carpeta contenga la estructura del proyecto sdkcpc
@@ -75,9 +75,41 @@ def validate83FilesinFolders(Folder):
                     print("[yellow](Project Folder)[red bold]\["+busca[y]+"]:El archivo " + arr[x] + " does not conform to 8:3 format.")
                     sys.exit()
 
+
+# Validamos la seccion Config
+# @Param Array de keys de la seccion
+def validateGeneralSection(data):
+    # comprobamos que existan todas las keys
+    if not "name" in data:
+        print("[yellow][Project.cfg][red bold]\[general]:name [red bold] --> key not exist")
+        sys.exit(1)
+    if not "description" in data:
+        print("[yellow][Project.cfg][red bold]\[general]:description [red bold] --> key not exist")
+        sys.exit(1)
+    if not "template" in data:
+        print("[yellow][Project.cfg][red bold]\[general]:template [red bold] --> key not exist")
+        sys.exit(1)
+    if not "authors" in data:
+        print("[yellow][Project.cfg][red bold]\[general]:authors [red bold] --> key not exist")
+        sys.exit(1)
+
 # Validamos la seccion Config
 # @Param Array de keys de la seccion
 def validateConfigSection(data):
+    # comprobamos que existan todas las keys
+    if not "validate.83.files" in data:
+        print("[yellow][Project.cfg][red bold]\[config]:validate.83.files [red bold] --> key not exist")
+        sys.exit(1)
+    if not "concatenate.files" in data:
+        print("[yellow][Project.cfg][red bold]\[config]:concatenate.files [red bold] --> key not exist")
+        sys.exit(1)
+    if not "name.bas.file" in data:
+        print("[yellow][Project.cfg][red bold]\[config]:name.bas.file [red bold] --> key not exist")
+        sys.exit(1)
+    if not "name.dsk.file" in data:
+        print("[yellow][Project.cfg][red bold]\[config]:name.dsk.file [red bold] --> key not exist")
+        sys.exit(1)
+
     # Validamos si el dato es correcto
     while data["concatenate.files"].upper() not in ["YES","NO"]:
         print("[yellow][Project.cfg][red bold]\[config]:concatenate = [red bold]"+ data["concatenate.files"] + " --> value is not correct. Correct values [green][Yes,No]")

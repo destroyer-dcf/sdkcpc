@@ -90,10 +90,11 @@ def readProyectKey(section,key):
     try:
         config = configparser.RawConfigParser()
         config.read(PWD + MAKEFILE)
-        return config.get(section, key)
+        
     except:
         console.print("[red bold]\[ERROR]: Key not exist in Project.cfg")
         sys.exit(1)
+    return config.get(section, key)
 
 # Leer todas las keys de una seccion
 #   @Param Seccion
