@@ -83,7 +83,7 @@ def main():
             sys.exit(0)
         if args.winape == True:
             validateFolderProject()
-            print("winape option")
+            winape()
             sys.exit(0)
         if args.m4 == True:
             validateFolderProject()

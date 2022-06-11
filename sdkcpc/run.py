@@ -14,9 +14,7 @@ console = Console(width=80,color_system="windows",force_terminal=True)
 def rvm():
 
     Section_config  = readProyectSection("config")
-    Section_general = readProyectSection("general")
     rvm_model = readProyectSection("rvm")
-    winape_model = readProyectSection("winape")
     DSK = PWD + "OUT/" + Section_config["name.dsk.file"]
     
     head(str(rvm_model) )
@@ -31,5 +29,18 @@ def rvm():
     footer()
 
 def winape():
+
+    Section_config  = readProyectSection("config")
+    winape_model = readProyectSection("winape")
+    DSK = PWD + "OUT/" + Section_config["name.dsk.file"]
+    DSK = "z:"+DSK.replace("/", "\\").lower()
+    
+    head(str(winape_model["model.cpc"]) )
     # Depending on the platform we execute
-    print("hgg")
+    WINAPE = getConfigKeyProgram("winape.path")
+    console.print('[yellow]RUN"'+Section_config["name.bas.file"])
+    if sys.platform == "darwin" or sys.platform == "linux":
+        subprocess.Popen(["wine",WINAPE,DSK,"/A:"+Section_config["name.bas.file"]], stdout=subprocess.DEVNULL)
+    elif sys.platform == "win32" or sys.platform == "win64":
+        os.system(r"start " + WINAPE +" "+DSK+" "+"/A:"+Section_config["name.bas.file"])
+    footer()
