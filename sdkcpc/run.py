@@ -14,6 +14,7 @@ console = Console(width=80,color_system="windows",force_terminal=True)
 def rvm():
 
     Section_config  = readProyectSection("config")
+    section_compilation = readProyectSection("compilation")
     rvm_model = readProyectSection("rvm")
     DSK = PWD + "OUT/" + Section_config["name.dsk.file"]
 
@@ -21,9 +22,12 @@ def rvm():
         print("[yellow](config sdkcpc)[red bold]\[rvm.path]:El archivo " + CONFIG["rvm.path"] + " does not exist.")
         exit(1)
 
-    head(str(rvm_model) )
+    head(readProyectKey("rvm","model.cpc"))
     # Depending on the platform we execute
     RVM = getConfigKeyProgram("rvm.path")
+    console.print("[yellow]Build   : " + section_compilation["build"])
+    console.print("[yellow]Version : " + section_compilation["version"])
+    console.print("[yellow]Emulador: Retro Virtual Machine")
     console.print('[yellow]RUN"'+Section_config["name.bas.file"])
     if sys.platform == "darwin" or sys.platform == "linux":
         subprocess.Popen([RVM,"-i", DSK,"-b=cpc"+rvm_model["model.cpc"],"-c=RUN\""+Section_config["name.bas.file"]+"\"\n"], stdout=subprocess.DEVNULL)
@@ -35,6 +39,7 @@ def rvm():
 def winape():
 
     Section_config  = readProyectSection("config")
+    section_compilation = readProyectSection("compilation")
     rvm_model = readProyectSection("rvm")
     DSK = PWD + "OUT/" + Section_config["name.dsk.file"]
     DSK = "z:"+DSK.replace("/", "\\").lower()
@@ -46,6 +51,9 @@ def winape():
     head(str(rvm_model["model.cpc"]) )
     # Depending on the platform we execute
     WINAPE = getConfigKeyProgram("winape.path")
+    console.print("[yellow]Build   : " + section_compilation["build"])
+    console.print("[yellow]Version : " + section_compilation["version"])
+    console.print("[yellow]Emulador: Winape")
     console.print('[yellow]RUN"'+Section_config["name.bas.file"])
     if sys.platform == "darwin" or sys.platform == "linux":
         subprocess.Popen(["wine",WINAPE,DSK,"/A:"+Section_config["name.bas.file"]], stdout=subprocess.DEVNULL)

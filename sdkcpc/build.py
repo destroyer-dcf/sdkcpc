@@ -66,17 +66,20 @@ def build():
                 fo.write(concat)
             unix2dos(Section_config["name.bas.file"])
     console.print("")
-    # Creamos Dsk en OUT
-    console.rule("[yellow]\[   Create DSK File    ]")
-    console.print("")
-    try:
-        os_cmd = _commando_idsk + " " + PWD+"OUT/"+ Section_config["name.dsk.file"] +  ' -n'
-        if os.system(os_cmd) != 0:
-            raise Exception(_commando_idsk + ' does not exist')
-    except:
-        Error(Section_config["name.dsk.file"] + " not create!!!")
-        print("[blue]VERSION: [bold  white]"+ new_version +"\n[blue]BUILD  : [white]" + new_compilation +"\n[blue]STATUS : [red bold]ERROR")
-        sys.exit(1)
+    # Creamos Dsk en OUT si el template es basic, si no copiamos la bibliotec 8bp que esta en dsk
+    if Section_general["template"] == "Basic":
+        console.rule("[yellow]\[   Create DSK File    ]")
+        console.print("")
+        try:
+            os_cmd = _commando_idsk + " " + PWD+"OUT/"+ Section_config["name.dsk.file"] +  ' -n'
+            if os.system(os_cmd) != 0:
+                raise Exception(_commando_idsk + ' does not exist')
+        except:
+            Error(Section_config["name.dsk.file"] + " not create!!!")
+            print("[blue]VERSION: [bold  white]"+ new_version +"\n[blue]BUILD  : [white]" + new_compilation +"\n[blue]STATUS : [red bold]ERROR")
+            sys.exit(1)
+    if Section_general["template"] == "8BP":
+        copy8bp(Section_general["name"],Section_config["name.dsk.file"])
     console.print("")
     addDskFiles("OBJ",0)
     console.print("")
@@ -98,6 +101,15 @@ def build():
     console.print("")
     console.rule("")
     footer()
+
+# Copia 8bp defauld
+def copy8bp(project,dskfile):
+    try:
+        shutil.copy(PWD+ "/DSK/8bp.dsk",PWD + "/OUT/"+dskfile)
+        print("[white]Add 8bp library.")
+    except OSError as err:
+        print("[red bold]"+str(err))
+        sys.exit(1)
 
 def createDskFile(dskFile,new_version,new_compilation):
     try:

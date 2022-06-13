@@ -73,7 +73,7 @@ def main():
         createNewProject(args.name_project,"Basic")
 
     elif args.command == 'new-8bp':
-        print("new project 8bp")
+        createNewProject(args.name_project_8bp,"8BP")
 
     elif args.command == 'run':
 

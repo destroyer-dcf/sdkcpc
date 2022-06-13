@@ -15,9 +15,7 @@ console = Console(width=100,color_system="windows",force_terminal=True)
 contador_files = 0
 
 def info():
-    Section_config  = readProyectSection("config")
     Section_general = readProyectSection("general")
-    Section_compile = readProyectSection("compilation")
     Section_rvm     = readProyectSection("rvm")
 
     head(str(Section_rvm["model.cpc"]))
@@ -42,8 +40,6 @@ def info():
 
     for a in FOLDERS:
         total_size = 0
-        tabla_files =[]
-        tabla_sizes =[]
         files = glob.glob(PWD + a + "/*") 
         contador = 0
         for f in files: 
