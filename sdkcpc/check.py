@@ -37,7 +37,6 @@ def checkProject():
        sys.exit(1)
     # Validamos que el modelo de cpc sea correcto.
     validateModelCpc("rvm")
-    validateModelCpc("winape")
     # Validamos el nombre de proyecto
     validateName(readProyectKey("general","name"))
     # validamos la seccion CONFIG

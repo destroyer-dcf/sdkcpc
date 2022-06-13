@@ -31,11 +31,11 @@ def rvm():
 def winape():
 
     Section_config  = readProyectSection("config")
-    winape_model = readProyectSection("winape")
+    rvm_model = readProyectSection("rvm")
     DSK = PWD + "OUT/" + Section_config["name.dsk.file"]
     DSK = "z:"+DSK.replace("/", "\\").lower()
     
-    head(str(winape_model["model.cpc"]) )
+    head(str(rvm_model["model.cpc"]) )
     # Depending on the platform we execute
     WINAPE = getConfigKeyProgram("winape.path")
     console.print('[yellow]RUN"'+Section_config["name.bas.file"])
