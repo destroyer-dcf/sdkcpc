@@ -18,13 +18,13 @@ def rvm():
     rvm_model = readProyectSection("rvm")
     DSK = PWD + "OUT/" + Section_config["name.dsk.file"]
 
-    if not os.path.exists(CONFIG["rvm.path"]):
-        print("[yellow](config sdkcpc)[red bold]\[rvm.path]:El archivo " + CONFIG["rvm.path"] + " does not exist.")
+    if not os.path.exists(CONFIG["path.rvm"]):
+        print("[yellow](config sdkcpc)[red bold]\[path.rvm]:El archivo " + CONFIG["path.rvm"] + " does not exist.")
         exit(1)
 
     head(readProyectKey("rvm","model.cpc"))
     # Depending on the platform we execute
-    RVM = getConfigKeyProgram("rvm.path")
+    RVM = getConfigKeyProgram("path.rvm")
     console.print("[yellow]Build   : " + section_compilation["build"])
     console.print("[yellow]Version : " + section_compilation["version"])
     console.print("[yellow]Emulator: Retro Virtual Machine")
@@ -44,13 +44,13 @@ def winape():
     DSK = PWD + "OUT/" + Section_config["name.dsk.file"]
     DSK = "z:"+DSK.replace("/", "\\").lower()
 
-    if not os.path.exists(CONFIG["winape.path"]):
-        print("[yellow](config sdkcpc)[red bold]\[winape.path]:El archivo " + CONFIG["winape.path"] + " does not exist.")
+    if not os.path.exists(CONFIG["path.winape"]):
+        print("[yellow](config sdkcpc)[red bold]\[path.winape]:El archivo " + CONFIG["path.winape"] + " does not exist.")
         exit(1)
 
     head(str(rvm_model["model.cpc"]) )
     # Depending on the platform we execute
-    WINAPE = getConfigKeyProgram("winape.path")
+    WINAPE = getConfigKeyProgram("path.winape")
     console.print("[yellow]Build   : " + section_compilation["build"])
     console.print("[yellow]Version : " + section_compilation["version"])
     console.print("[yellow]Emulator: Winape")
