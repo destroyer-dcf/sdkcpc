@@ -16,6 +16,7 @@ from tabulate import tabulate
 from datetime import datetime
 
 from .config import *
+
 from rich.console import Console
 
 console = Console(width=80,color_system="windows",force_terminal=True)
