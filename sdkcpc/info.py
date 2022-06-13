@@ -28,8 +28,6 @@ def info():
 
     for i in config.sections():
         ShowDataProjectinSection(i)
-   
-
     
     console.rule("[bold yellow]PROJECT FILES")
     table = Table(show_lines= True,show_edge=True,box=box.SQUARE,expand=True)

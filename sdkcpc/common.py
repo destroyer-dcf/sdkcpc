@@ -34,13 +34,11 @@ MODELS_CPC         = ["464","664","6128"]
 CONFIG_FILE    = "sdkcpc.yml"
 PATH_TOOLS     = os.path.split(os.path.abspath(__file__))
 PARENT_DIR     = os.path.dirname(os.path.dirname(__file__))
-SHOW_HEAD      = getConfigKeyProgram("show.amstrad.screen")
-SHOW_FOOTER    = getConfigKeyProgram("show.amstrad.ready")
 LOG_FILE       = "project.log"
 
 #Cabezera 
 def head(model):
-    if SHOW_HEAD == 1 :
+    if getConfigKeyProgram("show.amstrad.screen") == 1 :
         if model == "6128":
             console.print("  ")
             console.print("[yellow] Amstrad 128K Microcomputer (s3) ")
@@ -74,7 +72,7 @@ def head(model):
 
 #footer screen
 def footer():
-    if SHOW_FOOTER == 1 :
+    if getConfigKeyProgram("show.amstrad.ready") == 1 :
         console.print("[yellow]Ready")
         console.print("[yellow]█")
 
