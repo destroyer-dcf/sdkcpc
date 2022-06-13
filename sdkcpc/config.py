@@ -1,31 +1,41 @@
 import yaml
 from yaml.loader import SafeLoader
 import os.path as path
-from rich.console import Console
 from rich import print
 import os
 from .common import *
-
 from rich.console import Console
-console = Console(width=80,color_system="windows",force_terminal=True)
+from rich.table import Table
+from rich import box
+
+console = Console(width=100,color_system="windows",force_terminal=True)
 
 # Lista el contenido de todas la variables de configuracion de sdkcpc
 #   @Param text to write
 def listConfigsKeys():
     # data = pkgutil.get_data(__package__, 'sdkcpc.yml')
     print("")
+    table = Table(title="sdkcpc configurations",show_lines= True,show_edge=True,box=box.SQUARE,expand=True)
+    table.add_column("Key", justify="left", style="yellow", no_wrap=True)
+    table.add_column("Value", justify="left", style="green")
     yaml_file = open(path.dirname(path.abspath(__file__)) + '/sdkcpc.yml', 'r')
     yaml_content = yaml.load(yaml_file, Loader=yaml.FullLoader)
     for key, value in yaml_content.items():
-        print(f"[blue]{key}: [white]{value}")
+        # print(f"[blue]{key}: [white]{value}")
+        table.add_row(key, str(value))
+    console.print(table)        
 
 # Muestra el valor de la clave especificada
 #   @Param: Nombre de la Clave
 def getConfigKey(key):
+    table = Table(title="sdkcpc configurations",show_lines= True,show_edge=True,box=box.SQUARE,expand=True)
+    table.add_column("Key", justify="left", style="yellow", no_wrap=True)
+    table.add_column("Value", justify="left", style="green")
     with open(path.dirname(path.abspath(__file__)) + '/sdkcpc.yml', 'r', encoding='utf8') as f:
         try:
             data = yaml.load(f, Loader=SafeLoader)
-            print(f"[blue]{key}: [white]"+ data[key])
+            table.add_row(key, str(data[key]))
+            console.print(table)  
         except KeyError as e:
             print('[red bold]The key %s does not exist' % str(e))
         except IndexError as e:
@@ -74,8 +84,7 @@ def setConfigKeyValue(key,value):
     with open(path.dirname(path.abspath(__file__)) + '/sdkcpc.yml', 'w', encoding='utf8') as f:
         yaml.dump(doc, f)
     print("[yellow]New Value Key    ("+key+"): [green]" + value)
-    print()
-    console.rule("sdkcpc config")
+
     listConfigsKeys()
 
 # Lee los datos de configuracion para utilizarlos en el programa
