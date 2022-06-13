@@ -59,7 +59,7 @@ def checkConfigKey(key):
     with open(path.dirname(path.abspath(__file__)) + '/sdkcpc.yml', 'r', encoding='utf8') as f:
         try:
             data = yaml.load(f, Loader=SafeLoader)
-            print("[yellow]Change value Key ("+key+"): [white]" + data[key])
+            print("[yellow]Change value Key ("+key+"): [white]" + str(data[key]))
         except KeyError as e:
             print('[red bold]The key %s does not exist' % str(e))
             exit(1)
@@ -73,7 +73,10 @@ def setConfigKeyValue(key,value):
     
     if key == "rvm.path" or key == "winape.path":
         if not os.path.exists(value):
-            print("[yellow](config sdkcpc)[red bold]\["+key+"]:El archivo " + value + " does not exist.")
+            print("[yellow](config sdkcpc)[red bold]\["+key+"]:file " + str(value) + " does not exist.")
+            exit(1)
+    elif value == "0" or value=="1":
+            print("[yellow](config sdkcpc)[red bold]\["+key+"]:The value of the key must be 1 or 0")
             exit(1)
     checkConfigKey(key)
     with open(path.dirname(path.abspath(__file__)) + '/sdkcpc.yml', 'r', encoding='utf8') as f:
