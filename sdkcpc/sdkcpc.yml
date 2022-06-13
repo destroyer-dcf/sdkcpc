@@ -1,8 +1,6 @@
-rvm.path: /usr/bin/RetroVirtualMachine
-winape.path: /home/destroyer/Documentos/Github/WinAPE20B2/WinApe.exe
-project.vscode: 1
 project.git: 1
-show.amstrad.screen: 1
+project.vscode: 1
+rvm.path: /usr/bin/RetroVirtualMachine
 show.amstrad.ready: 1
-
-
+show.amstrad.screen: 1
+winape.path: /home/destroyer/Documentos/Github/WinAPE20B2/WinApe.exe

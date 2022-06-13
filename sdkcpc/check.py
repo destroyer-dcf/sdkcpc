@@ -72,7 +72,7 @@ def validate83FilesinFolders(Folder):
                 if len(os.path.splitext(arr[x])[1]) != 4 or len(os.path.splitext(arr[x])[0]) > 8:
                     print("El archivo " + arr[x] + " does not conform to 8:3 format.")
                     print("[yellow](Project Folder)[red bold]\["+busca[y]+"]:El archivo " + arr[x] + " does not conform to 8:3 format.")
-                    sys.exit()
+                    exit(1)
 
 
 # Validamos la seccion Config

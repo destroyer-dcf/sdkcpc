@@ -4,6 +4,7 @@ import pkgutil
 import os.path as path
 from rich.console import Console
 from rich import print
+import os
 
 from rich.console import Console
 console = Console(width=80,color_system="windows",force_terminal=True)
@@ -60,6 +61,11 @@ def checkConfigKey(key):
 #   @Param: Nuevo valor de la Clave
 def setConfigKeyValue(key,value):
     checkConfigKey(key)
+    if key == "rvm.path" or key == "winape.path":
+        if not os.path.exists(value):
+            print("[yellow](config sdkcpc)[red bold]\["+key+"]:El archivo " + value + " does not exist.")
+            exit(1)
+
     with open(path.dirname(path.abspath(__file__)) + '/sdkcpc.yml', 'r', encoding='utf8') as f:
         doc = yaml.load(f, Loader=yaml.FullLoader)
 
