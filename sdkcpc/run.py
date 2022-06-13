@@ -8,11 +8,11 @@ from .config import *
 from .common import *
 from .new import *
 from rich.console import Console
+
 console = Console(width=80,color_system="windows",force_terminal=True)
 
-
+# Ejecuta retro virtual machine con el dsk asociado
 def rvm():
-
     Section_config  = readProyectSection("config")
     section_compilation = readProyectSection("compilation")
     rvm_model = readProyectSection("rvm")
@@ -36,8 +36,8 @@ def rvm():
         os.system(r"start " + RVM + " -i "+ DSK +  " -b=cpc"+rvm_model["model.cpc"] + run +"\n\n")
     footer()
 
+# Ejecuta winape con el dsk asociado
 def winape():
-
     Section_config  = readProyectSection("config")
     section_compilation = readProyectSection("compilation")
     rvm_model = readProyectSection("rvm")
