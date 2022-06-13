@@ -27,7 +27,7 @@ def rvm():
     RVM = getConfigKeyProgram("rvm.path")
     console.print("[yellow]Build   : " + section_compilation["build"])
     console.print("[yellow]Version : " + section_compilation["version"])
-    console.print("[yellow]Emulador: Retro Virtual Machine")
+    console.print("[yellow]Emulator: Retro Virtual Machine")
     console.print('[yellow]\nRUN"'+Section_config["name.bas.file"])
     if sys.platform == "darwin" or sys.platform == "linux":
         subprocess.Popen([RVM,"-i", DSK,"-b=cpc"+rvm_model["model.cpc"],"-c=RUN\""+Section_config["name.bas.file"]+"\"\n"], stdout=subprocess.DEVNULL)
@@ -53,7 +53,7 @@ def winape():
     WINAPE = getConfigKeyProgram("winape.path")
     console.print("[yellow]Build   : " + section_compilation["build"])
     console.print("[yellow]Version : " + section_compilation["version"])
-    console.print("[yellow]Emulador: Winape")
+    console.print("[yellow]Emulator: Winape")
     console.print('[yellow]\nRUN"'+Section_config["name.bas.file"])
     if sys.platform == "darwin" or sys.platform == "linux":
         subprocess.Popen(["wine",WINAPE,DSK,"/A:"+Section_config["name.bas.file"]], stdout=subprocess.DEVNULL)
