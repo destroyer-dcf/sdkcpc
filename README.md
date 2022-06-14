@@ -78,9 +78,9 @@ La instalación en OSX la realizaremos desde el gestor de paquetes de codigo abi
 brew install wine
 ```
 
-### Instalar Plugins en Visual Studio Code.
+### Instalar Extensiones en Visual Studio Code.
 
-Para que nuestra experiencia se total, es necesario instalar la extension Amstrad-Basic de dfreniche para que tengamos el resaltado de sintaxis para los bloques de código fuente Basic. Para ello desde el Gestor de extensiones de Visual Studio Code buscaremos la extension Amstrad-Basic y le datemos a instalar.
+Para que nuestra experiencia de programacion sea mas agradable, es recomendable instalar la extension Amstrad-Basic de **dfreniche**. De esta forma conseguimos el resaltado de sintaxis para los bloques de código fuente Basic. Desde el Gestor de extensiones de Visual Studio Code buscaremos la extension Amstrad-Basic y pulsaremos *instalar*.
 
 ![image](screenshot/extension.jpg)
 
@@ -123,8 +123,6 @@ Muestra información del desarrollador del proyecto.
 | Como Usar  | Opciones  | Descripcion  |
 |:----------|:----------|:----------|
 | `sdkcpc about`    |     | Muestra información del software y del desarrollador    |
-
-
 
 ---
 **█ build**
@@ -183,9 +181,9 @@ Crea un nuevo proyecto en la ruta actual con la estructura necesaria para trabaj
 
 | Como Usar  | Opciones  | Descripcion  |
 |:----------|:----------|:----------|
-| `sdkcpc new`    | [Nombre_proyecto]  | El argumento lleva como opción el nombre que asignaremos a nuestro proyecto|
+| `sdkcpc new`    | [Nombre_proyecto]  | El argumento lleva como opción el nombre que asignaremos a nuestro proyecto.|
 
-> **NOTA** No se admiten espacios en el nombre del proyecto
+> **NOTA:** *No se admiten espacios en el nombre del proyecto.*
 
 ---
 **█ new-8bp**
@@ -194,8 +192,8 @@ Crea un nuevo proyecto en la ruta actual con la estructura necesaria para trabaj
 
 | Como Usar  | Opciones  | Descripcion  |
 |:----------|:----------|:----------|
-| `sdkcpc new-8bp`    | [Nombre_proyecto]  |El argumento lleva como opción el nombre que asignaremos a nuestro proyecto|
-> **NOTA** No se admiten espacios en el nombre del proyecto
+| `sdkcpc new-8bp`    | [Nombre_proyecto]  |El argumento lleva como opción el nombre que asignaremos a nuestro proyecto.|
+> **NOTA:** *No se admiten espacios en el nombre del proyecto.*
 ---
 **█ run**
 
@@ -208,12 +206,12 @@ Carga nuestro DSK generado y ejecuta el bas seleccionado sobre el emulador pasad
 ---
 
 
-## Contact information and support
+## Información de contacto y soporte
 email: sdkcpc@gmail.com
 
 twitter: @sdkcpc
 
-## Authors and License
+## Licencia y Autor
 (C) Copyright 2021-2022 Destroyer sdkcpc
 
 CPCtelera low-level library, examples and scripts are distributed under GNU Lesser General Public License v3
