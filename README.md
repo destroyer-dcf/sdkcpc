@@ -80,7 +80,7 @@ brew install wine
 
 Para que nuestra experiencia se total, es necesario instalar la extension Amstrad-Basic de dfreniche para que tengamos el resaltado de sintaxis para los bloques de código fuente Basic. Para ello desde el Gestor de extensiones de Visual Studio Code buscaremos la extension Amstrad-Basic y le datemos a instalar.
 
-![image](extension.jpg)
+![image](screenshot/extension.jpg)
 
 
 ## Instalación SDKCPC en tu sistema
