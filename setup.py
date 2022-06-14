@@ -17,6 +17,7 @@ setup(
         description=DESCRIPTION,
         long_description=''.join(open('README.md', encoding='utf-8').readlines()),
         long_description_content_type='text/markdown',
+        license="GPL",
         url="https://github.com/destroyer-dcf/sdkcpc",
         project_urls={
             "Bug Tracker": "https://github.com/destroyer-dcf/sdkcpc/issues",
@@ -36,7 +37,7 @@ setup(
         ], 
         python_requires='>=3.6',
         classifiers=[
-            'License :: OSI Approved :: MIT License',
+            'License :: OSI Approved :: GNU General Public License',
             'Programming Language :: Python',
             'Programming Language :: Python :: 3',
             'Programming Language :: Python :: 3.6',
