@@ -114,45 +114,7 @@ sdkcpc [argumento] [opcion]
 
 A continuacion se muestra una lista de todos los comandos y sus funcionalidades.
 
-
-### █ about
-| Como Usar  | Opciones  | Descripcion  |
-|:----------|:----------|:----------|
-| `sdkcpc about`    |     | Muestra información del software y del desarrollador    |
-
-### █ build
-| Como Usar  | Opciones  | Descripcion  |
-|:----------|:----------|:----------|
-| `sdkcpc build`    |     | Genera un archivo DSK u CDT con todo el software del proyecto.    |
-
-### █ check
-| Como Usar  | Opciones  | Descripcion  |
-|:----------|:----------|:----------|
-| `sdkcpc check`    |     | Chequea que las configuraciones (Project.cfg) del proyecto sean correctas.|
-
-
-### █ config
-
-| Como Usar  | Opciones  | Descripcion  |
-|:----------|:----------|:----------|
-| `sdkcpc config`   | --list     | Muestra el listado de las configuraciones SDKCPC.    | 
-|                   | [Nombre key]     | Muestra el valor de la key solicitada.    | 
-|                   | [Nombre key] [Nuevo valor para la key]    | Modifica el valor de la key solicitada.    | 
-
-Listado de configuracines de SDKCPC. Pueden ser modificadas por el usuario.
-
-| Key  | Valor por defecto  | Descripcion  |
-|:----------|:----------|:----------|
-| **project.git**    | 1    | Crea el Proyecto con un control de versiones git. Parametros admitidos 1 activado - 0 Desactivado    |
-| **project.vscode**    | 1    | Una vez creado el Projecto pregunta si quiere asociarlo a Visual Studio Code. Parametros admitidos 1 activado - 0 Desactivado       |
-| **path.rvm**    | None    | Ruta donde esta instalado Retro Virtual Machine. **Es necesario configurar antes de empezar a utilizar SDKCPC**   |
-| **path.winape**    | None    | Ruta donde esta instalado Winape. **Es necesario configurar antes de empezar a utilizar SDKCPC**      |
-| **show.amstrad.ready**    | 1    | Muestra la cabezera amstrad por consola con la ejecucion de los comandos. Parametros admitidos 1 activado - 0 Desactivado       |
-| **show.amstrad.screen**    | 1    | Muestra Ready en la consola una vez ejecutado un comando. Parametros admitidos 1 activado - 0 Desactivado       |
-
-
----
-**█ ABOUT**
+**█ about**
 
 
 | Como Usar  | Opciones  | Descripcion  |
@@ -162,7 +124,7 @@ Listado de configuracines de SDKCPC. Pueden ser modificadas por el usuario.
 
 
 ---
-**█ BUILD**
+**█ build**
 
 
 | Como Usar  | Opciones  | Descripcion  |
@@ -170,7 +132,7 @@ Listado de configuracines de SDKCPC. Pueden ser modificadas por el usuario.
 | `sdkcpc build`    |     | Genera un archivo DSK u CDT con todo el software del proyecto.    |
 
 ---
-**█ CHECK**
+**█ check**
 
 
 | Como Usar  | Opciones  | Descripcion  |
@@ -178,7 +140,7 @@ Listado de configuracines de SDKCPC. Pueden ser modificadas por el usuario.
 | `sdkcpc check`    |     | Chequea que las configuraciones (Project.cfg) del proyecto sean correctas.|
 
 ---
-**█ CONFIG**
+**█ config**
 
 
 | Como Usar  | Opciones  | Descripcion  |
