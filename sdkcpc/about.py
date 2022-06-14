@@ -19,15 +19,17 @@ def about():
     head("6128")
     ver =  __version__
     banner ="""\n[bold white] ╔═╗╔═╗╔═╗╔═╗╦ ╦ [bold white]┌─────────────┐[/]    [bold white]Created by: [bold green] © Destroyer - 2022[/]
-[bold white] ║  ╠═╝║  ╠═╝╚╦╝ [bold white]│ [red bold]■■■[green] ■■■[blue] ■■■ [white]│[/]    [bold white]Github    : [bold green] https://github.com/amstrad-cpc/cpcp_core.git[/]
+[bold white] ║  ╠═╝║  ╠═╝╚╦╝ [bold white]│ [red bold]■■■[green] ■■■[blue] ■■■ [white]│[/]    [bold white]Github    : [bold green] https://github.com/destroyer-dcf/sdkcpc[/]
 [bold white] ╚═╝╩  ╚═╝╩   ╩  [bold white]│ [red bold]■■■[green] ■■■[blue] ■■■ [white]│[/]    [bold white]Version   : [bold green] {ver}[/]
-[yellow] SDK Amstrad CPC[bold white] └─────────────┘[/]    [bold white]Follow me : [bold green] https://faceboock.com/cpcpy[/]""".format(ver=ver)
+[yellow] SDK Amstrad CPC[bold white] └─────────────┘[/]    [bold white]Follow me : [bold green] twiter: @sdkcpc[/]""".format(ver=ver)
 
 
     #print(Panel(banner,expand=True))
-    console.rule("About")
+    # console.rule("About")
     console.print (banner)
     console.print("")
     footer()
+    print()
+    print()
 
 

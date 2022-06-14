@@ -1,5 +1,7 @@
 # SDKCPC (Software Developer Kit para Amstrad CPC)
 
+![image](screenshot/about.png)
+
 **SDKCPC** son una serie de librerias y programas multiplataforma desarrollados en *[Python](https://www.python.org/downloads/)*. que nos sirve para facilitarnos la vida en la programación con Locomotive Amstrad Basic, en ordenadores actuales. **SDKCPC** se distribuye bajo licencia [LGPL v3](https://www.python.org/downloads/)
 
 **SDKCPC** incluye: 
@@ -154,7 +156,7 @@ Muestra y modifica las configuraciones de **SDKCPC**
 |                   | [Nombre key]     | Muestra el valor de la key solicitada.    | 
 |                   | [Nombre key] [Nuevo valor para la key]    | Modifica el valor de la key solicitada.    | 
 
-Listado de configuracines de SDKCPC. Pueden ser modificadas por el usuario.
+Listado de configuraciones de SDKCPC. Pueden ser modificadas por el usuario.
 
 | Key  | Valor por defecto  | Descripcion  |
 |:----------|:----------|:----------|
@@ -172,7 +174,7 @@ Muestra información del proyecto de la ruta actual.
 
 | Como Usar  | Opciones  | Descripcion  |
 |:----------|:----------|:----------|
-| `sdkcpc info`    |    | Muestra informacion del proyecto seleccionado.|
+| `sdkcpc info`    |    | Muestra información del proyecto de la ruta actual.|
 
 ---
 **█ new**
