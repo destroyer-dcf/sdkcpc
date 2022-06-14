@@ -110,12 +110,13 @@ Podemos ver todas las opciones del programa escribiendo el comando **sdkcpc** se
 sdkcpc [argumento] [opcion]
 ```
 
-## Comandos
+## Argumentos
 
 A continuacion se muestra una lista de todos los comandos y sus funcionalidades.
 
 **█ about**
 
+Muestra información del desarrollador del proyecto.
 
 | Como Usar  | Opciones  | Descripcion  |
 |:----------|:----------|:----------|
@@ -126,14 +127,17 @@ A continuacion se muestra una lista de todos los comandos y sus funcionalidades.
 ---
 **█ build**
 
+Crea una imagen para Disco (DSK) y Cinta (CDT) con el software del proyecto
+
 
 | Como Usar  | Opciones  | Descripcion  |
 |:----------|:----------|:----------|
-| `sdkcpc build`    |     | Genera un archivo DSK u CDT con todo el software del proyecto.    |
+| `sdkcpc build`    |     | Genera un archivo DSK y CDT con todo el software del proyecto.    |
 
 ---
 **█ check**
 
+Chequea que las configuraciones del proyecto de la ruta actual esten correctas.
 
 | Como Usar  | Opciones  | Descripcion  |
 |:----------|:----------|:----------|
@@ -142,6 +146,7 @@ A continuacion se muestra una lista de todos los comandos y sus funcionalidades.
 ---
 **█ config**
 
+Muestra y modifica las configuraciones de **SDKCPC**
 
 | Como Usar  | Opciones  | Descripcion  |
 |:----------|:----------|:----------|
@@ -161,11 +166,53 @@ Listado de configuracines de SDKCPC. Pueden ser modificadas por el usuario.
 | **show.amstrad.screen**    | 1    | Muestra Ready en la consola una vez ejecutado un comando. Parametros admitidos 1 activado - 0 Desactivado       |
 
 ---
+**█ info**
 
-Contact information and support
-email: cpctelera@cheesetea.com
-twitter: @FranGallegoBR
-Authors and License
-(C) Copyright 2014-2017 CPCtelera's awesome authors
+Muestra información del proyecto de la ruta actual.
+
+| Como Usar  | Opciones  | Descripcion  |
+|:----------|:----------|:----------|
+| `sdkcpc info`    |    | Muestra informacion del proyecto seleccionado.|
+
+---
+**█ new**
+
+Crea un nuevo proyecto en la ruta actual con la estructura necesaria para trabajar en Amstrad Locomotive Basic.
+
+| Como Usar  | Opciones  | Descripcion  |
+|:----------|:----------|:----------|
+| `sdkcpc new`    | [Nombre_proyecto]  | El argumento lleva como opción el nombre que asignaremos a nuestro proyecto|
+
+> **NOTA** No se admiten espacios en el nombre del proyecto
+
+---
+**█ new-8bp**
+
+Crea un nuevo proyecto en la ruta actual con la estructura necesaria para trabajar con la libreria  [8BP](https://github.com/jjaranda13/8BP)
+
+| Como Usar  | Opciones  | Descripcion  |
+|:----------|:----------|:----------|
+| `sdkcpc new-8bp`    | [Nombre_proyecto]  |El argumento lleva como opción el nombre que asignaremos a nuestro proyecto|
+> **NOTA** No se admiten espacios en el nombre del proyecto
+---
+**█ run**
+
+Carga nuestro DSK generado y ejecuta el bas seleccionado sobre el emulador pasado como opcion al argumento.
+
+| Como Usar  | Opciones  | Descripcion  |
+|:----------|:----------|:----------|
+| `sdkcpc run`    |  --rvm   | Ejecuta el emulador Retro virtual Machine.|
+|                 |  --winape   | Ejecuta el emulador Winape.|
+---
+
+
+## Contact information and support
+email: sdkcpc@gmail.com
+
+twitter: @sdkcpc
+
+## Authors and License
+(C) Copyright 2021-2022 Destroyer sdkcpc
+
 CPCtelera low-level library, examples and scripts are distributed under GNU Lesser General Public License v3
 Content authoring tools included within CPCtelera (under cpctelera/tools folder) have their own licenses. Check each of them in their respective folders for more details.
