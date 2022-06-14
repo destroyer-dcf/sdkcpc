@@ -35,7 +35,7 @@ def main():
     check_parser = subparsers.add_parser('check', help='Checks the validity of the project.cfg file.')
 
     # A config comman
-    config_parser = subparsers.add_parser('config', help='Configuration of Basic SDK')
+    config_parser = subparsers.add_parser('config', help='Configuration software SDKCPC')
     config_parser.add_argument('Key',type=str,nargs='?',help='Key of config file')
     config_parser.add_argument('Value',type=str,nargs='?',help='Value of config file')
     group_project =  config_parser.add_mutually_exclusive_group()
