@@ -29,9 +29,9 @@ def info():
     
     console.rule("[bold yellow]PROJECT FILES")
     table = Table(show_lines= True,show_edge=True,box=box.SQUARE,expand=True)
-    table.add_column("Folder", justify="left", style="yellow", no_wrap=True)
-    table.add_column("Files", justify="left", style="green")
-    table.add_column("Size", justify="left", style="white",width=50)
+    table.add_column("Folder", justify="left", style="yellow bold", no_wrap=True)
+    table.add_column("Files", justify="left", style="green bold")
+    table.add_column("Size", justify="left", style="white bold",width=50)
 
     if Section_general["template"] == "Basic":
         FOLDERS = FOLDER_PROJECT_NEW 
@@ -61,8 +61,8 @@ def ShowDataProjectinSection(section):
     Sectionitems  = readProyectSection(section)
     console.rule("[bold yellow]"+section.upper())
     table = Table(show_lines= True,show_edge=True,box=box.SQUARE,expand=True,show_header=False)
-    table.add_column("key", justify="left", style="green",max_width=7)
-    table.add_column("Value", justify="left", style="white")
+    table.add_column("key", justify="left", style="green bold",max_width=7)
+    table.add_column("Value", justify="left", style="white bold")
     for key,value in Sectionitems.items():
             table.add_row(key, value)
     console.print(table)  
