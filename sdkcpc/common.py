@@ -91,7 +91,7 @@ def readProyectKey(section,key):
         config.read(PWD + MAKEFILE)
         
     except:
-        console.print("[red bold]\[ERROR]: Key not exist in Project.cfg")
+        console.print("[red bold]\[ERROR]: Key not exist in "+MAKEFILE)
         sys.exit(1)
     return config.get(section, key)
 
@@ -103,10 +103,10 @@ def readProyectSection(section):
         config.read(PWD + MAKEFILE)
         return dict(config.items(section))
     except:
-        print("[red bold]\[ERROR]: Section " + section + " not exist in Project.cfg")
+        print("[red bold]\[ERROR]: Section " + section + " not exist in "+MAKEFILE)
         sys.exit(1)
 
-# Modifica un valor de Project.cfg
+# Modifica un valor de "+MAKEFILE+"
 #   @Param Nombre de la Seccion donde esta la key a modificar
 #   @Param nombre de la key a modificar
 #   @Param nuevo valor
@@ -119,7 +119,7 @@ def setProjectKeyValue(section, key, value):
         with open(PWD + MAKEFILE, 'w') as configfile:
             config.write(configfile)
     except:
-        console.print("[red bold]\[ERROR]: Section " + section + " or key " + key + " not exist in Project.cfg")
+        console.print("[red bold]\[ERROR]: Section " + section + " or key " + key + " not exist in "+MAKEFILE)
         sys.exit(1)
 
 

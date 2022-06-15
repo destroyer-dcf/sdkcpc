@@ -32,7 +32,7 @@ def main():
     build_parser = subparsers.add_parser('build', help='Compile the DSK image of the project')
 
     # A check comman
-    check_parser = subparsers.add_parser('check', help='Checks the validity of the project.cfg file.')
+    check_parser = subparsers.add_parser('check', help='Checks the validity of the makefile.')
 
     # A config comman
     config_parser = subparsers.add_parser('config', help='Configuration software SDKCPC')

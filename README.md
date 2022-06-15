@@ -10,7 +10,7 @@
 - Snnipet integrado para Basic y para la libreria [8BP](https://github.com/jjaranda13/8BP)
 - Integración con gestor de versiones Git
 - Creación DSK
-- Comentarios en codigo
+- Comentarios en codigo que no ocupan memoria.
 - Trabajo por objetos
 - Verificacion formato 8:3
 - Compatible con Emuladores: Retro Virtual Machine y Winape
