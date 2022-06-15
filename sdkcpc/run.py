@@ -19,16 +19,17 @@ def rvm():
     DSK = PWD + "OUT/" + Section_config["name.dsk.file"]
 
     if not os.path.exists(CONFIG["path.rvm"]):
-        print("[yellow](config sdkcpc)[red bold]\[path.rvm]:El archivo " + CONFIG["path.rvm"] + " does not exist.")
+        print("[blue bold][SDKCPC][red bold] path.rvm: " + CONFIG["path.rvm"] + " File does not exist.")
         exit(1)
 
     head(readProyectKey("rvm","model.cpc"))
     # Depending on the platform we execute
     RVM = getConfigKeyProgram("path.rvm")
-    console.print("[yellow]Build   : " + section_compilation["build"])
-    console.print("[yellow]Version : " + section_compilation["version"])
-    console.print("[yellow]Emulator: Retro Virtual Machine")
-    console.print('[yellow]\nRUN"'+Section_config["name.bas.file"])
+    console.print("[blue bold][Build   ][yellow] " + section_compilation["build"])
+    console.print("[blue bold][Version ][yellow] " + section_compilation["version"])
+    console.print("[blue bold][Emulator][yellow] Retro Virtual Machine")
+    console.print('[blue bold][DSK File][yellow] ' + Section_config["name.dsk.file"])
+    console.print('[blue bold][BAS File][yellow] ' + Section_config["name.bas.file"])
     if sys.platform == "darwin" or sys.platform == "linux":
         subprocess.Popen([RVM,"-i", DSK,"-b=cpc"+rvm_model["model.cpc"],"-c=RUN\""+Section_config["name.bas.file"]+"\"\n"], stdout=subprocess.DEVNULL)
     elif sys.platform == "win32" or sys.platform == "win64":
@@ -51,10 +52,11 @@ def winape():
     head(str(rvm_model["model.cpc"]) )
     # Depending on the platform we execute
     WINAPE = getConfigKeyProgram("path.winape")
-    console.print("[yellow]Build   : " + section_compilation["build"])
-    console.print("[yellow]Version : " + section_compilation["version"])
-    console.print("[yellow]Emulator: Winape")
-    console.print('[yellow]\nRUN"'+Section_config["name.bas.file"])
+    console.print("[blue bold][Build   ][yellow] " + section_compilation["build"])
+    console.print("[blue bold][Version ][yellow] " + section_compilation["version"])
+    console.print("[blue bold][Emulator][yellow] Retro Virtual Machine")
+    console.print('[blue bold][DSK File][yellow] ' + Section_config["name.dsk.file"])
+    console.print('[blue bold][BAS File][yellow] ' + Section_config["name.bas.file"])
     if sys.platform == "darwin" or sys.platform == "linux":
         subprocess.Popen(["wine",WINAPE,DSK,"/A:"+Section_config["name.bas.file"]], stdout=subprocess.DEVNULL)
     elif sys.platform == "win32" or sys.platform == "win64":
