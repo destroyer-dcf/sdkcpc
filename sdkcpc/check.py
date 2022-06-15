@@ -33,7 +33,7 @@ def checkProject():
         # Validamos que los archivos cumplan con 8:3
         validate83FilesinFolders(FOLDER_PROJECT_8BP)
     else:
-       print("[yellow]["+MAKEFILE+"][red bold]\[general]:template [bold red]key value is not correct. Correct values [green][Basic,8BP]")
+       print("[blue bold]["+MAKEFILE+"][red bold]\[general]:template [bold red]key value is not correct. Correct values [green bold][Basic,8BP]")
        sys.exit(1)
     # Validamos que el modelo de cpc sea correcto.
     validateModelCpc("rvm")
@@ -44,16 +44,16 @@ def checkProject():
     # Validamos que la key IP sea correcta
     IP = readProyectKey("m4","ip")
     if not validateIp(IP):
-        print("[yellow]["+MAKEFILE+"][red bold]\[m4]:ip = [red bold]"+ IP + " --> value is not correct.")
+        print("[blue bold]["+MAKEFILE+"][red bold]\[m4]:ip = [red bold]"+ IP + " --> value is not correct.")
         sys.exit(1)
     # Validamos formato de version
     version = readProyectKey("compilation","version")
     if validateVersion(version) < 3:
-        print("[yellow]["+MAKEFILE+"][red bold]\[compilation]:version = [red bold]"+ version + " --> The version format is not correct. Correct Value [green]0.0.0")
+        print("[blue bold]["+MAKEFILE+"][red bold]\[compilation]:version = [red bold]"+ version + " --> The version format is not correct. Correct Value [green bold]0.0.0")
         sys.exit(1)        
     # print(readProyectSection("general"))
     # print(readProyectSection("config"))
-    print("["+MAKEFILE+"][green]: Is correct!!")
+    print("[blue bold]\["+MAKEFILE+"][yellow bold] Successfully")
 
 
 # Valida que la version tenga el formato correcto 0.0.0
@@ -71,7 +71,7 @@ def validate83FilesinFolders(Folder):
             for x in range(0,len(arr)):
                 if len(os.path.splitext(arr[x])[1]) != 4 or len(os.path.splitext(arr[x])[0]) > 8:
                     print("El archivo " + arr[x] + " does not conform to 8:3 format.")
-                    print("[yellow](Project Folder)[red bold]\["+busca[y]+"]:El archivo " + arr[x] + " does not conform to 8:3 format.")
+                    print("[blue bold]\["+busca[y]+"] \[red bold]El archivo " + arr[x] + " does not conform to 8:3 format.")
                     exit(1)
 
 
@@ -80,16 +80,16 @@ def validate83FilesinFolders(Folder):
 def validateGeneralSection(data):
     # comprobamos que existan todas las keys
     if not "name" in data:
-        print("[yellow]["+MAKEFILE+"][red bold]\[general]:name [red bold] --> key not exist")
+        print("[blue bold]\["+MAKEFILE+"][red bold] name key not exist")
         sys.exit(1)
     if not "description" in data:
-        print("[yellow]["+MAKEFILE+"][red bold]\[general]:description [red bold] --> key not exist")
+        print("[blue bold]\["+MAKEFILE+"][red bold] description key not exist")
         sys.exit(1)
     if not "template" in data:
-        print("[yellow]["+MAKEFILE+"][red bold]\[general]:template [red bold] --> key not exist")
+        print("[blue bold]["+MAKEFILE+"][red bold] template key not exist")
         sys.exit(1)
     if not "authors" in data:
-        print("[yellow]["+MAKEFILE+"][red bold]\[general]:authors [red bold] --> key not exist")
+        print("[blue bold]["+MAKEFILE+"][red bold] authors key not exist")
         sys.exit(1)
 
 # Validamos la seccion Config
@@ -97,57 +97,57 @@ def validateGeneralSection(data):
 def validateConfigSection(data):
     # comprobamos que existan todas las keys
     if not "validate.83.files" in data:
-        print("[yellow]["+MAKEFILE+"][red bold]\[config]:validate.83.files [red bold] --> key not exist")
+        print("[blue bold]["+MAKEFILE+"][red bold] validate.83.files key not exist")
         sys.exit(1)
     if not "concatenate.files" in data:
-        print("[yellow]["+MAKEFILE+"][red bold]\[config]:concatenate.files [red bold] --> key not exist")
+        print("[blue bold]["+MAKEFILE+"][red bold] concatenate.files key not exist")
         sys.exit(1)
     if not "name.bas.file" in data:
-        print("[yellow]["+MAKEFILE+"][red bold]\[config]:name.bas.file [red bold] --> key not exist")
+        print("[blue bold]["+MAKEFILE+"][red bold] name.bas.file key not exist")
         sys.exit(1)
     if not "name.dsk.file" in data:
-        print("[yellow]["+MAKEFILE+"][red bold]\[config]:name.dsk.file [red bold] --> key not exist")
+        print("[blue bold]["+MAKEFILE+"][red bold] name.dsk.file key not exist")
         sys.exit(1)
 
     # Validamos si el dato es correcto
     while data["concatenate.files"].upper() not in ["YES","NO"]:
-        print("[yellow]["+MAKEFILE+"][red bold]\[config]:concatenate = [red bold]"+ data["concatenate.files"] + " --> value is not correct. Correct values [green][Yes,No]")
+        print("[blue bold]["+MAKEFILE+"][red bold] concatenate.files = "+ data["concatenate.files"] + " value is not correct. Correct values [green bold][Yes,No]")
         sys.exit(1)
     # Validamos si el dato es correcto
     while data["validate.83.files"].upper() not in ["YES","NO"]:
-        print("[yellow]["+MAKEFILE+"][bold red]\[config]:validate83 = [red bold]"+ data["validate.83.files"] + " --> value is not correct. Correct values [green][Yes,No]")
+        print("[blue bold]["+MAKEFILE+"][bold red] validate.83.files = "+ data["validate.83.files"] + " value is not correct. Correct values [green bold][Yes,No]")
         sys.exit(1)
     # Validamos si el dato contiene espacios
     if data["name.bas.file"].find(' ') != -1:
-        print("[yellow]["+MAKEFILE+"][red bold]\[config]:name.bas.file = [red bold]"+ data["name.bas.file"] + " --> value is not correct. The name contain spaces")
+        print("[blue bold]["+MAKEFILE+"][red bold] name.bas.file = "+ data["name.bas.file"] + " value is not correct. The name contain spaces")
         sys.exit(1)
     if exists(PWD + "BASIC/"+data["name.bas.file"]) == False:
-        print ("[red bold][ERROR]: BASIC/"+data["name.bas.file"] +" not exist.")
+        print ("[red bold][["+MAKEFILE+"] BASIC/"+data["name.bas.file"] +" not exist.")
         sys.exit(1)
 
     # Validamos si el dato contiene espacios
     if data["name.dsk.file"].find(' ') != -1:
-        print("[yellow]["+MAKEFILE+"][red bold]\[config]:name.bas.file = [red bold]"+ data["name.dsk.file"] + " --> value is not correct. The name contain spaces")
+        print("[yellow]["+MAKEFILE+"][red bold] name.bas.file = "+ data["name.dsk.file"] + " value is not correct. The name contain spaces")
         sys.exit(1)
     # Si activado formato 8:3 comprobamos que se cumpla en name.bas.file/name.dsk.file
     if data["validate.83.files"].upper() == "YES":
         if len(os.path.splitext(data["name.bas.file"])[1]) != 4:
-            print("[yellow]["+MAKEFILE+"][bold red]\[config]:name.bas.file = "+data["name.dsk.file"]+" --> File extension must have 3 characters!")
+            print("[blue bold]["+MAKEFILE+"][bold red] name.bas.file = "+data["name.dsk.file"]+" File extension must have 3 characters!")
             sys.exit(1)
         if os.path.splitext(data["name.bas.file"])[1].lower() != ".bas":
-            print("[yellow]["+MAKEFILE+"][red bold]\[config]:name.bas.file = "+data["name.dsk.file"]+" --> File extension must have 3 characters!")
+            print("[blue bold]["+MAKEFILE+"][red bold] name.bas.file = "+data["name.dsk.file"]+" File extension must have 3 characters!")
             sys.exit(1)
         if len(os.path.splitext(data["name.bas.file"])[0]) > 8:
-            print("[yellow]["+MAKEFILE+"][red bold]\[config]:name.bas.file = "+data["name.dsk.file"]+" --> File name cannot be longer than 8 characters!")
+            print("[blue bold]["+MAKEFILE+"][red bold] name.bas.file = "+data["name.dsk.file"]+" File name cannot be longer than 8 characters!")
             sys.exit(1)
         if len(os.path.splitext(data["name.dsk.file"])[1]) != 4:
-            print("[yellow]["+MAKEFILE+"][red bold]\[config]:name.dsk.file = "+data["name.dsk.file"]+" --> File extension must have 3 characters!")
+            print("[blue bold]["+MAKEFILE+"][red bold] name.dsk.file = "+data["name.dsk.file"]+" File extension must have 3 characters!")
             sys.exit(1)
         if os.path.splitext(data["name.dsk.file"])[1].lower() != ".dsk":
-            print("[yellow]["+MAKEFILE+"][red bold]\[config]:name.dsk.file = "+data["name.dsk.file"]+" --> File extension must have 3 characters!")
+            print("[blue bold]["+MAKEFILE+"][red bold] name.dsk.file = "+data["name.dsk.file"]+" File extension must have 3 characters!")
             sys.exit(1)
         if len(os.path.splitext(data["name.dsk.file"])[0]) > 8:
-            print("[yellow]["+MAKEFILE+"][red bold]\[config]:name.dsk.file = "+data["name.dsk.file"]+" --> File name cannot be longer than 8 characters!")
+            print("[blue bold]["+MAKEFILE+"][red bold] name.dsk.file = "+data["name.dsk.file"]+" File name cannot be longer than 8 characters!")
             sys.exit(1)
 
 # Validamos que existan todas las carpetas del proyecto
@@ -155,21 +155,21 @@ def validateConfigSection(data):
 def validateStructureProject(Folders):
     for x in range(0,len(Folders)):
         if not path.exists(PWD + Folders[x]):
-            print("[red bold]The folder "+ Folders[x] +" does not exist in the project")
+            print("[blue bold]\["+Folders[x]+"][red bold]The folder does not exist in the project")
 
 # Valida que el modelo de cpc sea correcto
 #   @Param: seccion
 def validateModelCpc(section):
     val = readProyectKey(section,"model.cpc")
     if val not in MODELS_CPC: 
-        print("[red bold]\["+section+"]:model.cpc = [red bold]"+ val + " --> value is not correct. Correct values [gree][464,664,6128]")
+        print("[blue bold]\["+MAKEFILE+"][red bold] model.cpc = "+ val + " value is not correct. Correct values [green bold][464,664,6128]")
         sys.exit(1)
 
 # Valida que el nombre de proyecto no este vacio
 #   @Param: nombre proyecto
 def validateName(name):
     if name == "": 
-        print("[red bold]\[general]:name [red bold]key value cannot be empty.")
+        print("[blue bold]\["+MAKEFILE+"][red bold] name key value cannot be empty.")
         sys.exit(1)
 
 # Validate IP addrees
@@ -184,5 +184,5 @@ def validateIp(ip_address):
 # Valida si la carpeta es de proyecto
 def validateFolderProject():
     if not os.path.exists(PWD + MAKEFILE):
-        print("[red bold]This folder does not contain sdkcpc project.")
+        print("[blue bold]\[SDKCPC][red bold] This folder does not contain sdkcpc project.")
         sys.exit(1)
