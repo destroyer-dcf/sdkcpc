@@ -135,3 +135,12 @@ def  version():
     except IOError:
         return "12.0.0"
 
+
+def infoLog(recurso,informacion):
+    print("[blue bold]\["+recurso+"][yellow bold] "+informacion+" [green bold]\[OK]")
+
+def warningLog(recurso,informacion):
+    print("[blue bold]\["+recurso+"][yellow bold] "+informacion+" [yellow bold]\[WARNING]")
+
+def errorLog(recurso,informacion):
+    print("[blue bold]\["+recurso+"][yellow bold] "+informacion+" [red bold]\[ERROR]")

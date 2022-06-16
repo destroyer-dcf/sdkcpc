@@ -29,34 +29,21 @@ elif sys.platform == "linux":
 
 
 def build():
+    
     Section_config  = readProyectSection("config")
     Section_general = readProyectSection("general")
     Section_rvm     = readProyectSection("rvm")
 
     head(str(Section_rvm["model.cpc"]))
-    console.rule("[yellow]\[Project]")
-    console.print("")
-    console.print("[Name        ]: [white]" + Section_general["name"])
-    console.print("[Template    ]: [white]" + Section_general["template"])
-    console.print("[Concatenate ]: [white]" + Section_config["concatenate.files"])
-    console.print("[Validate 8:3]: [white]" + Section_config["validate.83.files"])
-    console.print("")
-    console.rule("[yellow]\[Verifying Project Data]")
+    console.rule("[yellow bold]\[Build Project]")
     console.print("")
     checkProject()
-    console.print("")
     new_version     = incrementVersion(readProyectKey("compilation","version"))
     new_compilation = str(datetime.now())
-    console.rule("[yellow]\[Delete temporary files]")
-    console.print("")
     BorraTemporales("OUT")
     BorraTemporales("OBJ")
-    console.print("")
-    console.rule("[yellow]\[ Processing BAS files ]")
-    console.print("")
     files = os.listdir(PWD + 'BASIC/')
     for idx, infile in enumerate(files):
-            Info("File #" + str(idx) + "  " + infile)
             DeleteCommentLines(infile,new_version, new_compilation)
 
     if Section_config["concatenate.files"].upper() == "YES":
@@ -64,40 +51,35 @@ def build():
             BorraTemporales("OBJ")
             with open(PWD + "OBJ/"+Section_config["name.bas.file"]+".tmp", "w") as fo:
                 fo.write(concat)
+            infoLog("/BASIC","Contatenate files")
             unix2dos(Section_config["name.bas.file"])
-    console.print("")
+  
+
     # Creamos Dsk en OUT si el template es basic, si no copiamos la bibliotec 8bp que esta en dsk
     if Section_general["template"] == "Basic":
-        console.rule("[yellow]\[   Create DSK File    ]")
-        console.print("")
+        FNULL = open(os.devnull, 'w')
         try:
-            os_cmd = _commando_idsk + " " + PWD+"OUT/"+ Section_config["name.dsk.file"] +  ' -n'
-            if os.system(os_cmd) != 0:
-                raise Exception(_commando_idsk + ' does not exist')
+            retcode = subprocess.call([_commando_idsk, PWD+"OUT/"+ Section_config["name.dsk.file"],"-n"], stdout=FNULL, stderr=subprocess.STDOUT)
+            infoLog(Section_config["name.dsk.file"],"Create DSK.")
         except:
-            Error(Section_config["name.dsk.file"] + " not create!!!")
-            print("[blue]VERSION: [bold  white]"+ new_version +"\n[blue]BUILD  : [white]" + new_compilation +"\n[blue]STATUS : [red bold]ERROR")
+            errorLog("SDKCPC","iDSK does not exist.")
             sys.exit(1)
+
     if Section_general["template"] == "8BP":
         copy8bp(Section_general["name"],Section_config["name.dsk.file"])
-    console.print("")
     addDskFiles("OBJ",0)
-    console.print("")
     addDskFiles("BIN",1)
-    console.print("")
     addDskFiles("ASCII",0)
-    console.print("")
     setProjectKeyValue("compilation","version",new_version)
     setProjectKeyValue("compilation","build",new_compilation)
-    console.rule("[yellow]\[Delete temporary files]")
-    console.print("")
     BorraTemporales("OBJ")
+
     console.print("")
     console.rule("")
     console.print("")
-    Info ("[blue]VERSION: [white]" + new_version)
-    Info ("[blue]BUILD  : [white]" + new_compilation)
-    Info ("[blue]STATUS : [green]SUCCESSFULLY")
+    print ("[blue bold]VERSION: [white bold]" + new_version)
+    print ("[blue bold]BUILD  : [white bold]" + new_compilation)
+    print ("[blue bold]STATUS : [green bold]SUCCESSFULLY")
     console.print("")
     console.rule("")
     footer()
@@ -106,45 +88,33 @@ def build():
 def copy8bp(project,dskfile):
     try:
         shutil.copy(PWD+ "/DSK/8bp.dsk",PWD + "/OUT/"+dskfile)
-        print("[white]Add 8bp library.")
+        infoLog("/DSK","Added 8bp library")
     except OSError as err:
-        print("[red bold]"+str(err))
-        sys.exit(1)
-
-def createDskFile(dskFile,new_version,new_compilation):
-    try:
-        os_cmd = _commando_idsk + " " + PWD+"OUT/"+dskFile +  ' -n'
-        if os.system(os_cmd) != 0:
-            raise Exception(_commando_idsk + ' does not exist')
-    except:
-        Error(dskFile + " not create!!!")
-        print("[blue]VERSION: [white]"+ new_version +"\n[blue]BUILD  : [white]" + new_compilation +"\n[blue]STATUS : [red bold]ERROR")
+        errorLog("/DSK","Added 8bp library: " +str(err))
         sys.exit(1)
 
 def addDskFiles(folder,tipo):
     Section_config  = readProyectSection("config")
-    console.rule("[yellow]\[Add Files to DSK folder " + folder.upper()+"]")
-    console.print("")
     path = PWD + folder + '/'
     dsk  = PWD + "OUT/" + Section_config["name.dsk.file"]
     files = os.listdir(path)
     for idx, infile in enumerate(files):
-        os_cmd = _commando_idsk + " " + dsk + ' -i ' + path + infile + " -f -t " + str(tipo)
-        # print(os_cmd)
+        
+        FNULL = open(os.devnull, 'w')
         try:
-            if os.system(os_cmd) != 0:
-                raise Exception(_commando_idsk + ' does not exist')
+            retcode = subprocess.call([_commando_idsk, dsk,"-i",path + infile,"-f","-t",str(tipo)], stdout=FNULL, stderr=subprocess.STDOUT)
+            infoLog(Section_config["name.dsk.file"],"Added file "+folder + '/'+infile)
         except:
-            Error(path + infile + " not add to DSK!!!")
+            errorLog(Section_config["name.dsk.file"],"Added file "+folder + '/'+infile)
             sys.exit(1)
-        # if folder.upper() == "OBJ":
-        #     os.remove(path + infile)  
+
     if len(files) == 0:
         # Warning("\["+folder+"]: No files in folder ")
-        print("[FILES]: No files in folder ")
+        infoLog("/"+folder,"No files in folder")
 
 def DeleteCommentLines(file,new_version, new_compilation):
     # Elimina comentarios de linea de Visual studio Code (1 ')
+    file_modificado = file
     with open(PWD + "BASIC/" +file, "r") as input:
         with open(PWD + "OBJ/"+file+".tmp", "w",newline='\r\n') as output:
             # iterate all lines from file
@@ -153,7 +123,8 @@ def DeleteCommentLines(file,new_version, new_compilation):
                 if not line.strip("\n").startswith("1 '"):
                     output.write(line)
             output.write("\n")
-    print("  [DELETE ]: Comment lines")
+
+    infoLog(file,"Delete Comment lines OBJ/"+file)
     # Convertimos fichero a dos
     unix2dos(file)
 
@@ -164,9 +135,8 @@ def unix2dos(file):
     with open(PWD + "OBJ/"+file, "w") as fo:
         fo.write(remove_lines + "\n\n")
     os.remove(PWD + "OBJ/"+file+".tmp")
-    print("  [CONVERT]: Convert file to dos")
-    print("  [DELETE ]: Delete temporal file") 
-
+    infoLog(file,"Convert file to dos")
+    # infoLog(file,"Delete temporal file")
 
 # Borra ficheros temporales
 #   @Param: Carpeta a borrar
@@ -174,7 +144,7 @@ def BorraTemporales(Folder):
     files = glob.glob(PWD + Folder+'/*') 
     for f in files: 
         os.remove(f)
-        print("[DELETE ]: " + os.path.basename(f))
+        infoLog("/"+Folder,"Delete temporal file " + os.path.basename(f))
 
 # Version increment
 #   @Param current version
@@ -189,19 +159,3 @@ def WriteLog(texto):
     file_object = open(PWD + LOG_FILE, 'a')
     file_object.write(texto)
     file_object.close()
-
-# Log INFO message
-#   @Param text to write
-def Info(text):
-    print("[white]"+text)
-
-# Log WRITE message
-#   @Param text to write
-def Warning(text):
-    print("[yellow]WARNING  [white]"+text)
-
-
-# Log ERROR message
-#   @Param text to write
-def Error(text):
-    print("[red bold]ERROR    [white]"+text)
