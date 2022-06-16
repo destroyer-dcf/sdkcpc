@@ -41,40 +41,40 @@ def head(model):
     if getConfigKeyProgram("show.amstrad.screen") == 1 :
         if model == "6128":
             console.print("  ")
-            console.print("[yellow] Amstrad 128K Microcomputer (s3) ")
-            console.print("[yellow] ©1984 Amstrad Consumer Electronics plc ")
-            console.print("[yellow]           and Locomotive Software Ltd. ")
-            console.print("[yellow] BASIC 1.1 ")
+            console.print("[yellow bold] Amstrad 128K Microcomputer (s3) ")
+            console.print("[yellow bold] ©1984 Amstrad Consumer Electronics plc ")
+            console.print("[yellow bold]           and Locomotive Software Ltd. ")
+            console.print("[yellow bold] BASIC 1.1 ")
             console.print("  ")
-            console.print("[yellow]Ready")
+            console.print("[yellow bold]Ready")
             # print("  ")
             # print("[yellow bold] █")
         elif model == "464":
             console.print("  ")
-            console.print("[yellow] Amstrad 64K Microcomputer (s1) ")
-            console.print("[yellow] ©1984 Amstrad Consumer Electronics plc ")
-            console.print("[yellow]           and Locomotive Software Ltd. ")
-            console.print("[yellow] BASIC 1.0 ")
+            console.print("[yellow bold] Amstrad 64K Microcomputer (s1) ")
+            console.print("[yellow bold] ©1984 Amstrad Consumer Electronics plc ")
+            console.print("[yellow bold]           and Locomotive Software Ltd. ")
+            console.print("[yellow bold] BASIC 1.0 ")
             console.print("  ")
-            console.print("[yellow]Ready")
+            console.print("[yellow bold]Ready")
             # print("  ")
             # print("[yellow bold] █")
         elif model == "664":
             console.print("  ")
-            console.print("[yellow] Amstrad 64K Microcomputer (v2) ")
-            console.print("[yellow] ©1984 Amstrad Consumer Electronics plc ")
-            console.print("[yellow]           and Locomotive Software Ltd. ")
-            console.print("[yellow] BASIC 1.1 ")
+            console.print("[yellow bold] Amstrad 64K Microcomputer (v2) ")
+            console.print("[yellow bold] ©1984 Amstrad Consumer Electronics plc ")
+            console.print("[yellow bold]           and Locomotive Software Ltd. ")
+            console.print("[yellow bold] BASIC 1.1 ")
             console.print("  ")
-            console.print("[yellow]Ready")
+            console.print("[yellow bold]Ready")
             # print("  ")
             # print("[yellow bold] █")
 
 #footer screen
 def footer():
     if getConfigKeyProgram("show.amstrad.ready") == 1 :
-        console.print("[yellow]Ready")
-        console.print("[yellow]█")
+        console.print("[yellow bold]Ready")
+        console.print("[yellow bold]█")
 
 # Create Build de la compilacion
 def createBuild():

@@ -4,6 +4,7 @@ import sys, os
 import inquirer
 import shutil
 from datetime import datetime
+import subprocess
 
 import os.path
 from os import path
@@ -24,31 +25,31 @@ def createNewProject(nameProject,template):
     checkNameProject(nameProject)
     # Creamos estructura del proyecto
     build = createBuild()
-    console.rule("[yellow]\[New Project: " + nameProject + "]")
+    console.rule("[yellow bold]\[New Project: " + nameProject + "]")
 
-    console.print("[yellow]\nProject Folders")
+    # console.print("[yellow]\nProject Folders")
     if not path.exists(PWD + "/" + nameProject):
         os.makedirs(PWD + "/" + nameProject)
         createStructure(nameProject,template)
         # Creamos makefile del proyecto
         makeFileTemplate(nameProject,build,template)
-        console.print("[yellow]\nBas File")
+        # console.print("[yellow]\nBas File")
         basFileTemplate(nameProject,build,template)
         if template == "8BP":
             copy8bp(nameProject)
-            console.print("[white]Create loader.bas File.")
-        console.print("[white]Create "+nameProject+".bas File.")
+            # console.print("[blue bold]\[Create][white bold] loader.bas File.")
+        console.print("[blue bold]\[Create][white bold] "+nameProject+".bas File.")
         if CONFIG["project.git"] == 1:
-            console.print("[yellow]\nGit Repository")
+            console.print("[blue bold]\[Create][white bold] Git Repository")
             gitInit(nameProject)
         # Creamos proyecto vscode si activado
         if CONFIG["project.vscode"] == 1:
-            console.print("[yellow]\nVisual Studio Code")
+            # console.print("[yellow]\nVisual Studio Code")
             createVscode(nameProject)
 
-        console.print("[green]\nProject " + nameProject + " Create successfully")
+        console.print("[blue bold]\[Create][green bold] Project " + nameProject + " Successfully")
         console.rule("")
-        footer()
+        
         if CONFIG["project.vscode"] == 1:
             questions = [
                 inquirer.List("vscodeopen", message="Do you want to open the new Project with Visual Studio Code?", choices=["Yes", "No"], default="Yes"),
@@ -57,8 +58,9 @@ def createNewProject(nameProject,template):
         
             if answers["vscodeopen"] == "Yes":
                 openVscode(nameProject)
+            footer()
     else:
-        print(f"[red bold]The " + nameProject + " project exists on this path")
+        print(f"[blue bold]\[SDKCPC][red bold]The " + nameProject + " project exists on this path")
         sys.exit(1)
 
 # Cheque si el nombre de proyecto contiene espacios.
@@ -117,13 +119,13 @@ def createStructure(project,template):
     for i in estructura:
         if not os.path.isdir(PWD + project + "/" + i):
             os.makedirs(PWD + project + "/" + i)
-            print("[white]" + project + "/" + i)
+            print("[blue bold]\[Create][white bold] " + project + "/" + i)
 
 # Crea estructura vscode
 def createVscode(project):
     try:
         shutil.copytree(path.dirname(path.abspath(__file__)) + "/resources/vscode",PWD + project + "/.vscode")
-        print("[white]Create vscode files.")
+        print("[blue bold]\[Create][white bold] Vscode files.")
     except OSError as err:
         print("[red bold]"+str(err))
         sys.exit(1)
@@ -139,29 +141,41 @@ def copy8bp(project):
 
 # Inicializacion repositorio GIT
 def gitInit(project):
+    # try:
+    #     os_cmd = "git init " + PWD + project
+    #     if os.system(os_cmd) != 0:
+    #         raise Exception('[yellow bold][WARNING] The git command does not exist. Unable to initialize repository')
+    #         print("[green]    Initialized Git repository.")
+    # except:
+    #     print('[yellow bold][WARNING] The git command does not exist.')
+
+    FNULL = open(os.devnull, 'w')
     try:
-        os_cmd = "git init " + PWD + project
-        if os.system(os_cmd) != 0:
-            raise Exception('[WARNING] The git command does not exist. Unable to initialize repository')
-            print("[green]    Initialized Git repository.")
+        retcode = subprocess.call(['git', 'init',PWD + project], stdout=FNULL, stderr=subprocess.STDOUT)
     except:
-        print('[yellow]    [WARNING] The git command does not exist.')
+        print('[yellow bold][WARNING] The git command does not exist.')
 
     try:
         shutil.copy(path.dirname(path.abspath(__file__)) + "/resources/gitignore",PWD + project + "/.gitignore")
-        print("[white]Create .gitignore file.")
+        print("[blue bold]\[Create][white bold] gitignore file.")
     except OSError as err:
         print("[bold red]"+err)
         sys.exit(1)
 
 # Open Visual Studio Code
 def openVscode(project):
+    # try:
+    #     os_cmd = "code \"" + PWD + project +"\""
+    #     if os.system(os_cmd) != 0:
+    #         raise Exception('[yellow bold]\[WARNING] Visual Studio Code command does not exist.')
+    # except:
+    #     print('[yellow bold][WARNING] Visual Studio Code command does not exist.')
+    FNULL = open(os.devnull, 'w')
     try:
-        os_cmd = "code \"" + PWD + project +"\""
-        if os.system(os_cmd) != 0:
-            raise Exception('[WARNING] Visual Studio Code command does not exist.')
+        retcode = subprocess.call(['code',PWD + project], stdout=FNULL, stderr=subprocess.STDOUT)
     except:
-        print('[yellow][WARNING] Visual Studio Code command does not exist.')
+        print('[yellow bold][WARNING] The Visual Studio Code does not exist.')
+
 
 # CREATE BAS FILE TEMPLATE
 def basFileTemplate(project_name, build,template):
