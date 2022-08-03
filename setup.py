@@ -33,7 +33,8 @@ setup(
             'jinja2',
             'ipaddress',
             'tabulate',
-            'inquirer'
+            'inquirer',
+            'cerberus'
         ], 
         python_requires='>=3.6',
         classifiers=[
