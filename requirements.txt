@@ -6,4 +6,4 @@ jinja2
 ipaddress
 tabulate
 inquirer
-cerverus
+cerberus
