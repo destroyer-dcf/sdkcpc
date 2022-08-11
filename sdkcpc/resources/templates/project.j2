@@ -1,0 +1,33 @@
+---
+
+compilation:
+  build: {{ compilation }}
+  version: 1.0.1
+project:
+  name: {{ project_name }}
+  description: ""
+  template: {{ template }}
+  author: authors <authors@mail.com>
+configurations:
+  concatenate_bas_files: False
+  validate_83_files: False
+  name_bas_file: XXXX
+supports:
+  dsk:
+    name: {{ project_name }}.dsk
+    compile: True
+  cdt:
+    name: {{ project_name }}.cdt
+    compile: False
+    orden_files:
+      - XXXXXXXX
+      - XXXXXXXX
+      - XXXXXXXX
+emulators:
+  rvm:
+    model: 6128
+    path: XXXXXXXX
+  winape:
+    path: XXXXX
+  m4board:
+    ip: 0.0.0.0
