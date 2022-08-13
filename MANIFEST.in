@@ -10,3 +10,6 @@ recursive-include sdkcpc/resources/idsk/linux iDSK
 recursive-include sdkcpc/resources/idsk/win32 iDSK.exe
 recursive-include sdkcpc/resources/idsk/win32 cyggcc_s-1.dll
 recursive-include sdkcpc/resources/idsk/win32 cygwin1.dll
+recursive-include sdkcpc/resources/templates 8bp.j2
+recursive-include sdkcpc/resources/templates basic.j2
+recursive-include sdkcpc/resources/templates project.j2
