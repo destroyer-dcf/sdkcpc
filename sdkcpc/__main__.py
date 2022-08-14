@@ -16,6 +16,8 @@ from .build import *
 from .run import *
 from .info import *
 
+from .validate import *
+
 
 
 def main():
@@ -113,13 +115,14 @@ def main():
         validateFolderProject()
         info()
     elif args.command == "check":
-        validateFolderProject()
-        Section_rvm     = readProyectSection("rvm")
-        head(str(Section_rvm["model.cpc"]))
-        print("")
-        checkProject()
-        print("")
-        footer()
+        # validateFolderProject()
+        # Section_rvm     = readProyectSection("rvm")
+        # head(str(Section_rvm["model.cpc"]))
+        # print("")
+        # checkProject()
+        # print("")
+        # footer()
+        validate_data()
     elif args.command == "build":
         validateFolderProject()
         build()
