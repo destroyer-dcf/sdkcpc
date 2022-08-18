@@ -18,7 +18,8 @@
                     'name': {
                         'type': 'string',
                         'empty': False,
-                        'required': True
+                        'required': True,
+                        'regex': '^([a-zA-Z0-9]{1,8})*[^\s]\1*$', # Valida que el nombre de fichero tenga 8 posiciones
                     },
                     'description': {
                         'type': 'string',
