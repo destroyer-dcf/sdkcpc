@@ -71,7 +71,7 @@ def checkConfigKey(key):
 #   @Param: Nuevo valor de la Clave
 def setConfigKeyValue(key,value):
     
-    if key == "path.rvm" or key == "path.winape":
+    if key == "path.rvm":
         if not os.path.exists(value):
             print("[blue bold]\[SDKCPC][red bold] "+key+": " + str(value) + " file does not exist.")
             exit(1)

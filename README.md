@@ -13,7 +13,7 @@
 - Comentarios en codigo que no ocupan memoria.
 - Trabajo por objetos
 - Verificacion formato 8:3
-- Compatible con Emuladores: Retro Virtual Machine y Winape
+- Compatible con Emuladores: Retro Virtual Machine
 - Integración con M4-Board
 - y mucho mucho más.....
 
@@ -33,7 +33,6 @@
 |:----------|:----------|:----------|
 | Python    | =>3.6    | [Descarga](https://www.python.org/downloads/)    |
 | Retro Virtual Machine    | =>2.0 BETA-1 R7 10/07/2019    | [Descarga](https://www.retrovirtualmachine.org/es/downloads)    |
-| Winape    | 2.0b2    | [Descarga](http://www.winape.net/download/WinAPE20B2.zip)    |
 | Visual Studio Code    | latest   | [Descarga](https://code.visualstudio.com/download)    |
 | iDSK    | 20    | Incluido en SDKCPC ([Github iDSK](https://github.com/cpcsdk/idsk))      |
 
@@ -42,41 +41,17 @@
 |:----------|:----------|:----------|
 | Python    | =>3.6    | [Descarga](https://www.python.org/downloads/)    |
 | Retro Virtual Machine    | =>2.0 BETA-1 R7 10/07/2019    | [Descarga](https://www.retrovirtualmachine.org/es/downloads)    |
-| Winape    | 2.0b2    | [Descarga](http://www.winape.net/download/WinAPE20B2.zip)    |
 | Visual Studio Code    | latest   | [Descarga](https://code.visualstudio.com/download)    |
 | iDSK    | 20    | Incluido en SDKCPC ([Github iDSK](https://github.com/cpcsdk/idsk))   |
-| wine    | --    | **Wine es opcional. Se instalara siempre y cuando queramos usar **Winape** como Emulador para nuestras pruebas.**    |
 
 ### OSX
 | Software  | Version  | Url |
 |:----------|:----------|:----------|
 | Python    | =>3.6    | [Descarga](https://www.python.org/downloads/)    |
 | Retro Virtual Machine    | =>2.0 BETA-1 R7 10/07/2019    | [Descarga](https://www.retrovirtualmachine.org/es/downloads)    |
-| Winape    | 2.0b2    | [Descarga](http://www.winape.net/download/WinAPE20B2.zip)    |
 | Visual Studio Code    | latest   | [Descarga](https://code.visualstudio.com/download)    |
 | iDSK    | 20    | Incluido en SDKCPC ([Github iDSK](https://github.com/cpcsdk/idsk))       |
-| wine    | --    | **Wine es opcional. Se instalara siempre y cuando queramos usar **Winape** como Emulador para nuestras pruebas.**   |
 
-
-### Instalar Wine en linux:
-
-La instalación en linux se realizada desde nuestro gestor de paquetes:
-
-**Ubuntu/Debian y similares:**
-
-```
-sudo apt-get install wine
-```
-**RHEL/CentOS/Fedora y similares:**
-```
-sudo yum install wine
-```
-### Instalar Wine en OSX:
-
-La instalación en OSX la realizaremos desde el gestor de paquetes de codigo abierto **Homebrew**. Lo puedes instalar desde [aqui](https://brew.sh/index_es). Una vez instalado:
-```
-brew install wine
-```
 
 ### Instalar Extensiones en Visual Studio Code.
 
@@ -135,13 +110,13 @@ Crea una imagen para Disco (DSK) y Cinta (CDT) con el software del proyecto
 | `sdkcpc build`    |     | Genera un archivo DSK y CDT con todo el software del proyecto.    |
 
 ---
-**█ check**
+**█ validate**
 
-Chequea que las configuraciones del proyecto de la ruta actual esten correctas.
+Valida que las configuraciones del proyecto en la ruta actual esten correctas.
 
 | Como Usar  | Opciones  | Descripcion  |
 |:----------|:----------|:----------|
-| `sdkcpc check`    |     | Chequea que las configuraciones (Project.cfg) del proyecto sean correctas.|
+| `sdkcpc validate`    |     | Valida que las configuraciones (Project.cfg) del proyecto sean correctas.|
 
 ---
 **█ config**
@@ -161,7 +136,6 @@ Listado de configuraciones de SDKCPC. Pueden ser modificadas por el usuario.
 | **project.git**    | 1    | Crea el Proyecto con un control de versiones git. Parametros admitidos 1 activado - 0 Desactivado    |
 | **project.vscode**    | 1    | Una vez creado el Projecto pregunta si quiere asociarlo a Visual Studio Code. Parametros admitidos 1 activado - 0 Desactivado       |
 | **path.rvm**    | None    | Ruta donde esta instalado Retro Virtual Machine. **Es necesario configurar antes de empezar a utilizar SDKCPC**   |
-| **path.winape**    | None    | Ruta donde esta instalado Winape. **Es necesario configurar antes de empezar a utilizar SDKCPC**      |
 | **show.amstrad.ready**    | 1    | Muestra la cabezera amstrad por consola con la ejecucion de los comandos. Parametros admitidos 1 activado - 0 Desactivado       |
 | **show.amstrad.screen**    | 1    | Muestra Ready en la consola una vez ejecutado un comando. Parametros admitidos 1 activado - 0 Desactivado       |
 
@@ -202,17 +176,13 @@ Carga nuestro DSK generado y ejecuta el bas seleccionado sobre el emulador pasad
 | Como Usar  | Opciones  | Descripcion  |
 |:----------|:----------|:----------|
 | `sdkcpc run`    |  --rvm   | Ejecuta el emulador Retro virtual Machine.|
-|                 |  --winape   | Ejecuta el emulador Winape.|
 ---
 
 
 ## Información de contacto y soporte
-email: sdkcpc@gmail.com
+email: destroyer.dcf@gmail.com
 
-twitter: @sdkcpc
 
 ## Licencia y Autor
 (C) Copyright 2021-2022 Destroyer sdkcpc
 
-CPCtelera low-level library, examples and scripts are distributed under GNU Lesser General Public License v3
-Content authoring tools included within CPCtelera (under cpctelera/tools folder) have their own licenses. Check each of them in their respective folders for more details.
