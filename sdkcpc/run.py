@@ -22,7 +22,6 @@ def rvm():
         print("[blue bold][SDKCPC][red bold] path.rvm: " + CONFIG["path.rvm"] + " File does not exist.")
         exit(1)
 
-    head(readProyectKey("rvm","model.cpc"))
     # Depending on the platform we execute
     RVM = getConfigKeyProgram("path.rvm")
     console.print("[blue bold][Build   ][yellow] " + section_compilation["build"])
@@ -35,4 +34,3 @@ def rvm():
     elif sys.platform == "win32" or sys.platform == "win64":
         run = ' -c=RUN"'+Section_config["name.bas.file"]
         os.system(r"start " + RVM + " -i "+ DSK +  " -b=cpc"+rvm_model["model.cpc"] + run +"\n\n")
-    footer()

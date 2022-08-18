@@ -34,7 +34,6 @@ def build():
     Section_general = readProyectSection("general")
     Section_rvm     = readProyectSection("rvm")
 
-    head(str(Section_rvm["model.cpc"]))
     console.rule("[yellow bold]\[Build Project]")
     console.print("")
     checkProject()

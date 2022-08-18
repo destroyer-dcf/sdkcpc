@@ -91,34 +91,24 @@ def main():
     elif args.command == 'config':
         # Lista las configuraciones de sdkcpc
         if args.list == True and not args.Key and not args.Value:
-            head("6128")
             listConfigsKeys()
-            footer()
             sys.exit(0)
         if args.Key and args.Value:
             # Cambia el valor de una clave
-            head("6128")
             setConfigKeyValue(args.Key,args.Value)
-            footer()
         else:
             # Muestra el Valor de una Clave
-            head("6128")
             getConfigKey(args.Key)
-            footer()
 
     elif args.command == 'info':
         validateFolderProject()
         info()
     elif args.command == "validate":
-        # validateFolderProject()
-        # Section_rvm     = readProyectSection("rvm")
-        # head(str(Section_rvm["model.cpc"]))
-        # print("")
-        # checkProject()
-        # print("")
-        # footer()
-        # validate_data()
+        validateFolderProject()
+        print("")
         checkProject()
+        print("")
+        # validate_data()
     elif args.command == "build":
         validateFolderProject()
         build()

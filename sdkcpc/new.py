@@ -20,7 +20,6 @@ console = Console(width=80,color_system="windows",force_terminal=True)
 # Crea nuevo proyecto en la ruta actua.
 #   @Param Nombre del Proyecto
 def createNewProject(nameProject,template):
-    head("6128")
     # chequeamos si el nombre del proyecto contiene espacios
     checkNameProject(nameProject)
     # Creamos estructura del proyecto

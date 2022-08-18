@@ -18,7 +18,6 @@ def info():
     Section_general = readProyectSection("general")
     Section_rvm     = readProyectSection("rvm")
 
-    head(str(Section_rvm["model.cpc"]))
     print(" ")
 
     config = configparser.ConfigParser()
