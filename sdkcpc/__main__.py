@@ -34,7 +34,7 @@ def main():
     build_parser = subparsers.add_parser('build', help='Compile the DSK image of the project')
 
     # A check comman
-    check_parser = subparsers.add_parser('check', help='Checks the validity of the makefile.')
+    check_parser = subparsers.add_parser('validate', help='Project data validation.')
 
     # A config comman
     config_parser = subparsers.add_parser('config', help='Configuration software SDKCPC')
@@ -109,7 +109,7 @@ def main():
     elif args.command == 'info':
         validateFolderProject()
         info()
-    elif args.command == "check":
+    elif args.command == "validate":
         # validateFolderProject()
         # Section_rvm     = readProyectSection("rvm")
         # head(str(Section_rvm["model.cpc"]))
@@ -117,7 +117,8 @@ def main():
         # checkProject()
         # print("")
         # footer()
-        validate_data()
+        # validate_data()
+        checkProject()
     elif args.command == "build":
         validateFolderProject()
         build()
