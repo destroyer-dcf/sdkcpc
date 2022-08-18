@@ -33,11 +33,12 @@ setup(
             'jinja2',
             'ipaddress',
             'tabulate',
-            'inquirer'
+            'inquirer',
+            'cerberus'
         ], 
         python_requires='>=3.6',
         classifiers=[
-            'License :: OSI Approved :: GNU General Public License',
+            'License :: OSI Approved :: GNU General Public License (GPL)',   
             'Programming Language :: Python',
             'Programming Language :: Python :: 3',
             'Programming Language :: Python :: 3.6',

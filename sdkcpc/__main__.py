@@ -16,6 +16,8 @@ from .build import *
 from .run import *
 from .info import *
 
+from .validate import *
+
 
 
 def main():
@@ -32,7 +34,7 @@ def main():
     build_parser = subparsers.add_parser('build', help='Compile the DSK image of the project')
 
     # A check comman
-    check_parser = subparsers.add_parser('check', help='Checks the validity of the makefile.')
+    check_parser = subparsers.add_parser('validate', help='Project data validation.')
 
     # A config comman
     config_parser = subparsers.add_parser('config', help='Configuration software SDKCPC')
@@ -57,7 +59,6 @@ def main():
     run_parser = subparsers.add_parser('run', help='Run BAS File in DSK image')
     run_parser = run_parser.add_mutually_exclusive_group()
     run_parser.add_argument('--rvm',action='store_true',help='Run in Retro Virtual Machine Software')
-    run_parser.add_argument('--winape',action='store_true',help='Run in Winape Software')
     run_parser.add_argument('--m4',action='store_true',help='Run in M4-Board')
 
     # A version comman
@@ -81,15 +82,11 @@ def main():
             validateFolderProject()
             rvm()
             sys.exit(0)
-        if args.winape == True:
-            validateFolderProject()
-            winape()
-            sys.exit(0)
         if args.m4 == True:
             validateFolderProject()
             print("m4 option")
             sys.exit(0)
-        print("ERROR NO HAY PARAMETRO DE RETROVIRTUALMACHINE")
+        print("[blue bold][SDKCPC][red bold] missing parameter.")
 
     elif args.command == 'config':
         # Lista las configuraciones de sdkcpc
@@ -112,14 +109,16 @@ def main():
     elif args.command == 'info':
         validateFolderProject()
         info()
-    elif args.command == "check":
-        validateFolderProject()
-        Section_rvm     = readProyectSection("rvm")
-        head(str(Section_rvm["model.cpc"]))
-        print("")
+    elif args.command == "validate":
+        # validateFolderProject()
+        # Section_rvm     = readProyectSection("rvm")
+        # head(str(Section_rvm["model.cpc"]))
+        # print("")
+        # checkProject()
+        # print("")
+        # footer()
+        # validate_data()
         checkProject()
-        print("")
-        footer()
     elif args.command == "build":
         validateFolderProject()
         build()

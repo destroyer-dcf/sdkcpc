@@ -36,29 +36,3 @@ def rvm():
         run = ' -c=RUN"'+Section_config["name.bas.file"]
         os.system(r"start " + RVM + " -i "+ DSK +  " -b=cpc"+rvm_model["model.cpc"] + run +"\n\n")
     footer()
-
-# Ejecuta winape con el dsk asociado
-def winape():
-    Section_config  = readProyectSection("config")
-    section_compilation = readProyectSection("compilation")
-    rvm_model = readProyectSection("rvm")
-    DSK = PWD + "OUT/" + Section_config["name.dsk.file"]
-    DSK = "z:"+DSK.replace("/", "\\").lower()
-
-    if not os.path.exists(CONFIG["path.winape"]):
-        print("[yellow](config sdkcpc)[red bold]\[path.winape]:El archivo " + CONFIG["path.winape"] + " does not exist.")
-        exit(1)
-
-    head(str(rvm_model["model.cpc"]) )
-    # Depending on the platform we execute
-    WINAPE = getConfigKeyProgram("path.winape")
-    console.print("[blue bold][Build   ][yellow] " + section_compilation["build"])
-    console.print("[blue bold][Version ][yellow] " + section_compilation["version"])
-    console.print("[blue bold][Emulator][yellow] Retro Virtual Machine")
-    console.print('[blue bold][DSK File][yellow] ' + Section_config["name.dsk.file"])
-    console.print('[blue bold][BAS File][yellow] ' + Section_config["name.bas.file"])
-    if sys.platform == "darwin" or sys.platform == "linux":
-        subprocess.Popen(["wine",WINAPE,DSK,"/A:"+Section_config["name.bas.file"]], stdout=subprocess.DEVNULL)
-    elif sys.platform == "win32" or sys.platform == "win64":
-        os.system(r"start " + WINAPE +" "+DSK+" "+"/A:"+Section_config["name.bas.file"])
-    footer()
