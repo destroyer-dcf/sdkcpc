@@ -46,7 +46,6 @@ def build():
             BorraTemporales("OBJ")
             with open(PWD + "OBJ/"+project_data["config"]["name.bas.file"]+".tmp", "w") as fo:
                 fo.write(concat)
-            # infoLog("/BASIC","Contatenate files")
             print("Contatenate files")
             unix2dos(project_data["config"]["name.bas.file"])
   
@@ -57,9 +56,7 @@ def build():
         try:
             retcode = subprocess.Popen([_commando_idsk, PWD+project_data["general"]["name"],"-n"], stdout=FNULL, stderr=subprocess.STDOUT)
             print("Create DSK.")
-            # infoLog(project_data["general"]["name"],"Create DSK.")
         except:
-            errorLog("SDKCPC","iDSK does not exist.")
             print("[red bold]ERROR: "+"iDSK does not exist.")
             sys.exit(1)
 
@@ -85,10 +82,8 @@ def build():
 def copy8bp(project,dskfile):
     try:
         shutil.copy(PWD+ "/DSK/8bp.dsk",PWD + "/"+dskfile)
-        # infoLog("/","Added 8bp library")
         print("Added 8bp library")
     except OSError as err:
-        # errorLog("/","Added 8bp library: " +str(err))
         print("[red bold]ERROR: "+"Added 8bp library: " +str(err))
         sys.exit(1)
 
@@ -102,16 +97,12 @@ def addDskFiles(folder,tipo):
         FNULL = open(os.devnull, 'w')
         try:
             retcode = subprocess.Popen([_commando_idsk, dsk,"-i",path + infile,"-f","-t",str(tipo)], stdout=FNULL, stderr=subprocess.STDOUT)
-            # infoLog(project_data["general"]["name"]+".dsk","Added file "+folder + '/'+infile)
             print("Added file "+folder + '/'+infile)
         except:
-            # errorLog(project_data["general"]["name"]+".dsk","Added file "+folder + '/'+infile)
             print("[red bold]ERROR: "+"Added file "+folder + '/'+infile)
             sys.exit(1)
 
     if len(files) == 0:
-        # Warning("\["+folder+"]: No files in folder ")
-        # infoLog("/"+folder,"No files in folder")
         print("No files in folder "+folder)
 
 def DeleteCommentLines(file,new_version, new_compilation):
@@ -126,7 +117,6 @@ def DeleteCommentLines(file,new_version, new_compilation):
                     output.write(line)
             output.write("\n")
 
-    # infoLog(file,"Delete Comment lines OBJ/"+file)
     print("Delete Comment lines OBJ/"+file)
     # Convertimos fichero a dos
     unix2dos(file)
@@ -138,9 +128,7 @@ def unix2dos(file):
     with open(PWD + "OBJ/"+file, "w") as fo:
         fo.write(remove_lines + "\n\n")
     os.remove(PWD + "OBJ/"+file+".tmp")
-    # infoLog(file,"Convert file to dos")
     print("Convert file to dos")
-    # infoLog(file,"Delete temporal file")
 
 # Borra ficheros temporales
 #   @Param: Carpeta a borrar
@@ -148,7 +136,6 @@ def BorraTemporales(Folder):
     files = glob.glob(PWD + Folder+'/*') 
     for f in files: 
         os.remove(f)
-        # infoLog("/"+Folder,"Delete temporal file " + os.path.basename(f))
         print("Delete temporal file " + os.path.basename(f))
 
 # Version increment

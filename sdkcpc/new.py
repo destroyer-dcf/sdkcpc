@@ -58,7 +58,7 @@ def createNewProject(nameProject,template):
             if answers["vscodeopen"] == "Yes":
                 openVscode(nameProject)
     else:
-        print(f"[blue bold]\[SDKCPC][red bold]The " + nameProject + " project exists on this path")
+        print(f"[red bold]The " + nameProject + " project exists on this path")
         sys.exit(1)
 
 # Cheque si el nombre de proyecto contiene espacios.

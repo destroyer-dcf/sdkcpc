@@ -37,9 +37,9 @@ def getConfigKey(key):
             table.add_row(key, str(data[key]))
             console.print(table)  
         except KeyError as e:
-            print('[blue bold]\[SDKCPC][red bold] The key %s does not exist' % str(e))
+            print('[red bold] The key %s does not exist' % str(e))
         except IndexError as e:
-            print ('[blue bold]\[SDKCPC][red bold] I got an IndexError - reason "%s"' % str(e))
+            print ('[red bold] I got an IndexError - reason "%s"' % str(e))
 
 # Devuelve el valor de la clave especificada
 #   @Param: Nombre de la Clave
@@ -49,9 +49,9 @@ def getConfigKeyProgram(key):
             data = yaml.load(f, Loader=SafeLoader)
             return data[key]
         except KeyError as e:
-            print('[blue bold]\[SDKCPC][red bold] The key %s does not exist' % str(e))
+            print('[red bold] The key %s does not exist' % str(e))
         except IndexError as e:
-            print ('[blue bold]\[SDKCPC][red bold] I got an IndexError - reason "%s"' % str(e))
+            print ('[red bold] I got an IndexError - reason "%s"' % str(e))
 
 # Verifica que exista la clave en el fichero de configuracion
 #   @Param: Nombre de la Clave
@@ -59,12 +59,12 @@ def checkConfigKey(key):
     with open(path.dirname(path.abspath(__file__)) + '/sdkcpc.yml', 'r', encoding='utf8') as f:
         try:
             data = yaml.load(f, Loader=SafeLoader)
-            print("[blue bold]\[SDKCPC][yellow bold] Change value Key ("+key+"): [white]" + str(data[key]))
+            print("[yellow bold] Change value Key ("+key+"): [white]" + str(data[key]))
         except KeyError as e:
-            print('[blue bold]\[SDKCPC][red bold] The key %s does not exist' % str(e))
+            print('[red bold] The key %s does not exist' % str(e))
             exit(1)
         except IndexError as e:
-            print ('[blue bold]\[SDKCPC][red bold] I got an IndexError - reason "%s"' % str(e))
+            print ('[red bold] I got an IndexError - reason "%s"' % str(e))
 
 # Cambiar el valor de la clave por el especificado
 #   @Param: Nombre de la Clave
@@ -73,10 +73,10 @@ def setConfigKeyValue(key,value):
     
     if key == "path.rvm":
         if not os.path.exists(value):
-            print("[blue bold]\[SDKCPC][red bold] "+key+": " + str(value) + " file does not exist.")
+            print("[red bold] "+key+": " + str(value) + " file does not exist.")
             exit(1)
     elif value == "0" or value=="1":
-            print("[blue bold]\[SDKCPC][red bold] "+key+": " + value + " The value is not correct (1 or 0)")
+            print("[red bold] "+key+": " + value + " The value is not correct (1 or 0)")
             exit(1)
     checkConfigKey(key)
     with open(path.dirname(path.abspath(__file__)) + '/sdkcpc.yml', 'r', encoding='utf8') as f:
@@ -86,7 +86,7 @@ def setConfigKeyValue(key,value):
 
     with open(path.dirname(path.abspath(__file__)) + '/sdkcpc.yml', 'w', encoding='utf8') as f:
         yaml.dump(doc, f)
-    print("[blue bold]\[SDKCPC][yellow bold] New Value Key    ("+key+"): [green bold]" + value)
+    print("[yellow bold] New Value Key    ("+key+"): [green bold]" + value)
 
     listConfigsKeys()
 

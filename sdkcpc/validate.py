@@ -20,7 +20,7 @@ def show_error_validate(error):
     new_error = re.sub('[^a-zA-Z0-9:, \n\.]', '', error)
     new_error = new_error.replace(":", " >")
     new_error = new_error.replace(",", "\n")
-    print ("[blue bold]\[SDKCPC][red bold]\nValidation "+ MAKEFILE +" Error:\n " + new_error)
+    print ("[red bold]\nValidation "+ MAKEFILE +" Error:\n " + new_error)
 
 def load_doc_project():
     validate_Folder_Project()
@@ -43,5 +43,5 @@ def validate_data():
 # Valida si la carpeta es de proyecto
 def validate_Folder_Project():
     if not os.path.exists(PWD + MAKEFILE):
-        print("[blue bold]\[SDKCPC][red bold] This folder does not contain sdkcpc project.")
+        print("][red bold] This folder does not contain sdkcpc project.")
         sys.exit(1)

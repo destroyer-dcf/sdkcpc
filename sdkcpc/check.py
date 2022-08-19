@@ -184,5 +184,5 @@ def validateIp(ip_address):
 # Valida si la carpeta es de proyecto
 def validateFolderProject():
     if not os.path.exists(PWD + MAKEFILE):
-        print("[blue bold]\[SDKCPC][red bold] This folder does not contain sdkcpc project.")
+        print("[red bold] This folder does not contain sdkcpc project.")
         sys.exit(1)

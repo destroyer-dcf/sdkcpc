@@ -94,10 +94,6 @@ def setProjectKeyValue(section, key, value):
 # get version cpcpy
 def  version():
     try:
-        # print(PATH_TOOLS[0] + '/VERSION')
-        # print(PARENT_DIR)
-        # print(pathlib.Path(__file__).parent.absolute())
-        # print(os.path.abspath(os.getcwd()))
         with open(PATH_TOOLS[0] + '/VERSION', 'r') as file:
             return file.read().rstrip()
     except IOError:
