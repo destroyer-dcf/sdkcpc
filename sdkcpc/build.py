@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-import argparse
 import sys, os
 import datetime
 
@@ -15,7 +14,7 @@ from .new import *
 from .check import *
 
 from rich.console import Console
-console = Console(width=80,color_system="windows",force_terminal=True)
+console = Console(width=80)
 
 # GET PLATFORM
 if sys.platform == "darwin":
@@ -27,17 +26,14 @@ elif sys.platform == "win64":
 elif sys.platform == "linux":
      _commando_idsk = path.dirname(path.abspath(__file__)) + "/resources/idsk/" + sys.platform + "/iDSK"
 
+project_data = Get_data_project_dict()
 
 def build():
     
-    Section_config  = readProyectSection("config")
-    Section_general = readProyectSection("general")
-    Section_rvm     = readProyectSection("rvm")
-
     console.rule("[yellow bold]\[Build Project]")
     console.print("")
     checkProject()
-    new_version     = incrementVersion(readProyectKey("compilation","version"))
+    new_version     = incrementVersion(project_data["compilation"]["version"])
     new_compilation = str(datetime.now())
     BorraTemporales("OUT")
     BorraTemporales("OBJ")
@@ -45,27 +41,30 @@ def build():
     for idx, infile in enumerate(files):
             DeleteCommentLines(infile,new_version, new_compilation)
 
-    if Section_config["concatenate.files"].upper() == "YES":
+    if project_data["config"]["concatenate.files"].upper() == "YES":
             concat = '\n'.join([open(PWD + "OBJ/" + f).read() for f in files])
             BorraTemporales("OBJ")
-            with open(PWD + "OBJ/"+Section_config["name.bas.file"]+".tmp", "w") as fo:
+            with open(PWD + "OBJ/"+project_data["config"]["name.bas.file"]+".tmp", "w") as fo:
                 fo.write(concat)
-            infoLog("/BASIC","Contatenate files")
-            unix2dos(Section_config["name.bas.file"])
+            # infoLog("/BASIC","Contatenate files")
+            print("Contatenate files")
+            unix2dos(project_data["config"]["name.bas.file"])
   
 
     # Creamos Dsk en OUT si el template es basic, si no copiamos la bibliotec 8bp que esta en dsk
-    if Section_general["template"] == "Basic":
+    if project_data["general"]["template"] == "Basic":
         FNULL = open(os.devnull, 'w')
         try:
-            retcode = subprocess.call([_commando_idsk, PWD+"OUT/"+ Section_config["name.dsk.file"],"-n"], stdout=FNULL, stderr=subprocess.STDOUT)
-            infoLog(Section_config["name.dsk.file"],"Create DSK.")
+            retcode = subprocess.Popen([_commando_idsk, PWD+project_data["general"]["name"],"-n"], stdout=FNULL, stderr=subprocess.STDOUT)
+            print("Create DSK.")
+            # infoLog(project_data["general"]["name"],"Create DSK.")
         except:
             errorLog("SDKCPC","iDSK does not exist.")
+            print("[red bold]ERROR: "+"iDSK does not exist.")
             sys.exit(1)
 
-    if Section_general["template"] == "8BP":
-        copy8bp(Section_general["name"],Section_config["name.dsk.file"])
+    if project_data["general"]["template"] == "8BP":
+        copy8bp(project_data["general"]["name"],project_data["general"]["name"]+".dsk")
     addDskFiles("OBJ",0)
     addDskFiles("BIN",1)
     addDskFiles("ASCII",0)
@@ -81,35 +80,39 @@ def build():
     print ("[blue bold]STATUS : [green bold]SUCCESSFULLY")
     console.print("")
     console.rule("")
-    footer()
 
 # Copia 8bp defauld
 def copy8bp(project,dskfile):
     try:
-        shutil.copy(PWD+ "/DSK/8bp.dsk",PWD + "/OUT/"+dskfile)
-        infoLog("/DSK","Added 8bp library")
+        shutil.copy(PWD+ "/DSK/8bp.dsk",PWD + "/"+dskfile)
+        # infoLog("/","Added 8bp library")
+        print("Added 8bp library")
     except OSError as err:
-        errorLog("/DSK","Added 8bp library: " +str(err))
+        # errorLog("/","Added 8bp library: " +str(err))
+        print("[red bold]ERROR: "+"Added 8bp library: " +str(err))
         sys.exit(1)
 
 def addDskFiles(folder,tipo):
-    Section_config  = readProyectSection("config")
+
     path = PWD + folder + '/'
-    dsk  = PWD + "OUT/" + Section_config["name.dsk.file"]
+    dsk  = PWD + "/" + project_data["general"]["name"]+".dsk"
     files = os.listdir(path)
     for idx, infile in enumerate(files):
         
         FNULL = open(os.devnull, 'w')
         try:
-            retcode = subprocess.call([_commando_idsk, dsk,"-i",path + infile,"-f","-t",str(tipo)], stdout=FNULL, stderr=subprocess.STDOUT)
-            infoLog(Section_config["name.dsk.file"],"Added file "+folder + '/'+infile)
+            retcode = subprocess.Popen([_commando_idsk, dsk,"-i",path + infile,"-f","-t",str(tipo)], stdout=FNULL, stderr=subprocess.STDOUT)
+            # infoLog(project_data["general"]["name"]+".dsk","Added file "+folder + '/'+infile)
+            print("Added file "+folder + '/'+infile)
         except:
-            errorLog(Section_config["name.dsk.file"],"Added file "+folder + '/'+infile)
+            # errorLog(project_data["general"]["name"]+".dsk","Added file "+folder + '/'+infile)
+            print("[red bold]ERROR: "+"Added file "+folder + '/'+infile)
             sys.exit(1)
 
     if len(files) == 0:
         # Warning("\["+folder+"]: No files in folder ")
-        infoLog("/"+folder,"No files in folder")
+        # infoLog("/"+folder,"No files in folder")
+        print("No files in folder "+folder)
 
 def DeleteCommentLines(file,new_version, new_compilation):
     # Elimina comentarios de linea de Visual studio Code (1 ')
@@ -123,7 +126,8 @@ def DeleteCommentLines(file,new_version, new_compilation):
                     output.write(line)
             output.write("\n")
 
-    infoLog(file,"Delete Comment lines OBJ/"+file)
+    # infoLog(file,"Delete Comment lines OBJ/"+file)
+    print("Delete Comment lines OBJ/"+file)
     # Convertimos fichero a dos
     unix2dos(file)
 
@@ -134,7 +138,8 @@ def unix2dos(file):
     with open(PWD + "OBJ/"+file, "w") as fo:
         fo.write(remove_lines + "\n\n")
     os.remove(PWD + "OBJ/"+file+".tmp")
-    infoLog(file,"Convert file to dos")
+    # infoLog(file,"Convert file to dos")
+    print("Convert file to dos")
     # infoLog(file,"Delete temporal file")
 
 # Borra ficheros temporales
@@ -143,7 +148,8 @@ def BorraTemporales(Folder):
     files = glob.glob(PWD + Folder+'/*') 
     for f in files: 
         os.remove(f)
-        infoLog("/"+Folder,"Delete temporal file " + os.path.basename(f))
+        # infoLog("/"+Folder,"Delete temporal file " + os.path.basename(f))
+        print("Delete temporal file " + os.path.basename(f))
 
 # Version increment
 #   @Param current version

@@ -57,7 +57,6 @@ def createNewProject(nameProject,template):
         
             if answers["vscodeopen"] == "Yes":
                 openVscode(nameProject)
-            footer()
     else:
         print(f"[blue bold]\[SDKCPC][red bold]The " + nameProject + " project exists on this path")
         sys.exit(1)

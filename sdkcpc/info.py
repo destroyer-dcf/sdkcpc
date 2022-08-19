@@ -52,7 +52,6 @@ def info():
         if contador == 0:
             table.add_row(a,"No files in folder", "0 KB")
     console.print(table) 
-    footer()
     print("")    
 
 

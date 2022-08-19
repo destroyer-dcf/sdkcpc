@@ -53,7 +53,7 @@ def checkProject():
         sys.exit(1)        
     # print(readProyectSection("general"))
     # print(readProyectSection("config"))
-    print("[blue bold]\["+MAKEFILE+"][yellow bold] Successfully")
+    print("Validate Project Successfully")
 
 
 # Valida que la version tenga el formato correcto 0.0.0

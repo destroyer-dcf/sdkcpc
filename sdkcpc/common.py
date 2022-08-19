@@ -16,7 +16,7 @@ from tabulate import tabulate
 from datetime import datetime
 
 from .config import *
-
+from configparser import ConfigParser
 from rich.console import Console
 
 console = Console(width=80,color_system="windows",force_terminal=True)
@@ -41,6 +41,13 @@ LOG_FILE       = "project.log"
 def createBuild():
     now = datetime.now()
     return now
+
+# Get data project in dict
+def Get_data_project_dict():
+    config = ConfigParser()
+    config.read('Project.cfg')
+    project_dic = dict(config._sections)
+    return project_dic
 
 
 # Leer propiedad del proyecto
