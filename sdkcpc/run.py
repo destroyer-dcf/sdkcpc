@@ -30,7 +30,7 @@ elif sys.platform == "linux":
 
 def make_executable(path):
     mode = os.stat(path).st_mode
-    mode |= (mode & 0o444) >> 2    # copy R bits to X
+    mode |= (mode & 0o444) >> 2
     os.chmod(path, mode)
 
 def Download_RVM():
@@ -55,32 +55,9 @@ def rvm():
     print()
     project_data = Get_data_project_dict()
     DSK = PWD + project_data["general"]["name"]+".dsk"
-
-    # if not os.path.exists(CONFIG["path.rvm"]):
-    #     print("[red bold] path.rvm: " + CONFIG["path.rvm"] + " File does not exist.")
-    #     exit(1)
-
-    # Depending on the platform we execute
-    RVM = _rvm
-
     console.print("[blue bold][Build   ][white] " + project_data["compilation"]["build"])
     console.print("[blue bold][Version ][white] " + project_data["compilation"]["version"])
     console.print("[blue bold][Emulator][white] Retro Virtual Machine")
     console.print('[blue bold][DSK File][white] ' + project_data["general"]["name"]+".dsk")
     console.print('[blue bold][BAS File][white] ' + project_data["config"]["name.bas.file"])
-    # print (_rvm + " -i "+ DSK + " -b=cpc"+project_data['rvm']['model.cpc'] + " -c=RUN\""+project_data["config"]["name.bas.file"]+"\"\n")
     subprocess.run([_rvm,"-i", DSK,"-b=cpc"+project_data['rvm']['model.cpc'],"-c=RUN\""+project_data["config"]["name.bas.file"]+"\"\n"])
-    # FNULL = open(os.devnull, 'w')
-    # if sys.platform == "darwin" or sys.platform == "linux":
-    #     RVM = RVM.replace(" ","\ ")
-    #     #subprocess.Popen([RVM,"-i", DSK,"-b=cpc"+project_data['rvm']['model.cpc'],"-c=RUN\""+project_data["config"]["name.bas.file"]+"\"\n"], stdout=subprocess.DEVNULL,shell=True)
-    #     subprocess.run(["RetroVirtualMachine","-i", DSK,"-b=cpc"+project_data['rvm']['model.cpc'],"-c=RUN\""+project_data["config"]["name.bas.file"]+"\"\n"], stderr=subprocess.STDOUT)
-    # elif sys.platform == "win32" or sys.platform == "win64":
-    #     # run = ' -c=RUN"'+project_data["config"]["name.bas.file"]
-    #     # print ('start "' + RVM + ' -i '+ DSK +  ' -b=cpc'+project_data['rvm']['model.cpc'] + run +'"')
-    #     # #os.system(r'start "' + RVM + ' -i '+ DSK +  ' -b=cpc'+project_data['rvm']['model.cpc'] + run +'\n\n"')
-    #     # cmd = 'start "{0} -i {1} -b=cpc{2} {3}"'.format(RVM,DSK,project_data['rvm']['model.cpc'],run)
-    #     # print(cmd)
-    #     # os.system(cmd)
-    #     subprocess.run([_rvm,"-i", DSK,"-b=cpc"+project_data['rvm']['model.cpc'],"-c=RUN\""+project_data["config"]["name.bas.file"]+"\"\n"],shell=True)
-    #         #subprocess.run([RVM,"-i", DSK,"-b=cpc"+project_data['rvm']['model.cpc'],"-c=RUN\""+project_data["config"]["name.bas.file"]+"\"\n"], capture_output=False, shell=True)
