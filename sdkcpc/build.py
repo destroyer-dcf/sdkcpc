@@ -18,13 +18,11 @@ console = Console(width=80)
 
 # GET PLATFORM
 if sys.platform == "darwin":
-    _commando_idsk  = path.dirname(path.abspath(__file__)) + "/resources/idsk/" + sys.platform + "/iDSK"
-elif sys.platform == "win32":
-    _commando_idsk  = path.dirname(path.abspath(__file__)) + "/resources/idsk/" + sys.platform + "/iDSK.exe"
-elif sys.platform == "win64":
-    _commando_idsk  = path.dirname(path.abspath(__file__)) + "/resources/idsk/" + sys.platform + "/iDSK.exe"
+    _commando_idsk  = path.dirname(path.abspath(__file__)) + "/resources/platform/" + sys.platform + "/iDSK"
+elif sys.platform == "win32" or sys.platform == "win64":
+    _commando_idsk  = path.dirname(path.abspath(__file__)) + "/resources/platform/" + sys.platform + "/iDSK.exe"
 elif sys.platform == "linux":
-     _commando_idsk = path.dirname(path.abspath(__file__)) + "/resources/idsk/" + sys.platform + "/iDSK"
+     _commando_idsk = path.dirname(path.abspath(__file__)) + "/resources/platform/" + sys.platform + "/iDSK"
 
 project_data = Get_data_project_dict()
 

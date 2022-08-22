@@ -80,13 +80,14 @@ def main():
 
         if args.rvm == True:
             validateFolderProject()
-            rvm()
+            #rvm()
+            Download_RVM()
             sys.exit(0)
         if args.m4 == True:
             validateFolderProject()
             print("m4 option")
             sys.exit(0)
-        print("[blue bold][SDKCPC][red bold] missing parameter.")
+        print("[red bold] missing parameter.")
 
     elif args.command == 'config':
         # Lista las configuraciones de sdkcpc
