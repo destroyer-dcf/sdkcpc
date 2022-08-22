@@ -80,8 +80,7 @@ def main():
 
         if args.rvm == True:
             validateFolderProject()
-            #rvm()
-            Download_RVM()
+            rvm()
             sys.exit(0)
         if args.m4 == True:
             validateFolderProject()

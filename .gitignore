@@ -134,3 +134,6 @@ dmypy.json
 
 prueba*/
 pepe*/
+*sdkcpc/resources/platform/darwin/*RetroVirtual*
+*sdkcpc/resources/platform/win32/*RetroVirtual*
+*sdkcpc/resources/platform/linux/*RetroVirtual*
