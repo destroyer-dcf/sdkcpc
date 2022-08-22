@@ -34,7 +34,9 @@ setup(
             'ipaddress',
             'tabulate',
             'inquirer',
-            'cerberus'
+            'cerberus',
+            'tqdm',
+            'requests'
         ], 
         python_requires='>=3.6',
         classifiers=[

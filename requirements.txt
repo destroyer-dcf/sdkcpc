@@ -7,3 +7,5 @@ ipaddress
 tabulate
 inquirer
 cerberus
+tqdm
+requests
