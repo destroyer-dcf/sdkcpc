@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import os
+import stat
 import os.path
 import sys
 import requests
@@ -25,7 +26,12 @@ elif sys.platform == "win32" or  sys.platform == "win64":
     _url = "https://static.retrovm.org/release/beta1/windows/x86/RetroVirtualMachine.2.0.beta-1.r7.windows.x86.zip"
 elif sys.platform == "linux":
      _rvm = path.dirname(path.abspath(__file__)) + "/resources/platform/" + sys.platform + "/RetroVirtualMachine"
-     _url = "https://static.retrovm.org/release/beta1/windows/x86/RetroVirtualMachine.2.0.beta-1.r7.windows.x86.zip"
+     _url = "https://static.retrovm.org/release/beta1/linux/x64/RetroVirtualMachine.2.0.beta-1.r7.linux.x64.zip"
+
+def make_executable(path):
+    mode = os.stat(path).st_mode
+    mode |= (mode & 0o444) >> 2    # copy R bits to X
+    os.chmod(path, mode)
 
 def Download_RVM():
     if not os.path.exists(_rvm):
@@ -40,6 +46,7 @@ def Download_RVM():
                     with ZipFile(path.dirname(path.abspath(__file__)) + "/resources/platform/" + sys.platform + "/rvm.zip", "r") as zipObj:
                         zipObj.extractall(path.dirname(path.abspath(__file__)) + "/resources/platform/" + sys.platform)
         os.remove(path.dirname(path.abspath(__file__)) + "/resources/platform/" + sys.platform + "/rvm.zip")
+        make_executable(_rvm)
 
 # Ejecuta retro virtual machine con el dsk asociado
 def rvm():
@@ -61,7 +68,8 @@ def rvm():
     console.print("[blue bold][Emulator][white] Retro Virtual Machine")
     console.print('[blue bold][DSK File][white] ' + project_data["general"]["name"]+".dsk")
     console.print('[blue bold][BAS File][white] ' + project_data["config"]["name.bas.file"])
-    subprocess.run([_rvm,"-i", DSK,"-b=cpc"+project_data['rvm']['model.cpc'],"-c=RUN\""+project_data["config"]["name.bas.file"]+"\"\n"],shell=True)
+    # print (_rvm + " -i "+ DSK + " -b=cpc"+project_data['rvm']['model.cpc'] + " -c=RUN\""+project_data["config"]["name.bas.file"]+"\"\n")
+    subprocess.run([_rvm,"-i", DSK,"-b=cpc"+project_data['rvm']['model.cpc'],"-c=RUN\""+project_data["config"]["name.bas.file"]+"\"\n"])
     # FNULL = open(os.devnull, 'w')
     # if sys.platform == "darwin" or sys.platform == "linux":
     #     RVM = RVM.replace(" ","\ ")
