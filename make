@@ -13,4 +13,4 @@ echo "__version__ = '$value'" > sdkcpc/__init__.py
 
 git add .
 git commit -m "compile and upload pytest version $value"
-git push origin/develop
+git push origin develop
