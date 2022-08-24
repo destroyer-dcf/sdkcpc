@@ -10,3 +10,7 @@ echo "__version__ = '$value'" > sdkcpc/__init__.py
 # rm -rf dist
 # python3 setup.py sdist
 # twine upload --repository testpypi dist/*
+
+git add .
+git commit -m "compile and upload pytest version $value"
+git push origin/develop
