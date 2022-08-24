@@ -7,6 +7,6 @@ value=`cat VERSION`
 echo "- New Version : $value"
 
 echo "__version__ = '$value'" > sdkcpc/__init__.py
-rm -rf dist
-python3 setup.py sdist
-twine upload --repository testpypi dist/*
+# rm -rf dist
+# python3 setup.py sdist
+# twine upload --repository testpypi dist/*
