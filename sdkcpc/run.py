@@ -46,7 +46,8 @@ def Download_RVM():
                     with ZipFile(path.dirname(path.abspath(__file__)) + "/resources/platform/" + sys.platform + "/rvm.zip", "r") as zipObj:
                         zipObj.extractall(path.dirname(path.abspath(__file__)) + "/resources/platform/" + sys.platform)
         os.remove(path.dirname(path.abspath(__file__)) + "/resources/platform/" + sys.platform + "/rvm.zip")
-        make_executable(_rvm)
+        if sys.platform == "darwin" or sys.platform == "linux":
+            make_executable(_rvm)
 
 # Ejecuta retro virtual machine con el dsk asociado
 def rvm():
