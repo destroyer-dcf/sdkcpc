@@ -19,13 +19,13 @@ console = Console(width=80,color_system="windows",force_terminal=True)
 
 # GET PLATFORM
 if sys.platform == "darwin":
-    _rvm  = path.dirname(path.abspath(__file__)) + "/resources/platform/" + sys.platform + "/RetroVirtualMachine"
+    _rvm  = path.dirname(path.abspath(__file__)) + "/resources/software/RetroVirtualMachine"
     _url = "https://static.retrovm.org/release/beta1/windows/x86/RetroVirtualMachine.2.0.beta-1.r7.windows.x86.zip"
 elif sys.platform == "win32" or  sys.platform == "win64":
-    _rvm  = path.dirname(path.abspath(__file__)) + "/resources/platform/" + sys.platform + "/RetroVirtualMachine.exe"
+    _rvm  = path.dirname(path.abspath(__file__)) + "/resources/software/RetroVirtualMachine.exe"
     _url = "https://static.retrovm.org/release/beta1/windows/x86/RetroVirtualMachine.2.0.beta-1.r7.windows.x86.zip"
 elif sys.platform == "linux":
-     _rvm = path.dirname(path.abspath(__file__)) + "/resources/platform/" + sys.platform + "/RetroVirtualMachine"
+     _rvm = path.dirname(path.abspath(__file__)) + "/resources/software/RetroVirtualMachine"
      _url = "https://static.retrovm.org/release/beta1/linux/x64/RetroVirtualMachine.2.0.beta-1.r7.linux.x64.zip"
 
 def make_executable(path):
@@ -41,11 +41,11 @@ def Download_RVM():
         with requests.get(_url, stream=True) as r:
             total_length = int(r.headers.get("Content-Length"))
             with tqdm.wrapattr(r.raw, "read", total=total_length, desc="")as raw:
-                with open(path.dirname(path.abspath(__file__)) + "/resources/platform/" + sys.platform + "/rvm.zip", 'wb')as output:
+                with open(path.dirname(path.abspath(__file__)) + "/resources/software/rvm.zip", 'wb')as output:
                     shutil.copyfileobj(raw, output)
-                    with ZipFile(path.dirname(path.abspath(__file__)) + "/resources/platform/" + sys.platform + "/rvm.zip", "r") as zipObj:
-                        zipObj.extractall(path.dirname(path.abspath(__file__)) + "/resources/platform/" + sys.platform)
-        os.remove(path.dirname(path.abspath(__file__)) + "/resources/platform/" + sys.platform + "/rvm.zip")
+                    with ZipFile(path.dirname(path.abspath(__file__)) + "/resources/software/rvm.zip", "r") as zipObj:
+                        zipObj.extractall(path.dirname(path.abspath(__file__)) + "/resources/software")
+        os.remove(path.dirname(path.abspath(__file__)) + "/resources/software/rvm.zip")
         if sys.platform == "darwin" or sys.platform == "linux":
             make_executable(_rvm)
 

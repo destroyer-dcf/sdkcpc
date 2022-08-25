@@ -7,7 +7,10 @@ from rich.console import Console
 from rich import print
 from datetime import datetime
 import glob
-
+import requests
+from tqdm.auto import tqdm
+from zipfile import ZipFile
+import stat
 from .config import *
 from .common import *
 from .new import *
@@ -18,16 +21,45 @@ console = Console(width=80)
 
 # GET PLATFORM
 if sys.platform == "darwin":
-    _commando_idsk  = path.dirname(path.abspath(__file__)) + "/resources/platform/" + sys.platform + "/iDSK"
+    _download_idsk = "https://github.com/destroyer-dcf/idsk/releases/download/v0.20/iDSK-0.20-OSX.zip"
+    _commando_idsk  = path.dirname(path.abspath(__file__)) + "/resources/platform/software/iDSK"
 elif sys.platform == "win32" or sys.platform == "win64":
-    _commando_idsk  = path.dirname(path.abspath(__file__)) + "/resources/platform/" + sys.platform + "/iDSK.exe"
+    _download_idsk = "https://github.com/destroyer-dcf/idsk/releases/download/v0.20/iDSK-0.20-windows.zip"
+    _commando_idsk  = path.dirname(path.abspath(__file__)) + "/resources/platform/software/iDSK.exe"
 elif sys.platform == "linux":
-     _commando_idsk = path.dirname(path.abspath(__file__)) + "/resources/platform/" + sys.platform + "/iDSK"
+    _download_idsk = "https://github.com/destroyer-dcf/idsk/releases/download/v0.20/iDSK-0.20-linux.zip"
+    _commando_idsk = path.dirname(path.abspath(__file__)) + "/resources/software/iDSK"
 
 project_data = Get_data_project_dict()
 
-def build():
+def Download_IDSK():
+    if not os.path.exists(_commando_idsk):
+        print()
+        print("Download iDSK Software.... please wait..")
+        print()
+        subprocess.run([_commando_idsk])
+        print()
+        with requests.get(_download_idsk, stream=True) as r:
+            total_length = int(r.headers.get("Content-Length"))
+            with tqdm.wrapattr(r.raw, "read", total=total_length, desc="")as raw:
+                with open(path.dirname(path.abspath(__file__)) + "/resources/software/idsk.zip", 'wb')as output:
+                    shutil.copyfileobj(raw, output)
+                    with ZipFile(path.dirname(path.abspath(__file__)) + "/resources/software/idsk.zip", "r") as zipObj:
+                        zipObj.extractall(path.dirname(path.abspath(__file__)) + "/resources/software")
+        os.remove(path.dirname(path.abspath(__file__)) + "/resources/software/idsk.zip")
+        if sys.platform == "darwin" or sys.platform == "linux":
+            make_executable(_commando_idsk)
+
+def make_executable(path):
+    mode = os.stat(path).st_mode
+    mode |= (mode & 0o444) >> 2
+    os.chmod(path, mode)
     
+def build():
+    Download_IDSK()
+    print()
+
+    print()
     console.rule("[yellow bold]\[Build Project]")
     console.print("")
     checkProject()
@@ -52,7 +84,7 @@ def build():
     if project_data["general"]["template"] == "Basic":
         FNULL = open(os.devnull, 'w')
         try:
-            retcode = subprocess.Popen([_commando_idsk, PWD+project_data["general"]["name"],"-n"], stdout=FNULL, stderr=subprocess.STDOUT)
+            retcode = subprocess.Popen([_commando_idsk, PWD+project_data["general"]["name"]+".dsk","-n"], stdout=FNULL, stderr=subprocess.STDOUT)
             print("Create DSK.")
         except:
             print("[red bold]ERROR: "+"iDSK does not exist.")
