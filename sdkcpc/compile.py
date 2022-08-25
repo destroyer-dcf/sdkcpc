@@ -44,9 +44,7 @@ def build():
     # Download iDSK Software
     Download_IDSK()
     print()
-    console.rule("[yellow bold]\[Build Project]")
-    console.print("")
-    
+    Head_info("Build Project ")
     # Generate new Version
     new_version     = incrementVersion(project_data["compilation"]["version"])
     new_compilation = str(datetime.now())
