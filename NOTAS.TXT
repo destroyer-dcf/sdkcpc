@@ -2,3 +2,5 @@
 - Cambiar nombres a las carpetas (src...)
 - Poner siempre verificacion 8:3
 - Los nombres de las imagenes siempre como el nombre del proyecto. 
+
+https://raw.githubusercontent.com/user/repository/branch/filename

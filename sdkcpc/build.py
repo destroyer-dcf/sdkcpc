@@ -22,10 +22,10 @@ console = Console(width=80)
 # GET PLATFORM
 if sys.platform == "darwin":
     _download_idsk = "https://github.com/destroyer-dcf/idsk/releases/download/v0.20/iDSK-0.20-OSX.zip"
-    _commando_idsk  = path.dirname(path.abspath(__file__)) + "/resources/platform/software/iDSK"
+    _commando_idsk  = path.dirname(path.abspath(__file__)) + "/resources/software/iDSK"
 elif sys.platform == "win32" or sys.platform == "win64":
     _download_idsk = "https://github.com/destroyer-dcf/idsk/releases/download/v0.20/iDSK-0.20-windows.zip"
-    _commando_idsk  = path.dirname(path.abspath(__file__)) + "/resources/platform/software/iDSK.exe"
+    _commando_idsk  = path.dirname(path.abspath(__file__)) + "/resources/software/iDSK.exe"
 elif sys.platform == "linux":
     _download_idsk = "https://github.com/destroyer-dcf/idsk/releases/download/v0.20/iDSK-0.20-linux.zip"
     _commando_idsk = path.dirname(path.abspath(__file__)) + "/resources/software/iDSK"
@@ -35,9 +35,7 @@ project_data = Get_data_project_dict()
 def Download_IDSK():
     if not os.path.exists(_commando_idsk):
         print()
-        print("Download iDSK Software.... please wait..")
-        print()
-        subprocess.run([_commando_idsk])
+        print("Download iDSK Software Version 0.20.... please wait..")
         print()
         with requests.get(_download_idsk, stream=True) as r:
             total_length = int(r.headers.get("Content-Length"))
@@ -57,8 +55,6 @@ def make_executable(path):
     
 def build():
     Download_IDSK()
-    print()
-
     print()
     console.rule("[yellow bold]\[Build Project]")
     console.print("")
