@@ -134,5 +134,7 @@ dmypy.json
 
 prueba*/
 pepe*/
-*sdkcpc/resources/software/*
+*sdkcpc/resources/software/Retr*
+*sdkcpc/resources/software/che*
+*sdkcpc/resources/software/iD*
 menusd*/*
