@@ -22,7 +22,7 @@ console = Console(width=80,color_system="windows",force_terminal=True)
 def createNewProject(nameProject,template):
     # chequeamos si el nombre del proyecto contiene espacios
     checkNameProject(nameProject)
-    # Creamos estructura del proyecto
+    # Creamos estructura del proyectod
     build = createBuild()
     console.rule("[yellow bold]\[New Project: " + nameProject + "]")
 

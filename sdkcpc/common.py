@@ -26,7 +26,7 @@ console = Console(width=80,color_system="windows",force_terminal=True)
 PWD                = os.getcwd() + "/"
 MAKEFILE           = "Project.cfg"
 CONFIG             = loadConfigData()
-FOLDER_PROJECT_NEW = ["OUT","ASCII","BIN","BASIC","OBJ"] 
+FOLDER_PROJECT_NEW = ["ASCII","BIN","BASIC","OBJ"] 
 FOLDER_PROJECT_8BP = ["ASM","DSK","MUSIC","OUTPUT_SPEDIT","OUT","ASCII","BIN","BASIC","OBJ"] 
 MODELS_CPC         = ["464","664","6128"]
 

@@ -36,7 +36,8 @@ setup(
             'inquirer',
             'cerberus',
             'tqdm',
-            'requests'
+            'requests',
+            'glob2'
         ], 
         python_requires='>=3.6',
         classifiers=[

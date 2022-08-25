@@ -12,7 +12,8 @@ from .config import *
 from .about import *
 from .new import *
 from .check import *
-from .build import *
+# from .build import *
+from .compile import *
 from .run import *
 from .info import *
 
@@ -31,7 +32,7 @@ def main():
     about_parser = subparsers.add_parser('about', help='Shows information about Basic SDK')
 
     # A build comman
-    build_parser = subparsers.add_parser('build', help='Compile the DSK image of the project')
+    build_parser = subparsers.add_parser('make', help='make the DSK image of the project')
 
     # A check comman
     check_parser = subparsers.add_parser('validate', help='Project data validation.')
@@ -109,7 +110,7 @@ def main():
         checkProject()
         print("")
         # validate_data()
-    elif args.command == "build":
+    elif args.command == "make":
         validateFolderProject()
         build()
     elif args.command == "about":
