@@ -36,27 +36,21 @@ def createNewProject(nameProject,template):
         basFileTemplate(nameProject,build,template)
         if template == "8BP":
             copy8bp(nameProject)
-            # console.print("[blue bold]\[Create][white bold] loader.bas File.")
         console.print("[blue bold]\[Create][white bold] "+nameProject+".bas File.")
-        if CONFIG["project.git"] == 1:
+
+        questions = [
+            inquirer.List("creategit", message="Do you want to create version control in the project (git software needed)?", choices=["Yes", "No"], default="Yes"),
+            inquirer.List("vscodeopen", message="Do you want to open the new Project with Visual Studio Code?", choices=["Yes", "No"], default="Yes"),
+        ]
+        answers = inquirer.prompt(questions)
+        if answers["creategit"] == "Yes":
             console.print("[blue bold]\[Create][white bold] Git Repository")
             gitInit(nameProject)
-        # Creamos proyecto vscode si activado
-        if CONFIG["project.vscode"] == 1:
-            # console.print("[yellow]\nVisual Studio Code")
+        if answers["vscodeopen"] == "Yes":
             createVscode(nameProject)
-
+            openVscode(nameProject)
         console.print("[blue bold]\[Create][green bold] Project " + nameProject + " Successfully")
         console.rule("")
-        
-        if CONFIG["project.vscode"] == 1:
-            questions = [
-                inquirer.List("vscodeopen", message="Do you want to open the new Project with Visual Studio Code?", choices=["Yes", "No"], default="Yes"),
-            ]
-            answers = inquirer.prompt(questions)
-        
-            if answers["vscodeopen"] == "Yes":
-                openVscode(nameProject)
     else:
         print(f"[red bold]The " + nameProject + " project exists on this path")
         sys.exit(1)

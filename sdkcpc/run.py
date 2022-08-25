@@ -61,4 +61,11 @@ def rvm():
     console.print("[blue bold][Emulator][white] Retro Virtual Machine")
     console.print('[blue bold][DSK File][white] ' + project_data["general"]["name"]+".dsk")
     console.print('[blue bold][BAS File][white] ' + project_data["config"]["name.bas.file"])
-    subprocess.run([_rvm,"-i", DSK,"-b=cpc"+project_data['rvm']['model.cpc'],"-c=RUN\""+project_data["config"]["name.bas.file"]+"\n"])
+    # subprocess.run([_rvm,"-i", DSK,"-b=cpc"+project_data['rvm']['model.cpc'],"-c=RUN\""+project_data["config"]["name.bas.file"]+"\n"])
+    
+    FNULL = open(os.devnull, 'w')
+    try:
+        retcode = subprocess.Popen([_rvm,"-i", DSK,"-b=cpc"+project_data['rvm']['model.cpc'],"-c=RUN\""+project_data["config"]["name.bas.file"]+"\n"], stdout=FNULL, stderr=subprocess.STDOUT)
+        print()
+    except:
+        print('[red bold]An error occurred while running Retro Virtual Machine.')
