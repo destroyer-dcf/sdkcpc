@@ -86,7 +86,6 @@ def create_template(data,template_name,file):
             message.write(j2_env.get_template(template_name).render(data))
     print("[+] Create Template " + file)
 
-
 # Crea estructura del proyecto
 def create_structure_project(project,template):
     

@@ -11,7 +11,7 @@ from .common import *
 
 from .about import *
 from .project import *
-from .check import *
+from .validate import *
 # from .build import *
 from .compile import *
 from .run import *
@@ -75,30 +75,27 @@ def main():
         createNewProject(args.name_project_8bp,"8BP")
 
     elif args.command == 'run':
-
+        validate_data_project()
         if args.rvm == True:
-            validateFolderProject()
             rvm()
             sys.exit(0)
         if args.m4 == True:
-            validateFolderProject()
             print("m4 option")
             sys.exit(0)
-        print("[red bold] missing parameter.")
+        print("\n[red bold]Missing parameter.\n")
 
     elif args.command == 'deploy':
-        print("deploy")
+        validate_data_project()
+        if build() == True:
+            rvm()
     elif args.command == 'info':
-        validateFolderProject()
         info()
     elif args.command == "validate":
-        validateFolderProject()
         print("")
-        checkProject()
+        validate_data_project()
         print("")
-        # validate_data()
     elif args.command == "make":
-        validateFolderProject()
+        validate_data_project()
         build()
     elif args.command == "about":
         about()

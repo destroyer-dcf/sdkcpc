@@ -54,7 +54,7 @@ elif sys.platform == "linux":
 # Get data project in dict
 def Get_data_project_dict():
     config = ConfigParser()
-    config.read('Project.cfg')
+    config.read(MAKEFILE)
     project_dic = dict(config._sections)
     return project_dic
 

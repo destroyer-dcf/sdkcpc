@@ -15,7 +15,7 @@ from zipfile import ZipFile
 
 from .common import *
 from .project import *
-from .check import *
+from .validate import *
 
 from rich.console import Console
 console = Console(width=80,color_system="windows",force_terminal=True)
@@ -36,16 +36,13 @@ def build():
     # Deleting temporal files
     remove_temporal_files(OBJ_PATH,"*")
     
-    # Validate Project
-    # checkProject()
-    
     # Deleting comment lines ('1) bas files
     files = os.listdir(BAS_PATH + '/')
     for infile in files:
         remove_comments_lines_in_bas_files(infile,new_version, new_compilation)
 
     # Concatenate files
-    if project_data["config"]["concatenate.files"].upper() == "YES":
+    if project_data["config"]["concatenate.bas.files"].upper() == "YES":
         files_in_path = os.listdir(OBJ_PATH + '/')
         with open(OBJ_PATH + '/' + project_data["config"]["name.bas.file"]+".concat", "a") as file_object:
             for basfile in files_in_path:
