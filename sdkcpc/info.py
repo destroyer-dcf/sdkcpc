@@ -1,6 +1,6 @@
 from rich.console import Console
 
-from .config import *
+
 from .common import *
 from .new import *
 from .check import *

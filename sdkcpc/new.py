@@ -116,7 +116,7 @@ def createStructure(project,template):
 # Crea estructura vscode
 def createVscode(project):
     try:
-        shutil.copytree(path.dirname(path.abspath(__file__)) + "/resources/vscode",PWD + project + "/.vscode")
+        shutil.copytree(APP_PATH + "/resources/vscode",PWD + project + "/.vscode")
         print("[blue bold]\[Create][white bold] Vscode files.")
     except OSError as err:
         print("[red bold]"+str(err))
@@ -125,7 +125,7 @@ def createVscode(project):
 # Copia 8bp defauld
 def copy8bp(project):
     try:
-        shutil.copy(path.dirname(path.abspath(__file__)) + "/resources/8bp.dsk",PWD + project + "/DSK")
+        shutil.copy(APP_PATH + "/resources/8bp.dsk",PWD + project + "/DSK")
         print("[white]Copy example 8bp library.")
     except OSError as err:
         print("[red bold]"+str(err))
@@ -148,7 +148,7 @@ def gitInit(project):
         print('[yellow bold][WARNING] The git command does not exist.')
 
     try:
-        shutil.copy(path.dirname(path.abspath(__file__)) + "/resources/gitignore",PWD + project + "/.gitignore")
+        shutil.copy(APP_PATH + "/resources/gitignore",PWD + project + "/.gitignore")
         print("[blue bold]\[Create][white bold] gitignore file.")
     except OSError as err:
         print("[bold red]"+err)

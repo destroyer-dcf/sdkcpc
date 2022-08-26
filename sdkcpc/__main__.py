@@ -8,7 +8,7 @@ import sys
 
 from . import __version__
 from .common import *
-from .config import *
+
 from .about import *
 from .new import *
 from .check import *
@@ -34,15 +34,12 @@ def main():
     # A build comman
     build_parser = subparsers.add_parser('make', help='make the DSK image of the project')
 
+    # A deploy comman
+    build_parser = subparsers.add_parser('deploy', help='Build and run the dsk image on the emulator')
+
     # A check comman
     check_parser = subparsers.add_parser('validate', help='Project data validation.')
 
-    # A config comman
-    config_parser = subparsers.add_parser('config', help='Configuration software SDKCPC')
-    config_parser.add_argument('Key',type=str,nargs='?',help='Key of config file')
-    config_parser.add_argument('Value',type=str,nargs='?',help='Value of config file')
-    group_project =  config_parser.add_mutually_exclusive_group()
-    group_project.add_argument('--list',action='store_true',help='List the Basic SDK configuration')
     #config_parser.print_help()
 
     # A info comman
@@ -89,18 +86,8 @@ def main():
             sys.exit(0)
         print("[red bold] missing parameter.")
 
-    elif args.command == 'config':
-        # Lista las configuraciones de sdkcpc
-        if args.list == True and not args.Key and not args.Value:
-            listConfigsKeys()
-            sys.exit(0)
-        if args.Key and args.Value:
-            # Cambia el valor de una clave
-            setConfigKeyValue(args.Key,args.Value)
-        else:
-            # Muestra el Valor de una Clave
-            getConfigKey(args.Key)
-
+    elif args.command == 'deploy':
+        print("deploy")
     elif args.command == 'info':
         validateFolderProject()
         info()

@@ -11,26 +11,14 @@ import glob
 import requests
 from tqdm.auto import tqdm
 from zipfile import ZipFile
-from .config import *
+
+
 from .common import *
 from .new import *
 from .check import *
 
 from rich.console import Console
 console = Console(width=80,color_system="windows",force_terminal=True)
-
-
-# Variables for platform
-if sys.platform == "darwin":
-    _DOWNLOAD_IDSK = "https://github.com/destroyer-dcf/idsk/releases/download/v0.20/iDSK-0.20-OSX.zip"
-    _COMMANDO_IDSK  = path.dirname(path.abspath(__file__)) + "/resources/software/iDSK"
-elif sys.platform == "win32" or sys.platform == "win64":
-    _DOWNLOAD_IDSK = "https://github.com/destroyer-dcf/idsk/releases/download/v0.20/iDSK-0.20-windows.zip"
-    _COMMANDO_IDSK  = path.dirname(path.abspath(__file__)) + "/resources/software/iDSK.exe"
-elif sys.platform == "linux":
-    _DOWNLOAD_IDSK = "https://github.com/destroyer-dcf/idsk/releases/download/v0.20/iDSK-0.20-linux.zip"
-    _COMMANDO_IDSK = path.dirname(path.abspath(__file__)) + "/resources/software/iDSK"
-
 
 project_data = Get_data_project_dict()
     
@@ -72,14 +60,14 @@ def build():
     if project_data["general"]["template"] == "Basic":
         FNULL = open(os.devnull, 'w')
         try:
-            retcode = subprocess.Popen([_COMMANDO_IDSK, PWD+project_data["general"]["name"]+".dsk","-n"], stdout=FNULL, stderr=subprocess.STDOUT)
+            retcode = subprocess.Popen([COMMANDO_IDSK, PWD+project_data["general"]["name"]+".dsk","-n"], stdout=FNULL, stderr=subprocess.STDOUT)
             print("[+] Create DSK " + project_data["general"]["name"]+".dsk")
         except:
             show_info("BUILD ERROR - "+"iDSK does not exist.","red")
             sys.exit(1)
         Folders = FOLDER_PROJECT_NEW
     else:
-        copy_file(path.dirname(path.abspath(__file__)) + "/resources/software/8bp.dsk",project_data["general"]["name"]+".dsk")
+        copy_file(APP_PATH + "/resources/software/8bp.dsk",project_data["general"]["name"]+".dsk")
         print("[+] Copy library 8BP to DSK")
         Folders = FOLDER_PROJECT_8BP
 
@@ -96,7 +84,7 @@ def build():
                 
                 FNULL = open(os.devnull, 'w')
                 try:
-                    retcode = subprocess.run([_COMMANDO_IDSK, dsk,"-i",PWD + Folders[x] + "/" + addfile,"-f","-t",type_file], stdout=FNULL, stderr=subprocess.STDOUT)
+                    retcode = subprocess.run([COMMANDO_IDSK, dsk,"-i",PWD + Folders[x] + "/" + addfile,"-f","-t",type_file], stdout=FNULL, stderr=subprocess.STDOUT)
                     print("[+] Add " + Folders[x] + "/" + addfile + " to DSK")
                 except:
                     show_info("BUILD ERROR - "+"Added file " + Folders[x] + "/" + addfile + " to DSK","red")
@@ -111,19 +99,19 @@ def build():
     return True
 
 def Download_IDSK():
-    if not os.path.exists(_COMMANDO_IDSK):
+    if not os.path.exists(COMMANDO_IDSK):
         show_info("Download iDSK Software Version 0.20.... please wait..","white")
         print()
-        with requests.get(_DOWNLOAD_IDSK, stream=True) as r:
+        with requests.get(DOWNLOAD_IDSK, stream=True) as r:
             total_length = int(r.headers.get("Content-Length"))
             with tqdm.wrapattr(r.raw, "read", total=total_length, desc="")as raw:
-                with open(path.dirname(path.abspath(__file__)) + "/resources/software/idsk.zip", 'wb')as output:
+                with open(APP_PATH + "/resources/software/idsk.zip", 'wb')as output:
                     shutil.copyfileobj(raw, output)
-                    with ZipFile(path.dirname(path.abspath(__file__)) + "/resources/software/idsk.zip", "r") as zipObj:
-                        zipObj.extractall(path.dirname(path.abspath(__file__)) + "/resources/software")
-        os.remove(path.dirname(path.abspath(__file__)) + "/resources/software/idsk.zip")
+                    with ZipFile(APP_PATH + "/resources/software/idsk.zip", "r") as zipObj:
+                        zipObj.extractall(APP_PATH + "/resources/software")
+        os.remove(APP_PATH + "/resources/software/idsk.zip")
         if sys.platform == "darwin" or sys.platform == "linux":
-            make_executable(_COMMANDO_IDSK)
+            make_executable(COMMANDO_IDSK)
 
 def make_executable(path):
     mode = os.stat(path).st_mode

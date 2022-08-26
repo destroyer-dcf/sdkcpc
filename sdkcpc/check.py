@@ -11,7 +11,7 @@ from os.path import exists
 from tabulate import tabulate
 from datetime import datetime
 
-from .config import *
+
 from .common import *
 from .new import *
 from rich.console import Console

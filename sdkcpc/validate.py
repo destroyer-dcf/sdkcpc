@@ -5,6 +5,7 @@ import os, sys
 from cerberus import Validator
 import os.path
 from os import path
+from .common import *
 from rich import print
 from rich.console import Console
 console = Console(width=80,color_system="windows",force_terminal=True)
@@ -32,7 +33,7 @@ def load_doc_project():
 
 def validate_data():
     # schema = eval(open('./schema.py', 'r').read())
-    schema = eval(open(path.dirname(path.abspath(__file__)) + "/schema.py", 'r').read())
+    schema = eval(open(APP_PATH + "/schema.py", 'r').read())
     v = Validator(schema)
     doc = load_doc_project() 
 
