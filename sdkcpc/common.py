@@ -4,10 +4,7 @@ import sys
 import os
 import os.path
 import configparser
-import glob
-import datetime
-import ipaddress
-import pathlib
+
 
 from rich import print
 from rich.panel import Panel
@@ -25,22 +22,16 @@ console = Console(width=80,color_system="windows",force_terminal=True)
 
 PWD                = os.getcwd() + "/"
 MAKEFILE           = "Project.cfg"
-CONFIG             = loadConfigData()
 FOLDER_PROJECT_NEW = ["ASCII","BIN","BASIC","OBJ"] 
 FOLDER_PROJECT_8BP = ["ASM","DSK","MUSIC","OUTPUT_SPEDIT","OUT","ASCII","BIN","BASIC","OBJ"] 
 MODELS_CPC         = ["464","664","6128"]
+BAS_PATH           = PWD + "BASIC"
+OBJ_PATH           = PWD + "OBJ"
+PATH_TOOLS         = os.path.split(os.path.abspath(__file__))
+PARENT_DIR         = os.path.dirname(os.path.dirname(__file__))
+LOG_FILE           = "project.log"
 
 
-CONFIG_FILE    = "sdkcpc.yml"
-PATH_TOOLS     = os.path.split(os.path.abspath(__file__))
-PARENT_DIR     = os.path.dirname(os.path.dirname(__file__))
-LOG_FILE       = "project.log"
-
-
-# Create Build de la compilacion
-def createBuild():
-    now = datetime.now()
-    return now
 
 # Get data project in dict
 def Get_data_project_dict():
@@ -74,31 +65,6 @@ def readProyectSection(section):
         print("[red bold]\[ERROR]: Section " + section + " not exist in "+MAKEFILE)
         sys.exit(1)
 
-# Modifica un valor de "+MAKEFILE+"
-#   @Param Nombre de la Seccion donde esta la key a modificar
-#   @Param nombre de la key a modificar
-#   @Param nuevo valor
-def setProjectKeyValue(section, key, value):
-
-    try:
-        config = configparser.RawConfigParser()
-        config.read(PWD + MAKEFILE)
-        config.set(section, key, value)
-        with open(PWD + MAKEFILE, 'w') as configfile:
-            config.write(configfile)
-    except:
-        console.print("[red bold]\[ERROR]: Section " + section + " or key " + key + " not exist in "+MAKEFILE)
-        sys.exit(1)
-
-
-# get version cpcpy
-def  version():
-    try:
-        with open(PATH_TOOLS[0] + '/VERSION', 'r') as file:
-            return file.read().rstrip()
-    except IOError:
-        return "12.0.0"
-
 
 def show_info(info, color):
     print("[*] ------------------------------------------------------------------------")
@@ -109,12 +75,3 @@ def show_info(info, color):
     elif color == "green":
         console.print("[*] [gren bold]" + info.upper())
     print("[*] ------------------------------------------------------------------------")
-
-def infoLog(recurso,informacion):
-    print("[blue bold]\["+recurso+"][yellow bold] "+informacion+" [green bold]\[OK]")
-
-def warningLog(recurso,informacion):
-    print("[blue bold]\["+recurso+"][yellow bold] "+informacion+" [yellow bold]\[WARNING]")
-
-def errorLog(recurso,informacion):
-    print("[blue bold]\["+recurso+"][yellow bold] "+informacion+" [red bold]\[ERROR]")

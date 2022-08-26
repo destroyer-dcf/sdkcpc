@@ -23,7 +23,7 @@ def createNewProject(nameProject,template):
     # chequeamos si el nombre del proyecto contiene espacios
     checkNameProject(nameProject)
     # Creamos estructura del proyectod
-    build = createBuild()
+    build = str(datetime.now())
     console.rule("[yellow bold]\[New Project: " + nameProject + "]")
 
     # console.print("[yellow]\nProject Folders")

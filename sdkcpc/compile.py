@@ -7,11 +7,9 @@ from rich.console import Console
 from rich import print
 from datetime import datetime
 import glob
-import glob2
 import requests
 from tqdm.auto import tqdm
 from zipfile import ZipFile
-import stat
 from .config import *
 from .common import *
 from .new import *
@@ -30,12 +28,6 @@ elif sys.platform == "win32" or sys.platform == "win64":
 elif sys.platform == "linux":
     _download_idsk = "https://github.com/destroyer-dcf/idsk/releases/download/v0.20/iDSK-0.20-linux.zip"
     _commando_idsk = path.dirname(path.abspath(__file__)) + "/resources/software/iDSK"
-
-# Common variables
-
-BAS_PATH = PWD + "BASIC"
-OBJ_PATH = PWD + "OBJ"
-
 
 
 project_data = Get_data_project_dict()
@@ -79,7 +71,7 @@ def build():
             retcode = subprocess.Popen([_commando_idsk, PWD+project_data["general"]["name"]+".dsk","-n"], stdout=FNULL, stderr=subprocess.STDOUT)
             print("[+] Create DSK " + project_data["general"]["name"]+".dsk")
         except:
-            print("[red bold]ERROR: "+"iDSK does not exist.")
+            show_info("BUILD ERROR - "+"iDSK does not exist.","red")
             sys.exit(1)
         Folders = FOLDER_PROJECT_NEW
     else:
@@ -103,23 +95,20 @@ def build():
                     retcode = subprocess.run([_commando_idsk, dsk,"-i",PWD + Folders[x] + "/" + addfile,"-f","-t",type_file], stdout=FNULL, stderr=subprocess.STDOUT)
                     print("[+] Add " + Folders[x] + "/" + addfile + " to DSK")
                 except:
-                    print("[red bold]ERROR: "+"Added file " + Folders[x] + "/" + addfile + " to DSK")
+                    show_info("BUILD ERROR - "+"Added file " + Folders[x] + "/" + addfile + " to DSK","red")
                     sys.exit(1)
 
     Change_Version_makefile(new_version,new_compilation)
     remove_temporal_files(OBJ_PATH,"*")
-    print("[+] Building DSK " + dsk)
-    print("[+] VERSION: " + new_version)
-    print("[+] BUILD  : " + new_compilation)
-    show_info("BUILD SUCCESS","green")
+    print("[+] Building DSK " + project_data["general"]["name"]+".dsk")
+    show_info("BUILD SUCCESS - Version: "+new_version + " - Build: "+new_compilation,"green")
     console.print("")
 
     return True
 
 def Download_IDSK():
     if not os.path.exists(_commando_idsk):
-        print()
-        print("Download iDSK Software Version 0.20.... please wait..")
+        show_info("Download iDSK Software Version 0.20.... please wait..","white")
         print()
         with requests.get(_download_idsk, stream=True) as r:
             total_length = int(r.headers.get("Content-Length"))
@@ -146,7 +135,7 @@ def Change_Version_makefile(version, compilation):
         with open(PWD + MAKEFILE, 'w') as configfile:
             config.write(configfile)
     except:
-        console.print("[red bold]\[ERROR]: Section " + section + " or key " + key + " not exist in "+MAKEFILE)
+        show_info("BUILD ERROR - Section compilation or keys build or version not exist in "+MAKEFILE,"red")
         sys.exit(1)
 
 def is_binary(file_name):
@@ -162,7 +151,7 @@ def copy_file(origen,destino):
     try:
         shutil.copy(origen,destino)
     except OSError as err:
-        print("[red bold]File copy error" +str(err))
+        show_info("BUILD ERROR - File copy error" +str(err),"red")
         sys.exit(1)
 
 # Borra ficheros temporales
