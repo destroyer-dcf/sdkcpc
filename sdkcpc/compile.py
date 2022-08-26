@@ -67,14 +67,14 @@ def build():
             sys.exit(1)
         Folders = FOLDER_PROJECT_NEW
     else:
-        copy_file(APP_PATH + "/resources/software/8bp.dsk",project_data["general"]["name"]+".dsk")
+        copy_file(PWD + "8bp_library/8bp.dsk",project_data["general"]["name"]+".dsk")
         print("[+] Copy library 8BP to DSK")
         Folders = FOLDER_PROJECT_8BP
 
     # Add files to DSK
     dsk  = PWD + project_data["general"]["name"]+".dsk"
     for x in range(0,len(Folders)):
-        if not Folders[x] == "src":
+        if Folders[x] == "obj" or Folders[x] == "bin" or Folders[x] == "ascii":
             files = os.listdir(PWD + "/" + Folders[x])
             for addfile in files:
                 if is_binary(PWD + Folders[x] + "/" + addfile):
