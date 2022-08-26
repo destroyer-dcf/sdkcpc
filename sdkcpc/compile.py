@@ -18,7 +18,7 @@ from .new import *
 from .check import *
 
 from rich.console import Console
-console = Console(width=80)
+console = Console(width=80,color_system="windows",force_terminal=True)
 
 # Variables for platform
 if sys.platform == "darwin":
@@ -44,7 +44,7 @@ def build():
     # Download iDSK Software
     Download_IDSK()
     print()
-    show_info("Build Project ")
+    show_info("Build Project","white")
     # Generate new Version
     new_version     = incrementVersion(project_data["compilation"]["version"])
     new_compilation = str(datetime.now())
@@ -84,6 +84,7 @@ def build():
         Folders = FOLDER_PROJECT_NEW
     else:
         copy_file(path.dirname(path.abspath(__file__)) + "/resources/software/8bp.dsk",project_data["general"]["name"]+".dsk")
+        print("[+] Copy library 8BP to DSK")
         Folders = FOLDER_PROJECT_8BP
 
     # Add files to DSK
@@ -110,7 +111,7 @@ def build():
     print("[+] Building DSK " + dsk)
     print("[+] VERSION: " + new_version)
     print("[+] BUILD  : " + new_compilation)
-    show_info("BUILD SUCCESS")
+    show_info("BUILD SUCCESS","green")
     console.print("")
 
     return True

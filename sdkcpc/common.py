@@ -100,9 +100,14 @@ def  version():
         return "12.0.0"
 
 
-def show_info(info):
+def show_info(info, color):
     print("[*] ------------------------------------------------------------------------")
-    print("[*] [white bold]" + info.upper())
+    if color == "white":
+        console.print("[*] [white bold]" + info.upper())
+    elif color == "red":
+        console.print("[*] [red bold]" + info.upper())
+    elif color == "green":
+        console.print("[*] [gren bold]" + info.upper())
     print("[*] ------------------------------------------------------------------------")
 
 def infoLog(recurso,informacion):
