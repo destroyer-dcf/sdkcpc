@@ -30,6 +30,7 @@ BAS_PATH           = PWD + "src"
 OBJ_PATH           = PWD + "obj"
 LOG_FILE           = "project.log"
 APP_PATH           = os.path.dirname(os.path.abspath(__file__))
+TEMPLATES          = APP_PATH + "/resources/templates/"
 
 # Variables for platform
 if sys.platform == "darwin":
@@ -82,13 +83,33 @@ def readProyectSection(section):
         print("[red bold]\[ERROR]: Section " + section + " not exist in "+MAKEFILE)
         sys.exit(1)
 
+def show_head(info, color):
+    print("[*] ------------------------------------------------------------------------")
+    if color == "white":
+        console.print("[*][white bold] " + info.upper())
+    elif color == "red":
+        console.print("[*][red bold] " + info.upper())
+    elif color == "green":
+        console.print("[*][green bold] " + info.upper())
+    print("[*] ------------------------------------------------------------------------")
+
 
 def show_info(info, color):
     print("[*] ------------------------------------------------------------------------")
     if color == "white":
-        console.print("[white bold]\[*] " + info.upper())
+        console.print("[*][white bold] " + info.upper())
     elif color == "red":
-        console.print("[red bold]\[*] " + info.upper())
+        console.print("[*][red bold] " + info.upper())
     elif color == "green":
-        console.print("[green bold]\[*] " + info.upper())
+        console.print("[*][green bold] " + info.upper())
+    print("[*] ------------------------------------------------------------------------")
+
+def show_foot(info, color):
+    print("[*] ------------------------------------------------------------------------")
+    if color == "white":
+        console.print("[*][white bold] " + info.upper())
+    elif color == "red":
+        console.print("[*][red bold] " + info.upper())
+    elif color == "green":
+        console.print("[*][green bold] " + info.upper())
     print("[*] ------------------------------------------------------------------------")

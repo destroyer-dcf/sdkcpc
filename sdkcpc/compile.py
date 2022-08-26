@@ -27,7 +27,7 @@ def build():
     # Download iDSK Software
     Download_IDSK()
     print()
-    show_info("Build Project","white")
+    show_head("Build Project","white")
     
     # Generate new Version
     new_version     = incrementVersion(project_data["compilation"]["version"])
@@ -93,7 +93,7 @@ def build():
     Change_Version_makefile(new_version,new_compilation)
     remove_temporal_files(OBJ_PATH,"*")
     print("[+] Building DSK " + project_data["general"]["name"]+".dsk")
-    show_info("BUILD SUCCESS - Version: "+new_version + " - Build: "+new_compilation,"green")
+    show_foot("BUILD SUCCESS - Version: "+new_version + " - Build: "+new_compilation,"green")
     console.print("")
 
     return True

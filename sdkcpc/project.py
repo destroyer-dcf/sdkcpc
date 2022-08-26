@@ -11,7 +11,8 @@ from os import path
 
 from rich.console import Console
 from rich import print
-from jinja2 import Template
+
+from jinja2 import Environment, FileSystemLoader
 
 from .common import *
 from rich.console import Console
@@ -25,34 +26,42 @@ def createNewProject(nameProject,template):
     check_project_nomenclature(nameProject)
     
     # Creamos estructura del proyectod
-    build = str(datetime.now())
+
     show_info("Create New Project "+nameProject,"white")
+    
+    data = {"project_name": nameProject,"compilation": str(datetime.now()),"template": template}
 
-    # console.print("[yellow]\nProject Folders")
     if not path.exists(PWD + "/" + nameProject):
+        
+        # Create project folder
         os.makedirs(PWD + "/" + nameProject)
-        createStructure(nameProject,template)
+        
+        # Create estructure project for template
+        create_structure_project(nameProject,template)
+        
         # Creamos makefile del proyecto
-        makeFileTemplate(nameProject,build,template)
-        # console.print("[yellow]\nBas File")
-        basFileTemplate(nameProject,build,template)
-        if template == "8BP":
-            copy8bp(nameProject)
-        console.print("[blue bold]\[Create][white bold] "+nameProject+".bas File.")
+        data = {"project_name": nameProject,"compilation": str(datetime.now()),"template": template}
+        create_template(data,"project.j2",PWD + nameProject +"/" + MAKEFILE)
 
-        questions = [
-            inquirer.List("creategit", message="Do you want to create version control in the project (git software needed)?", choices=["Yes", "No"], default="Yes"),
-            inquirer.List("vscodeopen", message="Do you want to open the new Project with Visual Studio Code?", choices=["Yes", "No"], default="Yes"),
-        ]
-        answers = inquirer.prompt(questions)
-        if answers["creategit"] == "Yes":
-            console.print("[blue bold]\[Create][white bold] Git Repository")
-            gitInit(nameProject)
-        if answers["vscodeopen"] == "Yes":
-            createVscode(nameProject)
-            openVscode(nameProject)
+        # # console.print("[yellow]\nBas File")
+        # basFileTemplate(nameProject,str(datetime.now(),template)
+        # if template == "8BP":
+        #     copy8bp(nameProject)
+        # console.print("[blue bold]\[Create][white bold] "+nameProject+".bas File.")
+
+        # questions = [
+        #     inquirer.List("creategit", message="Do you want to create version control in the project (git software needed)?", choices=["Yes", "No"], default="Yes"),
+        #     inquirer.List("vscodeopen", message="Do you want to open the new Project with Visual Studio Code?", choices=["Yes", "No"], default="Yes"),
+        # ]
+        # answers = inquirer.prompt(questions)
+        # if answers["creategit"] == "Yes":
+        #     console.print("[blue bold]\[Create][white bold] Git Repository")
+        #     gitInit(nameProject)
+        # if answers["vscodeopen"] == "Yes":
+        #     createVscode(nameProject)
+        #     openVscode(nameProject)
             
-        show_info("Project " + nameProject + " Successfully","green")
+        show_info(nameProject + " project successfully created","green")
     else:
         print("[red bold]\[ERROR] " + nameProject + " project exists on this path.")
         sys.exit(1)
@@ -65,45 +74,26 @@ def check_project_nomenclature(nameProject):
         sys.exit(1)
 
 # Create makefile
-def makeFileTemplate(project_name, build,template):
+def create_template(data,template_name,file):
+    j2_env = Environment(loader=FileSystemLoader(TEMPLATES),trim_blocks=True)
+    with open(file, mode="w", encoding="utf-8") as message:
+            message.write(j2_env.get_template(template_name).render(data))
+    print("[+] Create Template " + file)
+# # Create makefile
+# def create_template_makefile(project_name, build,template):
 
-    data = {
-        "project_name": project_name,
-        "compilation" : build,
-        "template"    : template
-    }
+#     data = {
+#         "project_name": project_name,
+#         "compilation" : build,
+#         "template"    : template
+#     }
     
-    template = """
-[compilation]
-build = {{ compilation }}
-version = 0.0.1
-
-[general]
-name = {{ project_name }}
-description = None
-template = {{ template }}
-authors = authors <authors@mail.com>
-
-[config]
-concatenate.files = No
-validate.83.files = Yes
-name.bas.file = {{ project_name }}.bas
-name.dsk.file = {{ project_name }}.dsk
-
-[rvm]
-model.cpc = 6128
-
-[m4]
-ip = 0.0.0.0
-
-    """
-    j2_template = Template(template)
-    fichero = open(PWD + project_name + "/" + MAKEFILE, 'w')
-    fichero.write(j2_template.render(data))
-    fichero.close()
+#     j2_env = Environment(loader=FileSystemLoader(TEMPLATES),trim_blocks=True)
+#     with open("pepe", mode="w", encoding="utf-8") as message:
+#             message.write(j2_env.get_template('project.j2').render(data))
 
 # Crea estructura del proyecto
-def createStructure(project,template):
+def create_structure_project(project,template):
     
     if template == "Basic":
         estructura = FOLDER_PROJECT_NEW
@@ -113,13 +103,13 @@ def createStructure(project,template):
     for i in estructura:
         if not os.path.isdir(PWD + project + "/" + i):
             os.makedirs(PWD + project + "/" + i)
-            print("[blue bold]\[Create][white bold] " + project + "/" + i)
+            print("[+] Create Folder " + project + "/" + i)
 
 # Crea estructura vscode
 def createVscode(project):
     try:
         shutil.copytree(APP_PATH + "/resources/vscode",PWD + project + "/.vscode")
-        print("[blue bold]\[Create][white bold] Vscode files.")
+        print("[+]\[Create][white bold] Vscode files.")
     except OSError as err:
         print("[red bold]"+str(err))
         sys.exit(1)

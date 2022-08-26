@@ -1,28 +1,21 @@
----
----
-build: {{ compilation }}
-version: "1.0.0"
-project:
-  general:
-    name: {{ project_name }}
-    description: ""
-    template:  {{ template }}
-    author: authors <authors@mail.com>
-  configurations:
-    concatenate_bas_files: False
-    {% comment %} validate_83_files: True {% endcomment %}
-    name_bas_file: {{ project_name }}.BAS
-  dsk_image:
-    name: {{ project_name }}.DSK
-    generate: True
-  cdt_image:
-    name: {{ project_name }}.CDT
-    generate: False
-    order_files:
-      - {{ project_name }}.BAS
-emulator:
-  rvm:
-    path: XXXXXXXX
-    model: 6128
-  m4board:
-    ip: 0.0.0.0
+[compilation]
+build = {{ compilation }}
+version = 0.0.1
+
+[general]
+name = {{ project_name }}
+description = None
+template = {{ template }}
+authors = authors <authors@mail.com>
+
+[config]
+concatenate.files = No
+validate.83.files = Yes
+name.bas.file = {{ project_name }}.bas
+name.dsk.file = {{ project_name }}.dsk
+
+[rvm]
+model.cpc = 6128
+
+[m4]
+ip = 0.0.0.0

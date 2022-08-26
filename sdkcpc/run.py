@@ -36,7 +36,7 @@ def make_executable(path):
 def download_retro_virtual_machine():
     if not os.path.exists(RETROVIRTUALMACHINE):
         print()
-        print("Download Retro Virtual Machine.... please wait..")
+        show_info("Download Retro Virtual Machine.... please wait..","white")
         print()
         with requests.get(URL, stream=True) as r:
             total_length = int(r.headers.get("Content-Length"))
@@ -56,7 +56,7 @@ def rvm():
     print()
     project_data = Get_data_project_dict()
     
-    show_info("Run " + project_data["general"]["name"]+".dsk in the Emulator","white")
+    show_head("Run " + project_data["general"]["name"]+".dsk in the Emulator","white")
     DSK = PWD + project_data["general"]["name"]+".dsk"
     print("[+] Version : " + project_data["compilation"]["version"])
     print("[+] Build   : " + project_data["compilation"]["build"])
@@ -71,7 +71,7 @@ def rvm():
             retcode = subprocess.run([RETROVIRTUALMACHINE,"-i", DSK,"-b=cpc"+project_data['rvm']['model.cpc'],"-c=RUN\""+project_data["config"]["name.bas.file"]+"\n"])
         elif sys.platform == "linux":
             retcode = subprocess.Popen([RETROVIRTUALMACHINE,"-i", DSK,"-b=cpc"+project_data['rvm']['model.cpc'],"-c=RUN\""+project_data["config"]["name.bas.file"]+"\n"], stdout=FNULL, stderr=subprocess.STDOUT)
-        show_info("Execution Successfull","green")
+        show_foot("Execution Successfull","green")
         print()
     except:
         show_info("An error occurred while running Retro Virtual Machine.'","red")

@@ -10,12 +10,6 @@ from rich import print
 from rich.console import Console
 console = Console(width=80,color_system="windows",force_terminal=True)
 
-PWD                = os.getcwd() + "/"
-MAKEFILE           = "project.yaml"
-# # CONFIG             = loadConfigData()
-# FOLDER_PROJECT_NEW = ["OUT","ASCII","BIN","BASIC","OBJ"] 
-# FOLDER_PROJECT_8BP = ["ASM","DSK","MUSIC","OUTPUT_SPEDIT","OUT","ASCII","BIN","BASIC","OBJ"] 
-
 
 def show_error_validate(error):
     new_error = re.sub('[^a-zA-Z0-9:, \n\.]', '', error)
