@@ -100,10 +100,10 @@ def  version():
         return "12.0.0"
 
 
-def Head_info(info):
-    print("[+] ------------------------------------------------------------------------")
-    print("[+] [white bold]" + info.upper())
-    print("[+] ------------------------------------------------------------------------")
+def show_info(info):
+    print("[*] ------------------------------------------------------------------------")
+    print("[*] [white bold]" + info.upper())
+    print("[*] ------------------------------------------------------------------------")
 
 def infoLog(recurso,informacion):
     print("[blue bold]\["+recurso+"][yellow bold] "+informacion+" [green bold]\[OK]")

@@ -44,7 +44,7 @@ def build():
     # Download iDSK Software
     Download_IDSK()
     print()
-    Head_info("Build Project ")
+    show_info("Build Project ")
     # Generate new Version
     new_version     = incrementVersion(project_data["compilation"]["version"])
     new_compilation = str(datetime.now())
@@ -87,7 +87,7 @@ def build():
         Folders = FOLDER_PROJECT_8BP
 
     # Add files to DSK
-    dsk  = PWD + "/" + project_data["general"]["name"]+".dsk"
+    dsk  = PWD + project_data["general"]["name"]+".dsk"
     for x in range(0,len(Folders)):
         if not Folders[x] == "BASIC":
             files = os.listdir(PWD + "/" + Folders[x])
@@ -107,15 +107,13 @@ def build():
 
     Change_Version_makefile(new_version,new_compilation)
     remove_temporal_files(OBJ_PATH,"*")
+    print("[+] Building DSK " + dsk)
+    print("[+] VERSION: " + new_version)
+    print("[+] BUILD  : " + new_compilation)
+    show_info("BUILD SUCCESS")
+    console.print("")
 
-    console.print("")
-    console.rule("")
-    console.print("")
-    print ("[blue bold]VERSION: [white bold]" + new_version)
-    print ("[blue bold]BUILD  : [white bold]" + new_compilation)
-    print ("[blue bold]STATUS : [green bold]SUCCESSFULLY")
-    console.print("")
-    console.rule("")
+    return True
 
 def Download_IDSK():
     if not os.path.exists(_commando_idsk):
