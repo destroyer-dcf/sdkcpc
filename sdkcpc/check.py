@@ -13,7 +13,7 @@ from datetime import datetime
 
 
 from .common import *
-from .new import *
+from .project import *
 from rich.console import Console
 console = Console(width=80,color_system="windows",force_terminal=True)
 

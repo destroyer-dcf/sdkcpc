@@ -14,7 +14,7 @@ from zipfile import ZipFile
 
 
 from .common import *
-from .new import *
+from .project import *
 from .check import *
 
 from rich.console import Console
@@ -74,7 +74,7 @@ def build():
     # Add files to DSK
     dsk  = PWD + project_data["general"]["name"]+".dsk"
     for x in range(0,len(Folders)):
-        if not Folders[x] == "BASIC":
+        if not Folders[x] == "src":
             files = os.listdir(PWD + "/" + Folders[x])
             for addfile in files:
                 if is_binary(PWD + Folders[x] + "/" + addfile):

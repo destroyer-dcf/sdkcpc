@@ -12,7 +12,7 @@ import shutil
 from tqdm.auto import tqdm
 
 from .common import *
-from .new import *
+from .project import *
 from rich.console import Console
 
 console = Console(width=80,color_system="windows",force_terminal=True)
@@ -55,13 +55,13 @@ def rvm():
     download_retro_virtual_machine()
     print()
     project_data = Get_data_project_dict()
+    
+    show_info("Run " + project_data["general"]["name"]+".dsk in the Emulator","white")
     DSK = PWD + project_data["general"]["name"]+".dsk"
-    console.print("[blue bold][Build   ][white] " + project_data["compilation"]["build"])
-    console.print("[blue bold][Version ][white] " + project_data["compilation"]["version"])
-    console.print("[blue bold][Emulator][white] Retro Virtual Machine")
-    console.print('[blue bold][DSK File][white] ' + project_data["general"]["name"]+".dsk")
-    console.print('[blue bold][BAS File][white] ' + project_data["config"]["name.bas.file"])
-
+    print("[+] Version : " + project_data["compilation"]["version"])
+    print("[+] Build   : " + project_data["compilation"]["build"])
+    print("[+] Bas File: " + project_data["general"]["name"]+".dsk")
+    
     FNULL = open(os.devnull, 'w')
     try:
         # Variables for platform
@@ -71,5 +71,7 @@ def rvm():
             retcode = subprocess.run([RETROVIRTUALMACHINE,"-i", DSK,"-b=cpc"+project_data['rvm']['model.cpc'],"-c=RUN\""+project_data["config"]["name.bas.file"]+"\n"])
         elif sys.platform == "linux":
             retcode = subprocess.Popen([RETROVIRTUALMACHINE,"-i", DSK,"-b=cpc"+project_data['rvm']['model.cpc'],"-c=RUN\""+project_data["config"]["name.bas.file"]+"\n"], stdout=FNULL, stderr=subprocess.STDOUT)
+        show_info("Execution Successfull","green")
+        print()
     except:
-        print('[red bold]An error occurred while running Retro Virtual Machine.')
+        show_info("An error occurred while running Retro Virtual Machine.'","red")

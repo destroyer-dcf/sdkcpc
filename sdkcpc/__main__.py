@@ -10,7 +10,7 @@ from . import __version__
 from .common import *
 
 from .about import *
-from .new import *
+from .project import *
 from .check import *
 # from .build import *
 from .compile import *

@@ -2,7 +2,7 @@ from rich.console import Console
 
 
 from .common import *
-from .new import *
+from .project import *
 from .check import *
 import configparser
 import os

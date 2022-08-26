@@ -23,11 +23,11 @@ console = Console(width=80,color_system="windows",force_terminal=True)
 
 PWD                = os.getcwd() + "/"
 MAKEFILE           = "Project.cfg"
-FOLDER_PROJECT_NEW = ["ASCII","BIN","BASIC","OBJ"] 
+FOLDER_PROJECT_NEW = ["ascii","bin","src","obj"] 
 FOLDER_PROJECT_8BP = ["ASM","DSK","MUSIC","OUTPUT_SPEDIT","OUT","ASCII","BIN","BASIC","OBJ"] 
 MODELS_CPC         = ["464","664","6128"]
-BAS_PATH           = PWD + "BASIC"
-OBJ_PATH           = PWD + "OBJ"
+BAS_PATH           = PWD + "src"
+OBJ_PATH           = PWD + "obj"
 LOG_FILE           = "project.log"
 APP_PATH           = os.path.dirname(os.path.abspath(__file__))
 
@@ -47,8 +47,6 @@ elif sys.platform == "linux":
     COMMANDO_IDSK = APP_PATH + "/resources/software/iDSK"
     RETROVIRTUALMACHINE = APP_PATH + "/resources/software/RetroVirtualMachine"
     URL = "https://static.retrovm.org/release/beta1/linux/x64/RetroVirtualMachine.2.0.beta-1.r7.linux.x64.zip"
-
-
 
 
 
@@ -88,9 +86,9 @@ def readProyectSection(section):
 def show_info(info, color):
     print("[*] ------------------------------------------------------------------------")
     if color == "white":
-        console.print("[*] [white bold]" + info.upper())
+        console.print("[white bold]\[*] " + info.upper())
     elif color == "red":
-        console.print("[*] [red bold]" + info.upper())
+        console.print("[red bold]\[*] " + info.upper())
     elif color == "green":
-        console.print("[*] [gren bold]" + info.upper())
+        console.print("[green bold]\[*] " + info.upper())
     print("[*] ------------------------------------------------------------------------")
