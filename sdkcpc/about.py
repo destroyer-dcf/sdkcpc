@@ -23,6 +23,5 @@ def about():
 
     console.print (banner)
     console.print("")
-    # print()
 
 

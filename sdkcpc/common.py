@@ -3,6 +3,7 @@ from itertools import count
 import sys
 import os
 import os.path
+import sys, os
 import configparser
 
 
@@ -27,10 +28,8 @@ FOLDER_PROJECT_8BP = ["ASM","DSK","MUSIC","OUTPUT_SPEDIT","OUT","ASCII","BIN","B
 MODELS_CPC         = ["464","664","6128"]
 BAS_PATH           = PWD + "BASIC"
 OBJ_PATH           = PWD + "OBJ"
-PATH_TOOLS         = os.path.split(os.path.abspath(__file__))
-PARENT_DIR         = os.path.dirname(os.path.dirname(__file__))
 LOG_FILE           = "project.log"
-
+APP_PATH           = os.path.dirname(path.abspath(__file__))
 
 
 # Get data project in dict
