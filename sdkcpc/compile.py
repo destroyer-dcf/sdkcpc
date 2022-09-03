@@ -79,9 +79,7 @@ def build():
 
     if project_data["general"]["template"] == "8BP":
         if not path.exists(PWD + "8bp_library/8bp.dsk"):
-            # copy_file(PWD + "8bp_library/8bp.dsk",project_data["general"]["name"]+".dsk")
-            # print("[+] Copy library 8BP to DSK")
-            # Folders = FOLDER_PROJECT_8BP
+            show_foot("BUILD ERROR - 8bp_library/8bp.dsk does not exist.","red")
             sys.exit(1) 
         else:
             try:
@@ -114,7 +112,7 @@ def build():
     Change_Version_makefile(new_version,new_compilation)
     remove_temporal_files(OBJ_PATH,"*")
     print("[+] Building DSK " + project_data["general"]["name"]+".dsk")
-    show_foot("BUILD SUCCESS - Version: "+new_version + " - Build: "+new_compilation,"green")
+    show_foot("Build Successfull - Version: "+new_version + " - Build: "+new_compilation,"green")
     console.print("")
 
     return True

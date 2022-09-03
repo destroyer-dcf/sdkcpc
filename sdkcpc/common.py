@@ -86,30 +86,30 @@ def readProyectSection(section):
 def show_head(info, color):
     print("[*] ------------------------------------------------------------------------")
     if color == "white":
-        console.print("[*][white bold] " + info.upper())
+        console.print("[*][white bold] " + info)
     elif color == "red":
-        console.print("[*][red bold] " + info.upper())
+        console.print("[*][red bold] " + info)
     elif color == "green":
-        console.print("[*][green bold] " + info.upper())
+        console.print("[*][green bold] " + info)
     print("[*] ------------------------------------------------------------------------")
 
 
 def show_info(info, color):
     print("[*] ------------------------------------------------------------------------")
     if color == "white":
-        console.print("[*][white bold] " + info.upper())
+        console.print("[*][white bold] " + info)
     elif color == "red":
-        console.print("[*][red bold] " + info.upper())
+        console.print("[*][red bold] " + info)
     elif color == "green":
-        console.print("[*][green bold] " + info.upper())
+        console.print("[*][green bold] " + info)
     print("[*] ------------------------------------------------------------------------")
 
 def show_foot(info, color):
     print("[*] ------------------------------------------------------------------------")
     if color == "white":
-        console.print("[*][white bold] " + info.upper())
+        console.print("[*][white bold] " + info)
     elif color == "red":
-        console.print("[*][red bold] " + info.upper())
+        console.print("[*][red bold] " + info)
     elif color == "green":
-        console.print("[*][green bold] " + info.upper())
+        console.print("[*][green bold] " + info)
     print("[*] ------------------------------------------------------------------------")

@@ -131,7 +131,7 @@ def validate_Folder_Project():
 # Validamos que existan todas las carpetas del proyecto
 #   @Param: array carpetas 
 def validate_Project_structure(estructura):
-    show_head("project structure validation","white")
+    show_head("Project Structure Validation","white")
     print("[+] [blue bold]FOLDERS [/]")
     for i in estructura:
         if not os.path.isdir(PWD + i):
@@ -145,7 +145,7 @@ def validate_Project_structure(estructura):
 
 
 def validate_83(estructura):
-    show_head("validate 8:3 Files","white")
+    show_head("Validate 8:3 Files","white")
     for i in estructura:
         print("[+] [blue bold]"+ i + " [/]")
         arr = next(os.walk(PWD + i))[2]
