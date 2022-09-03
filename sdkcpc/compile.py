@@ -54,20 +54,44 @@ def build():
         os.rename(OBJ_PATH + '/' + project_data["config"]["name.bas.file"]+".concat",OBJ_PATH + '/' + project_data["config"]["name.bas.file"])
     
     # Create DSK file
-    if project_data["general"]["template"] == "Basic":
-        FNULL = open(os.devnull, 'w')
-        try:
-            retcode = subprocess.Popen([COMMANDO_IDSK, PWD+project_data["general"]["name"]+".dsk","-n"], stdout=FNULL, stderr=subprocess.STDOUT)
-            print("[+] Create DSK " + project_data["general"]["name"]+".dsk")
-        except:
-            show_info("BUILD ERROR - "+"iDSK does not exist.","red")
-            sys.exit(1)
-        Folders = FOLDER_PROJECT_NEW
-    else:
-        copy_file(PWD + "8bp_library/8bp.dsk",project_data["general"]["name"]+".dsk")
-        print("[+] Copy library 8BP to DSK")
-        Folders = FOLDER_PROJECT_8BP
+    # if project_data["general"]["template"] == "Basic":
+    #     FNULL = open(os.devnull, 'w')
+    #     try:
+    #         retcode = subprocess.Popen([COMMANDO_IDSK, PWD+project_data["general"]["name"]+".dsk","-n"], stdout=FNULL, stderr=subprocess.STDOUT)
+    #         print("[+] Create DSK " + project_data["general"]["name"]+".dsk")
+    #     except:
+    #         show_info("BUILD ERROR - "+"iDSK does not exist.","red")
+    #         sys.exit(1)
+    #     Folders = FOLDER_PROJECT_NEW
+    # else:
+    #     copy_file(PWD + "8bp_library/8bp.dsk",project_data["general"]["name"]+".dsk")
+    #     print("[+] Copy library 8BP to DSK")
+    #     Folders = FOLDER_PROJECT_8BP
 
+    FNULL = open(os.devnull, 'w')
+    try:
+        retcode = subprocess.Popen([COMMANDO_IDSK, PWD+project_data["general"]["name"]+".dsk","-n"], stdout=FNULL, stderr=subprocess.STDOUT)
+        print("[+] Create DSK " + project_data["general"]["name"]+".dsk")
+    except:
+        show_info("BUILD ERROR - "+"iDSK does not exist.","red")
+        sys.exit(1)
+    Folders = FOLDER_PROJECT_NEW
+
+    if project_data["general"]["template"] == "8BP":
+        if not path.exists(PWD + "8bp_library/8bp.dsk"):
+            # copy_file(PWD + "8bp_library/8bp.dsk",project_data["general"]["name"]+".dsk")
+            # print("[+] Copy library 8BP to DSK")
+            # Folders = FOLDER_PROJECT_8BP
+            sys.exit(1) 
+        else:
+            try:
+                retcode = subprocess.Popen([COMMANDO_IDSK, PWD+"8bp_library/8bp.dsk","-g","bin/8BP.BIN"], stdout=FNULL, stderr=subprocess.STDOUT)
+                Folders = FOLDER_PROJECT_8BP
+            except:
+                show_info("BUILD ERROR - "+"iDSK does not exist.","red")
+                sys.exit(1) 
+        print("[+] Extract 8BP.BIN to 8bp.dsk")
+        
     # Add files to DSK
     dsk  = PWD + project_data["general"]["name"]+".dsk"
     for x in range(0,len(Folders)):
