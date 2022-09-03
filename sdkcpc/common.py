@@ -24,7 +24,7 @@ console = Console(width=80,color_system="windows",force_terminal=True)
 PWD                = os.getcwd() + "/"
 MAKEFILE           = "Project.cfg"
 FOLDER_PROJECT_NEW = ["ascii","bin","src","obj"] 
-FOLDER_PROJECT_8BP = ["8bp_library","asm","music","output_spedit","ascii","bin","src","obj"] 
+FOLDER_PROJECT_8BP = ["8bp_library","ascii","bin","src","obj"] 
 MODELS_CPC         = ["464","664","6128"]
 BAS_PATH           = PWD + "src"
 OBJ_PATH           = PWD + "obj"
