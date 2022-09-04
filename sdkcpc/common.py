@@ -12,7 +12,7 @@ from rich.panel import Panel
 from os.path import exists
 from tabulate import tabulate
 from datetime import datetime
-
+from . import __version__
 
 from configparser import ConfigParser
 from rich.console import Console
@@ -125,3 +125,8 @@ def show_foot(info, color):
     elif color == "green":
         console.print("[*][green bold] " + info)
     print("[*] ------------------------------------------------------------------------")
+
+def developer_info():
+    print("\n[white]sdkcpc [green]v"+str(__version__))
+    print("[blue]" + sys.platform+ " - [red] Build: [yellow]"+str(readBuild()))
+    print("[magenta]©2022 Destroyer\n")

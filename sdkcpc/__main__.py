@@ -24,8 +24,8 @@ from .validate import *
 def main():
     #Program arguments
     parser = argparse.ArgumentParser()
-    parser.version = __version__
-
+    parser.version = developer_info()
+    
     subparsers = parser.add_subparsers(help='commands',dest='command')
 
     # A about comman
@@ -69,17 +69,21 @@ def main():
     args = parser.parse_args()
 
     if args.command == 'new':
+
         createNewProject(args.name_project,"Basic")
 
     elif args.command == 'new-8bp':
+
         createNewProject(args.name_project_8bp,"8BP")
 
     elif args.command == 'run':
+
         validate_data_project()
         if args.rvm == True:
             rvm()
             sys.exit(0)
         if args.m4 == True:
+
             print("This option will be supported for the next version")
             sys.exit(0)
         print("\n[red bold]Missing parameter.\n")
@@ -91,10 +95,10 @@ def main():
     elif args.command == 'info':
         info()
     elif args.command == "validate":
-        print("")
         validate_data_project()
-        print("")
+
     elif args.command == "make":
+
         validate_data_project()
         build()
     elif args.command == "about":
