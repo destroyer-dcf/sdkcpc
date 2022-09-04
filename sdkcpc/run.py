@@ -60,7 +60,8 @@ def rvm():
     DSK = PWD + project_data["general"]["name"]+".dsk"
     print("[+] Version : " + project_data["compilation"]["version"])
     print("[+] Build   : " + project_data["compilation"]["build"])
-    print("[+] Bas File: " + project_data["general"]["name"]+".dsk")
+    print("[+] Bas File: " + project_data["config"]["name.bas.file"])
+    print("[+] Dsk File: " + project_data["general"]["name"]+".dsk")
     
     FNULL = open(os.devnull, 'w')
     try:

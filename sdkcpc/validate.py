@@ -88,8 +88,7 @@ def validate_data_project():
         sys.exit(1)
 
 
-    show_head("PROJECT.CFG VALIDATION","white")
-    # print("[*] ------------------------------------------------------------------------")
+    show_head(MAKEFILE + " Validation","white")
     print("[*] [blue bold]COMPILATION [/]")
     print("[*]   compilation: " + project_data["compilation"]["build"]+ " [green bold][OK]")
     print("[*]   version: " + project_data["compilation"]["version"]+ " [green bold][OK]")
@@ -120,13 +119,6 @@ def validate_Folder_Project():
     if not os.path.exists(PWD + MAKEFILE):
         print("\n[red bold]This folder does not contain sdkcpc project.\n")
         sys.exit(1)
-
-# Get data project in dict
-# def Get_data_project_dict():
-#     config = ConfigParser()
-#     config.read("/home/destroyer/Documentos/Github/sdkcpc/pepep/Project.cfg")
-#     project_dic = dict(config._sections)
-#     return project_dic
 
 # Validamos que existan todas las carpetas del proyecto
 #   @Param: array carpetas 

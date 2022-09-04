@@ -45,7 +45,7 @@ def info():
 
 
 def info_files(estructura):
-    show_head("FILES INFORMATION","white")
+    show_head("Files Information","white")
     TOTAL_FILES= 0
     TOTAL_SIZE = 0
     for i in estructura:
