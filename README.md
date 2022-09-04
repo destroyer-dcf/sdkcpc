@@ -85,7 +85,7 @@ sdkcpc [argumento] [opcion]
 
 A continuacion se muestra una lista de todos los comandos y sus funcionalidades.
 
-**█ about**
+**about**
 
 Muestra información del desarrollador del proyecto.
 
@@ -94,7 +94,7 @@ Muestra información del desarrollador del proyecto.
 | `sdkcpc about`    |     | Muestra información del software y del desarrollador    |
 
 ---
-**█ make**
+**make**
 
 Crea una imagen para Disco (DSK) y Cinta (CDT) con el software del proyecto
 
@@ -104,7 +104,7 @@ Crea una imagen para Disco (DSK) y Cinta (CDT) con el software del proyecto
 | `sdkcpc make`    |     | Genera un archivo DSK con todo el software del proyecto.    |
 
 ---
-**█ validate**
+**validate**
 
 Valida que las configuraciones del proyecto en la ruta actual esten correctas.
 
@@ -113,7 +113,7 @@ Valida que las configuraciones del proyecto en la ruta actual esten correctas.
 | `sdkcpc validate`    |     | Valida que las configuraciones (Project.cfg) del proyecto sean correctas.|
 
 ---
-**█ info**
+**info**
 
 Muestra información del proyecto de la ruta actual.
 
@@ -122,7 +122,7 @@ Muestra información del proyecto de la ruta actual.
 | `sdkcpc info`    |    | Muestra información del proyecto de la ruta actual.|
 
 ---
-**█ new**
+**new**
 
 Crea un nuevo proyecto en la ruta actual con la estructura necesaria para trabajar en Amstrad Locomotive Basic.
 
@@ -133,7 +133,7 @@ Crea un nuevo proyecto en la ruta actual con la estructura necesaria para trabaj
 > **NOTA:** *No se admiten espacios en el nombre del proyecto.*
 
 ---
-**█ new-8bp**
+**new-8bp**
 
 Crea un nuevo proyecto en la ruta actual con la estructura necesaria para trabajar con la libreria  [8BP](https://github.com/jjaranda13/8BP)
 
@@ -142,7 +142,7 @@ Crea un nuevo proyecto en la ruta actual con la estructura necesaria para trabaj
 | `sdkcpc new-8bp`    | [Nombre_proyecto]  |El argumento lleva como opción el nombre que asignaremos a nuestro proyecto.|
 > **NOTA:** *No se admiten espacios en el nombre del proyecto.*
 ---
-**█ run**
+**run**
 
 Carga nuestro DSK generado y ejecuta el bas seleccionado sobre el emulador pasado como opcion al argumento.
 

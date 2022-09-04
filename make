@@ -12,10 +12,12 @@ echo "- Build       : $build"
 
 cp VERSION sdkcpc/resources/software
 
+pandoc README.md -o README.pdf
+
 # rm -rf dist
 # python3 setup.py sdist
 # twine upload --repository testpypi dist/*
 
-# git add .
-# git commit -m "compile and upload pytest version $value"
-# git push origin develop
+git add .
+git commit -m "compile and upload pytest version $value"
+git push origin develop
