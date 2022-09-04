@@ -80,7 +80,7 @@ def main():
             rvm()
             sys.exit(0)
         if args.m4 == True:
-            print("m4 option")
+            print("This option will be supported for the next version")
             sys.exit(0)
         print("\n[red bold]Missing parameter.\n")
 

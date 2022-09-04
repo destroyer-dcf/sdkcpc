@@ -28,30 +28,11 @@
 ## Requisitos de Software
 
 
-### Windows
+### Windows/Linux And OSX
 | Software  | Version  | Url |
 |:----------|:----------|:----------|
 | Python    | =>3.6    | [Descarga](https://www.python.org/downloads/)    |
-| Retro Virtual Machine    | =>2.0 BETA-1 R7 10/07/2019    | [Descarga](https://www.retrovirtualmachine.org/es/downloads)    |
 | Visual Studio Code    | latest   | [Descarga](https://code.visualstudio.com/download)    |
-| iDSK    | 20    | Incluido en SDKCPC ([Github iDSK](https://github.com/cpcsdk/idsk))      |
-
-### Linux
-| Software  | Version  | Url |
-|:----------|:----------|:----------|
-| Python    | =>3.6    | [Descarga](https://www.python.org/downloads/)    |
-| Retro Virtual Machine    | =>2.0 BETA-1 R7 10/07/2019    | [Descarga](https://www.retrovirtualmachine.org/es/downloads)    |
-| Visual Studio Code    | latest   | [Descarga](https://code.visualstudio.com/download)    |
-| iDSK    | 20    | Incluido en SDKCPC ([Github iDSK](https://github.com/cpcsdk/idsk))   |
-
-### OSX
-| Software  | Version  | Url |
-|:----------|:----------|:----------|
-| Python    | =>3.6    | [Descarga](https://www.python.org/downloads/)    |
-| Retro Virtual Machine    | =>2.0 BETA-1 R7 10/07/2019    | [Descarga](https://www.retrovirtualmachine.org/es/downloads)    |
-| Visual Studio Code    | latest   | [Descarga](https://code.visualstudio.com/download)    |
-| iDSK    | 20    | Incluido en SDKCPC ([Github iDSK](https://github.com/cpcsdk/idsk))       |
-
 
 ### Instalar Extensiones en Visual Studio Code.
 
@@ -67,10 +48,17 @@ Para instalar **SDKCPC** en tu sistema por favor realice los siguientes pasos:
 1. Instale los [Requisitos de Software](#Requisitos-de-Software) de su sistema.
 2. Una vez instalados ejecute el siguiente comando desde el cmd/terminal de sus sistema:
 
+```
+pip install sdkcpc
+```
+o
 
 ```
 pip3 install sdkcpc
 ```
+Dependiendo del sistema operativo.
+
+
 3. Cierre la terminal desde donde lo ejecuto.
 
 Puede comprobar la instalacion del software y sus requisitos escribiendo desde un nuevo cmd/Terminal, que le devolvera la versión instalada del software:
@@ -100,14 +88,14 @@ Muestra información del desarrollador del proyecto.
 | `sdkcpc about`    |     | Muestra información del software y del desarrollador    |
 
 ---
-**█ build**
+**█ make**
 
 Crea una imagen para Disco (DSK) y Cinta (CDT) con el software del proyecto
 
 
 | Como Usar  | Opciones  | Descripcion  |
 |:----------|:----------|:----------|
-| `sdkcpc build`    |     | Genera un archivo DSK y CDT con todo el software del proyecto.    |
+| `sdkcpc make`    |     | Genera un archivo DSK con todo el software del proyecto.    |
 
 ---
 **█ validate**
@@ -117,27 +105,6 @@ Valida que las configuraciones del proyecto en la ruta actual esten correctas.
 | Como Usar  | Opciones  | Descripcion  |
 |:----------|:----------|:----------|
 | `sdkcpc validate`    |     | Valida que las configuraciones (Project.cfg) del proyecto sean correctas.|
-
----
-**█ config**
-
-Muestra y modifica las configuraciones de **SDKCPC**
-
-| Como Usar  | Opciones  | Descripcion  |
-|:----------|:----------|:----------|
-| `sdkcpc config`   | --list     | Muestra el listado de las configuraciones SDKCPC.    | 
-|                   | [Nombre key]     | Muestra el valor de la key solicitada.    | 
-|                   | [Nombre key] [Nuevo valor para la key]    | Modifica el valor de la key solicitada.    | 
-
-Listado de configuraciones de SDKCPC. Pueden ser modificadas por el usuario.
-
-| Key  | Valor por defecto  | Descripcion  |
-|:----------|:----------|:----------|
-| **project.git**    | 1    | Crea el Proyecto con un control de versiones git. Parametros admitidos 1 activado - 0 Desactivado    |
-| **project.vscode**    | 1    | Una vez creado el Projecto pregunta si quiere asociarlo a Visual Studio Code. Parametros admitidos 1 activado - 0 Desactivado       |
-| **path.rvm**    | None    | Ruta donde esta instalado Retro Virtual Machine. **Es necesario configurar antes de empezar a utilizar SDKCPC**   |
-| **show.amstrad.ready**    | 1    | Muestra la cabezera amstrad por consola con la ejecucion de los comandos. Parametros admitidos 1 activado - 0 Desactivado       |
-| **show.amstrad.screen**    | 1    | Muestra Ready en la consola una vez ejecutado un comando. Parametros admitidos 1 activado - 0 Desactivado       |
 
 ---
 **█ info**
