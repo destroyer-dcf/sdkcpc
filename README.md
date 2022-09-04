@@ -13,7 +13,7 @@
 - Comentarios en codigo que no ocupan memoria.
 - Trabajo por objetos
 - Verificacion formato 8:3
-- Compatible con Emuladores: Retro Virtual Machine
+- Compatible con Emulador: Retro Virtual Machine
 - Integración con M4-Board
 - y mucho mucho más.....
 
@@ -39,6 +39,12 @@
 Para que nuestra experiencia de programacion sea mas agradable, es recomendable instalar la extension Amstrad-Basic de **dfreniche**. De esta forma conseguimos el resaltado de sintaxis para los bloques de código fuente Basic. Desde el Gestor de extensiones de Visual Studio Code buscaremos la extension Amstrad-Basic y pulsaremos *instalar*.
 
 ![image](screenshot/extension.jpg)
+
+
+### Historial
+| Fecha  | Version  | Cambios  |
+|:----------|:----------|:----------|
+| 01.10.2022   | 1.0.0  | Versión inicial del proyecto.    |
 
 
 ## Instalación SDKCPC en tu sistema

@@ -3,7 +3,8 @@ include LICENSE
 recursive-include sdkcpc/resources gitignore
 recursive-include sdkcpc/resources/vscode tasks.json
 recursive-include sdkcpc/resources/vscode amstrad.json.code-snippets
-recursive-include sdkcpc/resources/software versions
+recursive-include sdkcpc/resources/software VERSION
+recursive-include sdkcpc/resources/software BUILD
 recursive-include sdkcpc/resources/templates 8bp.j2
 recursive-include sdkcpc/resources/templates basic.j2
 recursive-include sdkcpc/resources/templates project.j2

@@ -88,7 +88,7 @@ def validate_data_project():
         sys.exit(1)
 
 
-    show_head(MAKEFILE + " Validation","white")
+    show_head(MAKEFILE + "","white")
     print("[*] [blue bold]COMPILATION [/]")
     print("[*]   compilation: " + project_data["compilation"]["build"]+ " [green bold][OK]")
     print("[*]   version: " + project_data["compilation"]["version"]+ " [green bold][OK]")

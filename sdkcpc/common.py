@@ -31,6 +31,7 @@ OBJ_PATH           = PWD + "obj"
 LOG_FILE           = "project.log"
 APP_PATH           = os.path.dirname(os.path.abspath(__file__))
 TEMPLATES          = APP_PATH + "/resources/templates/"
+SOFTWARE           = APP_PATH + "/resources/software/"
 
 # Variables for platform
 if sys.platform == "darwin":
@@ -82,6 +83,17 @@ def readProyectSection(section):
     except:
         print("[red bold]\[ERROR]: Section " + section + " not exist in "+MAKEFILE)
         sys.exit(1)
+
+def readBuild():
+    file_path = SOFTWARE + "/BUILD"
+
+    if os.path.isfile(file_path):
+        text_file = open(file_path, "r")
+        data = text_file.read()
+        text_file.close()
+        return data
+
+    return "Could not read the build"
 
 def show_head(info, color):
     print("[*] ------------------------------------------------------------------------")

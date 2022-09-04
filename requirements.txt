@@ -8,6 +8,5 @@ tabulate
 inquirer
 cerberus
 tqdm
-glob2
 glob
 requests
