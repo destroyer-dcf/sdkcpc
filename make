@@ -13,7 +13,7 @@ echo "- Build       : $build"
 
 cp VERSION sdkcpc/resources/software
 
-pandoc README.md -o "User's manual.pdf"
+pandoc README.md -o User_manual.pdf
 
 # rm -rf dist
 # python3 setup.py sdist
