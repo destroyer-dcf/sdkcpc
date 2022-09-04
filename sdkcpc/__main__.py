@@ -33,10 +33,15 @@ def main():
 
     # A build comman
     build_parser = subparsers.add_parser('make', help='make the DSK image of the project')
+    build_parser.add_argument('-v','--verbose',action='store_false',help='Show all info in compilation project')
 
     # A deploy comman
-    build_parser = subparsers.add_parser('deploy', help='Build and run the dsk image on the emulator')
-
+    deploy_parser = subparsers.add_parser('deploy', help='Make and Run the dsk image on the emulator or M4-Board')
+    deploy_parser.add_argument('-v','--verbose',action='store_false',help='Show all info in Make/Run project')
+    deploy_parser = deploy_parser.add_mutually_exclusive_group()
+    deploy_parser.add_argument('--rvm',action='store_true',help='Run in Retro Virtual Machine Software')
+    deploy_parser.add_argument('--m4',action='store_true',help='Run in M4-Board')
+    
     # A check comman
     check_parser = subparsers.add_parser('validate', help='Project data validation.')
 
@@ -55,6 +60,7 @@ def main():
 
     # A run command
     run_parser = subparsers.add_parser('run', help='Run BAS File in DSK image')
+    run_parser.add_argument('-v','--verbose',action='store_false',help='Show all info in run project')
     run_parser = run_parser.add_mutually_exclusive_group()
     run_parser.add_argument('--rvm',action='store_true',help='Run in Retro Virtual Machine Software')
     run_parser.add_argument('--m4',action='store_true',help='Run in M4-Board')
@@ -77,29 +83,36 @@ def main():
         createNewProject(args.name_project_8bp,"8BP")
 
     elif args.command == 'run':
-
-        validate_data_project()
+        if args.verbose == False:
+            validate_data_project()
         if args.rvm == True:
             rvm()
             sys.exit(0)
         if args.m4 == True:
-
-            print("This option will be supported for the next version")
+            print("[yellow]This option will be supported for the next version")
             sys.exit(0)
         print("\n[red bold]Missing parameter.\n")
 
     elif args.command == 'deploy':
-        validate_data_project()
-        if build() == True:
-            rvm()
+        if args.rvm == True:
+            if args.verbose == False:
+                validate_data_project()
+            if build() == True:
+                rvm()
+                sys.exit(0)
+        if args.m4 == True:
+            print("[yellow]This option will be supported for the next version")
+            sys.exit(0)
+        print("\n[red bold]Missing parameter.\n")
+
     elif args.command == 'info':
         info()
     elif args.command == "validate":
         validate_data_project()
 
     elif args.command == "make":
-
-        validate_data_project()
+        if args.verbose == False:
+            validate_data_project()
         build()
     elif args.command == "about":
         about()
