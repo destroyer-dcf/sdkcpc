@@ -1,0 +1,14 @@
+1 '=============================================================
+1 '== {{ project_name }}
+1 '== {{ compilation }}
+1 '=============================================================
+
+10 MEMORY 23999
+20 load "8bp.bin"
+30 MODE 0: DEFINT A-Z: CALL &6B78:' install RSX
+40 INK 0,0:INK 1,26:BORDER 0
+50 c$=INKEY$: IF C$<>"" THEN 50:'clean buffer kayboard
+60 C$="HELLO WORLD WITH 8BP" :|PRINTAT,0,43,10,@C$
+70 |STARS,0,20,10,1,0: 
+80 b$=INKEY$: IF b$<>"" THEN MODE 2: LIST
+90 GOTO 70

@@ -1,4 +1,2 @@
-- Generar las imagenes de disco en raiz
-- Cambiar nombres a las carpetas (src...)
-- Poner siempre verificacion 8:3
-- Los nombres de las imagenes siempre como el nombre del proyecto. 
+- add Folder SD with files for m4
+- add m4 option

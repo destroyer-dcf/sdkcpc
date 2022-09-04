@@ -13,7 +13,7 @@
 - Comentarios en codigo que no ocupan memoria.
 - Trabajo por objetos
 - Verificacion formato 8:3
-- Compatible con Emuladores: Retro Virtual Machine
+- Compatible con Emulador: Retro Virtual Machine
 - Integración con M4-Board
 - y mucho mucho más.....
 
@@ -28,36 +28,23 @@
 ## Requisitos de Software
 
 
-### Windows
+### Windows/Linux And OSX
 | Software  | Version  | Url |
 |:----------|:----------|:----------|
 | Python    | =>3.6    | [Descarga](https://www.python.org/downloads/)    |
-| Retro Virtual Machine    | =>2.0 BETA-1 R7 10/07/2019    | [Descarga](https://www.retrovirtualmachine.org/es/downloads)    |
 | Visual Studio Code    | latest   | [Descarga](https://code.visualstudio.com/download)    |
-| iDSK    | 20    | Incluido en SDKCPC ([Github iDSK](https://github.com/cpcsdk/idsk))      |
-
-### Linux
-| Software  | Version  | Url |
-|:----------|:----------|:----------|
-| Python    | =>3.6    | [Descarga](https://www.python.org/downloads/)    |
-| Retro Virtual Machine    | =>2.0 BETA-1 R7 10/07/2019    | [Descarga](https://www.retrovirtualmachine.org/es/downloads)    |
-| Visual Studio Code    | latest   | [Descarga](https://code.visualstudio.com/download)    |
-| iDSK    | 20    | Incluido en SDKCPC ([Github iDSK](https://github.com/cpcsdk/idsk))   |
-
-### OSX
-| Software  | Version  | Url |
-|:----------|:----------|:----------|
-| Python    | =>3.6    | [Descarga](https://www.python.org/downloads/)    |
-| Retro Virtual Machine    | =>2.0 BETA-1 R7 10/07/2019    | [Descarga](https://www.retrovirtualmachine.org/es/downloads)    |
-| Visual Studio Code    | latest   | [Descarga](https://code.visualstudio.com/download)    |
-| iDSK    | 20    | Incluido en SDKCPC ([Github iDSK](https://github.com/cpcsdk/idsk))       |
-
 
 ### Instalar Extensiones en Visual Studio Code.
 
 Para que nuestra experiencia de programacion sea mas agradable, es recomendable instalar la extension Amstrad-Basic de **dfreniche**. De esta forma conseguimos el resaltado de sintaxis para los bloques de código fuente Basic. Desde el Gestor de extensiones de Visual Studio Code buscaremos la extension Amstrad-Basic y pulsaremos *instalar*.
 
 ![image](screenshot/extension.jpg)
+
+
+### Historial
+| Fecha  | Version  | Cambios  |
+|:----------|:----------|:----------|
+| 01.10.2022   | 1.0.0  | Versión inicial del proyecto.    |
 
 
 ## Instalación SDKCPC en tu sistema
@@ -67,10 +54,17 @@ Para instalar **SDKCPC** en tu sistema por favor realice los siguientes pasos:
 1. Instale los [Requisitos de Software](#Requisitos-de-Software) de su sistema.
 2. Una vez instalados ejecute el siguiente comando desde el cmd/terminal de sus sistema:
 
+```
+pip install sdkcpc
+```
+o
 
 ```
 pip3 install sdkcpc
 ```
+Dependiendo del sistema operativo.
+
+
 3. Cierre la terminal desde donde lo ejecuto.
 
 Puede comprobar la instalacion del software y sus requisitos escribiendo desde un nuevo cmd/Terminal, que le devolvera la versión instalada del software:
@@ -91,7 +85,7 @@ sdkcpc [argumento] [opcion]
 
 A continuacion se muestra una lista de todos los comandos y sus funcionalidades.
 
-**█ about**
+**about**
 
 Muestra información del desarrollador del proyecto.
 
@@ -100,17 +94,17 @@ Muestra información del desarrollador del proyecto.
 | `sdkcpc about`    |     | Muestra información del software y del desarrollador    |
 
 ---
-**█ build**
+**make**
 
 Crea una imagen para Disco (DSK) y Cinta (CDT) con el software del proyecto
 
 
 | Como Usar  | Opciones  | Descripcion  |
 |:----------|:----------|:----------|
-| `sdkcpc build`    |     | Genera un archivo DSK y CDT con todo el software del proyecto.    |
+| `sdkcpc make`    |     | Genera un archivo DSK con todo el software del proyecto.    |
 
 ---
-**█ validate**
+**validate**
 
 Valida que las configuraciones del proyecto en la ruta actual esten correctas.
 
@@ -119,28 +113,7 @@ Valida que las configuraciones del proyecto en la ruta actual esten correctas.
 | `sdkcpc validate`    |     | Valida que las configuraciones (Project.cfg) del proyecto sean correctas.|
 
 ---
-**█ config**
-
-Muestra y modifica las configuraciones de **SDKCPC**
-
-| Como Usar  | Opciones  | Descripcion  |
-|:----------|:----------|:----------|
-| `sdkcpc config`   | --list     | Muestra el listado de las configuraciones SDKCPC.    | 
-|                   | [Nombre key]     | Muestra el valor de la key solicitada.    | 
-|                   | [Nombre key] [Nuevo valor para la key]    | Modifica el valor de la key solicitada.    | 
-
-Listado de configuraciones de SDKCPC. Pueden ser modificadas por el usuario.
-
-| Key  | Valor por defecto  | Descripcion  |
-|:----------|:----------|:----------|
-| **project.git**    | 1    | Crea el Proyecto con un control de versiones git. Parametros admitidos 1 activado - 0 Desactivado    |
-| **project.vscode**    | 1    | Una vez creado el Projecto pregunta si quiere asociarlo a Visual Studio Code. Parametros admitidos 1 activado - 0 Desactivado       |
-| **path.rvm**    | None    | Ruta donde esta instalado Retro Virtual Machine. **Es necesario configurar antes de empezar a utilizar SDKCPC**   |
-| **show.amstrad.ready**    | 1    | Muestra la cabezera amstrad por consola con la ejecucion de los comandos. Parametros admitidos 1 activado - 0 Desactivado       |
-| **show.amstrad.screen**    | 1    | Muestra Ready en la consola una vez ejecutado un comando. Parametros admitidos 1 activado - 0 Desactivado       |
-
----
-**█ info**
+**info**
 
 Muestra información del proyecto de la ruta actual.
 
@@ -149,7 +122,7 @@ Muestra información del proyecto de la ruta actual.
 | `sdkcpc info`    |    | Muestra información del proyecto de la ruta actual.|
 
 ---
-**█ new**
+**new**
 
 Crea un nuevo proyecto en la ruta actual con la estructura necesaria para trabajar en Amstrad Locomotive Basic.
 
@@ -160,7 +133,7 @@ Crea un nuevo proyecto en la ruta actual con la estructura necesaria para trabaj
 > **NOTA:** *No se admiten espacios en el nombre del proyecto.*
 
 ---
-**█ new-8bp**
+**new-8bp**
 
 Crea un nuevo proyecto en la ruta actual con la estructura necesaria para trabajar con la libreria  [8BP](https://github.com/jjaranda13/8BP)
 
@@ -169,7 +142,7 @@ Crea un nuevo proyecto en la ruta actual con la estructura necesaria para trabaj
 | `sdkcpc new-8bp`    | [Nombre_proyecto]  |El argumento lleva como opción el nombre que asignaremos a nuestro proyecto.|
 > **NOTA:** *No se admiten espacios en el nombre del proyecto.*
 ---
-**█ run**
+**run**
 
 Carga nuestro DSK generado y ejecuta el bas seleccionado sobre el emulador pasado como opcion al argumento.
 

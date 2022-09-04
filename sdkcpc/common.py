@@ -3,20 +3,18 @@ from itertools import count
 import sys
 import os
 import os.path
+import sys, os
 import configparser
-import glob
-import datetime
-import ipaddress
-import pathlib
+
 
 from rich import print
 from rich.panel import Panel
 from os.path import exists
 from tabulate import tabulate
 from datetime import datetime
+from . import __version__
 
-from .config import *
-
+from configparser import ConfigParser
 from rich.console import Console
 
 console = Console(width=80,color_system="windows",force_terminal=True)
@@ -25,61 +23,41 @@ console = Console(width=80,color_system="windows",force_terminal=True)
 
 PWD                = os.getcwd() + "/"
 MAKEFILE           = "Project.cfg"
-CONFIG             = loadConfigData()
-FOLDER_PROJECT_NEW = ["OUT","ASCII","BIN","BASIC","OBJ"] 
-FOLDER_PROJECT_8BP = ["ASM","DSK","MUSIC","OUTPUT_SPEDIT","OUT","ASCII","BIN","BASIC","OBJ"] 
+FOLDER_PROJECT_NEW = ["ascii","bin","src","obj"] 
+FOLDER_PROJECT_8BP = ["8bp_library","ascii","bin","src","obj"] 
 MODELS_CPC         = ["464","664","6128"]
+BAS_PATH           = PWD + "src"
+OBJ_PATH           = PWD + "obj"
+LOG_FILE           = "project.log"
+APP_PATH           = os.path.dirname(os.path.abspath(__file__))
+TEMPLATES          = APP_PATH + "/resources/templates/"
+SOFTWARE           = APP_PATH + "/resources/software/"
+
+# Variables for platform
+if sys.platform == "darwin":
+    DOWNLOAD_IDSK = "https://github.com/destroyer-dcf/idsk/releases/download/v0.20/iDSK-0.20-OSX.zip"
+    COMMANDO_IDSK  = APP_PATH + "/resources/software/iDSK"
+    RETROVIRTUALMACHINE  = APP_PATH + "/resources/software/RetroVirtualMachine"
+    URL = "https://static.retrovm.org/release/beta1/windows/x86/RetroVirtualMachine.2.0.beta-1.r7.windows.x86.zip"
+elif sys.platform == "win32" or sys.platform == "win64":
+    DOWNLOAD_IDSK = "https://github.com/destroyer-dcf/idsk/releases/download/v0.20/iDSK-0.20-windows.zip"
+    COMMANDO_IDSK  = APP_PATH + "/resources/software/iDSK.exe"
+    RETROVIRTUALMACHINE  = APP_PATH + "/resources/software/RetroVirtualMachine.exe"
+    URL = "https://static.retrovm.org/release/beta1/windows/x86/RetroVirtualMachine.2.0.beta-1.r7.windows.x86.zip"
+elif sys.platform == "linux":
+    DOWNLOAD_IDSK = "https://github.com/destroyer-dcf/idsk/releases/download/v0.20/iDSK-0.20-linux.zip"
+    COMMANDO_IDSK = APP_PATH + "/resources/software/iDSK"
+    RETROVIRTUALMACHINE = APP_PATH + "/resources/software/RetroVirtualMachine"
+    URL = "https://static.retrovm.org/release/beta1/linux/x64/RetroVirtualMachine.2.0.beta-1.r7.linux.x64.zip"
 
 
-CONFIG_FILE    = "sdkcpc.yml"
-PATH_TOOLS     = os.path.split(os.path.abspath(__file__))
-PARENT_DIR     = os.path.dirname(os.path.dirname(__file__))
-LOG_FILE       = "project.log"
 
-#Cabezera 
-def head(model):
-    if getConfigKeyProgram("show.amstrad.screen") == 1 :
-        if model == "6128":
-            console.print("  ")
-            console.print("[yellow bold] Amstrad 128K Microcomputer (s3) ")
-            console.print("[yellow bold] ©1984 Amstrad Consumer Electronics plc ")
-            console.print("[yellow bold]           and Locomotive Software Ltd. ")
-            console.print("[yellow bold] BASIC 1.1 ")
-            console.print("  ")
-            console.print("[yellow bold]Ready")
-            # print("  ")
-            # print("[yellow bold] █")
-        elif model == "464":
-            console.print("  ")
-            console.print("[yellow bold] Amstrad 64K Microcomputer (s1) ")
-            console.print("[yellow bold] ©1984 Amstrad Consumer Electronics plc ")
-            console.print("[yellow bold]           and Locomotive Software Ltd. ")
-            console.print("[yellow bold] BASIC 1.0 ")
-            console.print("  ")
-            console.print("[yellow bold]Ready")
-            # print("  ")
-            # print("[yellow bold] █")
-        elif model == "664":
-            console.print("  ")
-            console.print("[yellow bold] Amstrad 64K Microcomputer (v2) ")
-            console.print("[yellow bold] ©1984 Amstrad Consumer Electronics plc ")
-            console.print("[yellow bold]           and Locomotive Software Ltd. ")
-            console.print("[yellow bold] BASIC 1.1 ")
-            console.print("  ")
-            console.print("[yellow bold]Ready")
-            # print("  ")
-            # print("[yellow bold] █")
-
-#footer screen
-def footer():
-    if getConfigKeyProgram("show.amstrad.ready") == 1 :
-        console.print("[yellow bold]Ready")
-        console.print("[yellow bold]█")
-
-# Create Build de la compilacion
-def createBuild():
-    now = datetime.now()
-    return now
+# Get data project in dict
+def Get_data_project_dict():
+    config = ConfigParser()
+    config.read(MAKEFILE)
+    project_dic = dict(config._sections)
+    return project_dic
 
 
 # Leer propiedad del proyecto
@@ -106,41 +84,49 @@ def readProyectSection(section):
         print("[red bold]\[ERROR]: Section " + section + " not exist in "+MAKEFILE)
         sys.exit(1)
 
-# Modifica un valor de "+MAKEFILE+"
-#   @Param Nombre de la Seccion donde esta la key a modificar
-#   @Param nombre de la key a modificar
-#   @Param nuevo valor
-def setProjectKeyValue(section, key, value):
+def readBuild():
+    file_path = SOFTWARE + "/BUILD"
 
-    try:
-        config = configparser.RawConfigParser()
-        config.read(PWD + MAKEFILE)
-        config.set(section, key, value)
-        with open(PWD + MAKEFILE, 'w') as configfile:
-            config.write(configfile)
-    except:
-        console.print("[red bold]\[ERROR]: Section " + section + " or key " + key + " not exist in "+MAKEFILE)
-        sys.exit(1)
+    if os.path.isfile(file_path):
+        text_file = open(file_path, "r")
+        data = text_file.read()
+        text_file.close()
+        return data
 
+    return "Could not read the build"
 
-# get version cpcpy
-def  version():
-    try:
-        # print(PATH_TOOLS[0] + '/VERSION')
-        # print(PARENT_DIR)
-        # print(pathlib.Path(__file__).parent.absolute())
-        # print(os.path.abspath(os.getcwd()))
-        with open(PATH_TOOLS[0] + '/VERSION', 'r') as file:
-            return file.read().rstrip()
-    except IOError:
-        return "12.0.0"
+def show_head(info, color):
+    print("[*] ------------------------------------------------------------------------")
+    if color == "white":
+        console.print("[*][white bold] " + info)
+    elif color == "red":
+        console.print("[*][red bold] " + info)
+    elif color == "green":
+        console.print("[*][green bold] " + info)
+    print("[*] ------------------------------------------------------------------------")
 
 
-def infoLog(recurso,informacion):
-    print("[blue bold]\["+recurso+"][yellow bold] "+informacion+" [green bold]\[OK]")
+def show_info(info, color):
+    print("[*] ------------------------------------------------------------------------")
+    if color == "white":
+        console.print("[*][white bold] " + info)
+    elif color == "red":
+        console.print("[*][red bold] " + info)
+    elif color == "green":
+        console.print("[*][green bold] " + info)
+    print("[*] ------------------------------------------------------------------------")
 
-def warningLog(recurso,informacion):
-    print("[blue bold]\["+recurso+"][yellow bold] "+informacion+" [yellow bold]\[WARNING]")
+def show_foot(info, color):
+    print("[*] ------------------------------------------------------------------------")
+    if color == "white":
+        console.print("[*][white bold] " + info)
+    elif color == "red":
+        console.print("[*][red bold] " + info)
+    elif color == "green":
+        console.print("[*][green bold] " + info)
+    print("[*] ------------------------------------------------------------------------")
 
-def errorLog(recurso,informacion):
-    print("[blue bold]\["+recurso+"][yellow bold] "+informacion+" [red bold]\[ERROR]")
+def developer_info():
+    print("\n[white]sdkcpc [green]v"+str(__version__))
+    print("[blue]" + sys.platform+ " - [red] Build: [yellow]"+str(readBuild()))
+    print("[magenta]©2022 Destroyer\n")

@@ -1,9 +1,10 @@
+import glob
 from rich.console import Console
 
-from .config import *
+
 from .common import *
-from .new import *
-from .check import *
+from .project import *
+from .validate import *
 import configparser
 import os
 
@@ -14,58 +15,59 @@ from rich.table import Column
 console = Console(width=100,color_system="windows",force_terminal=True)
 contador_files = 0
 
+project_data = Get_data_project_dict()
+
 def info():
-    Section_general = readProyectSection("general")
-    Section_rvm     = readProyectSection("rvm")
 
-    head(str(Section_rvm["model.cpc"]))
+    show_head("Information project","white")
+    # print("[*] ------------------------------------------------------------------------")
+    print("[*] [blue bold]COMPILATION [/]------------------------------------------------------------")
+    print("[*]   compilation: " + project_data["compilation"]["build"])
+    print("[*]   version: " + project_data["compilation"]["version"])
+    print("[*] [blue bold]GENERAL [/]----------------------------------------------------------------")
+    print("[*]   name: " + project_data["general"]["name"])
+    print("[*]   description: " + project_data["general"]["description"])
+    print("[*]   template: " + project_data["general"]["template"])
+    print("[*]   authors: " + project_data["general"]["authors"])
+    print("[*] [blue bold]CONFIG [/]-----------------------------------------------------------------")
+    print("[*]   concatenate.bas.files: " + project_data["config"]["concatenate.bas.files"])
+    print("[*]   name.bas.file: " + project_data["config"]["name.bas.file"])
+    print("[*] [blue bold]RETRO VIRTUAL MACHINE [/]--------------------------------------------------")
+    print("[*]   model.cpc: " + project_data["rvm"]["model.cpc"])
+    print("[*] [blue bold]M4 BOARD [/]---------------------------------------------------------------")
+    print("[*]   ip: " + project_data["m4"]["ip"])
     print(" ")
-
-    config = configparser.ConfigParser()
-    config.read(PWD + MAKEFILE)
-
-    for i in config.sections():
-        ShowDataProjectinSection(i)
     
-    console.rule("[bold yellow]PROJECT FILES")
-    table = Table(show_lines= True,show_edge=True,box=box.SQUARE,expand=True)
-    table.add_column("Folder", justify="left", style="yellow bold", no_wrap=True)
-    table.add_column("Files", justify="left", style="green bold")
-    table.add_column("Size", justify="left", style="white bold",width=50)
+    if project_data["general"]["template"] == "8BP":
+        info_files(FOLDER_PROJECT_8BP)
+    elif project_data["general"]["template"] == "BASIC":
+        info_files(FOLDER_PROJECT_NEW)
 
-    if Section_general["template"] == "Basic":
-        FOLDERS = FOLDER_PROJECT_NEW 
+
+def info_files(estructura):
+    show_head("Files Information","white")
+    TOTAL_FILES= 0
+    TOTAL_SIZE = 0
+    for i in estructura:
+        if not i == "8bp_library":
+            TOTAL_FILES = TOTAL_FILES + CountFilesFolderProject(i)
+            print("[+] [blue bold]"+ i + " [/] (" + str(CountFilesFolderProject(i))+ " Files)")
+            arr = next(os.walk(PWD + i))[2]
+            if len(arr) == 0:
+                TOTAL_SIZE = TOTAL_SIZE + 0
+                print('{message: <18}'.format(message="[+]  ....")+"[0 KB]")
+            for x in range(0,len(arr)):
+                TOTAL_SIZE = TOTAL_SIZE + int(GetKbytes(PWD + i + "/" + arr[x]))
+                print('{message: <18}'.format(message="[+]   " + arr[x])+"[" +GetKbytes(PWD + i + "/" + arr[x])+" KB]")
+    show_foot("Total "+str(TOTAL_FILES)+" files with a size of " + str(TOTAL_SIZE) + " KB","green")
+
+def GetKbytes(file):
+    if int(f"{os.path.getsize(file)/float(1<<10):,.0f}") == 0:
+        return "1"
     else:
-        FOLDERS = FOLDER_PROJECT_8BP
-
-    for a in FOLDERS:
-        total_size = 0
-        files = glob.glob(PWD + a + "/*") 
-        contador = 0
-        for f in files: 
-            if int(f"{os.path.getsize(f)/float(1<<10):,.0f}") == 0:
-                total_size = total_size + 1
-                table.add_row(a,os.path.basename(f), "1 KB")
-            else:
-                total_size = total_size + int(f"{os.path.getsize(f)/float(1<<10):,.0f}")
-                table.add_row(a,os.path.basename(f), str(f"{os.path.getsize(f)/float(1<<10):,.0f} KB"))
-            contador += 1
-        if contador == 0:
-            table.add_row(a,"No files in folder", "0 KB")
-    console.print(table) 
-    footer()
-    print("")    
+        return str(f"{os.path.getsize(file)/float(1<<10):,.0f}")
 
 
-def ShowDataProjectinSection(section):
-    Sectionitems  = readProyectSection(section)
-    console.rule("[bold yellow]"+section.upper())
-    table = Table(show_lines= True,show_edge=True,box=box.SQUARE,expand=True,show_header=False)
-    table.add_column("key", justify="left", style="green bold",max_width=7)
-    table.add_column("Value", justify="left", style="white bold")
-    for key,value in Sectionitems.items():
-            table.add_row(key, value)
-    console.print(table)  
 
 # Get number of kbytes of folder
 #   @Param folder project
