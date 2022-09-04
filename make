@@ -8,6 +8,7 @@ value=`cat VERSION`
 echo "- New Version : $value"
 echo "__version__ = '$value'" > sdkcpc/__init__.py
 echo $build > sdkcpc/resources/software/BUILD
+echo $build > sdkcpc/BUILD
 echo "- Build       : $build"
 
 cp VERSION sdkcpc/resources/software
