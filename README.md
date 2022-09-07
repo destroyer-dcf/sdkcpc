@@ -151,6 +151,14 @@ Carga nuestro DSK generado y ejecuta el bas seleccionado sobre el emulador pasad
 | `sdkcpc run`    |  --rvm   | Ejecuta el emulador Retro virtual Machine.|
 ---
 
+**deploy**
+
+Carga nuestro DSK generado y ejecuta el bas seleccionado sobre el emulador pasado como opcion al argumento.
+
+| Como Usar  | Opciones  | Descripcion  |
+|:----------|:----------|:----------|
+| `sdkcpc deploy`    |  --rvm   | Compila y carga el dsk resultante en el emulador Retro virtual Machine.|
+---
 
 ## Información de contacto y soporte
 email: destroyer.dcf@gmail.com
