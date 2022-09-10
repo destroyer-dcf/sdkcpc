@@ -22,3 +22,5 @@ pandoc README.md -o User_manual.pdf
 git add .
 git commit -m "compile and upload pytest version $value"
 git push origin develop
+
+gh release create --repo seanh/gha-python-packaging-demo --generate-notes 0.0.1
