@@ -1,35 +1,13 @@
 #!/bin/bash
 
 LAST_TAG=$(git tag | sort -V | tail -1)
-NEW_TAG=$(echo $LAST_TAG | awk -F. -v OFS=. 'NF==1{print ++$NF}; NF>1{if(length($NF+1)>length($NF))$(NF-1)++; $NF=sprintf("%0*d", length($NF), ($NF+1)%(10^length($NF))); print}')
-BUILD=$(date '+%Y/%m/%d %H:%M:%S')
+NOTAS=$(cat NOTES)
 
 echo "*******************************************"
-echo "Upload Version $NEW_TAG to PYTEST"
+echo "Create Pull Request $NEW_TAG to PYPI"
 echo "*******************************************"
-echo "New Tag   : "$NEW_TAG
-echo "New Build : "$BUILD
+echo "[*] Tag   : "$LAST_TAG
+echo "[*] Create pull request develop --> main"
+gh pr create --title "Pull request Version $LAST_TAG" --body $NOTAS
 
-echo "[*] Create __init__.py version"
-echo "__version__ = '$NEW_TAG'" > sdkcpc/__init__.py
-echo "[*] Create VERSION and BUILD Files"
-echo $NEW_TAG > VERSION
-echo $BUILD > BUILD
-
-cp VERSION sdkcpc/resources/software
-cp BUILD sdkcpc/resources/software
-echo "[*] Copy VERSION and BUILD Files to main dir"
-
-echo "[*] Generate User Manual in pdf"
-pandoc README.md -o User_manual.pdf
-
-echo "[*] Add commit to repository"
-
-git add .
-git commit -m "Prepare user manual and files to New $NEW_TAG"
-git push
-
-#gh release create --repo seanh/gha-python-packaging-demo --generate-notes 0.0.1
-echo "[*] Create NEW release $NEW_TAG"
-gh release create --notes-file NOTES $NEW_TAG
 

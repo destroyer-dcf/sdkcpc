@@ -18,7 +18,7 @@ echo $BUILD > BUILD
 
 cp VERSION sdkcpc/resources/software
 cp BUILD sdkcpc/resources/software
-echo "[*] Copy VERSION and BUILD Files to main dir"
+echo "[*] Copy VERSION and BUILD Files to main dir" 
 
 echo "[*] Generate User Manual in pdf"
 pandoc README.md -o User_manual.pdf
@@ -31,5 +31,5 @@ git push
 
 #gh release create --repo seanh/gha-python-packaging-demo --generate-notes 0.0.1
 echo "[*] Create NEW release $NEW_TAG"
-gh release create --generate-notes $NEW_TAG
+gh release create --notes-file NOTES $NEW_TAG
 
