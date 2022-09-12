@@ -76,15 +76,14 @@ def main():
 
     if args.command == 'new':
 
-        createNewProject(args.name_project,"Basic")
+        createNewProject(args.name_project,"BASIC")
 
     elif args.command == 'new-8bp':
 
         createNewProject(args.name_project_8bp,"8BP")
 
     elif args.command == 'run':
-        if args.verbose == False:
-            validate_data_project()
+        validate_project(args.verbose)
         if args.rvm == True:
             rvm()
             sys.exit(0)
@@ -95,8 +94,7 @@ def main():
 
     elif args.command == 'deploy':
         if args.rvm == True:
-            if args.verbose == False:
-                validate_data_project()
+            validate_project(args.verbose)
             if build() == True:
                 rvm()
                 sys.exit(0)
@@ -106,13 +104,13 @@ def main():
         print("\n[red bold]Missing parameter.\n")
 
     elif args.command == 'info':
+        validate_project(True)
         info()
     elif args.command == "validate":
-        validate_data_project()
+        validate_makefile_project()
 
     elif args.command == "make":
-        if args.verbose == False:
-            validate_data_project()
+        validate_project(args.verbose)
         build()
     elif args.command == "about":
         about()

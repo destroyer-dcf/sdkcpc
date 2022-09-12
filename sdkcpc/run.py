@@ -52,11 +52,16 @@ def download_retro_virtual_machine():
 # Ejecuta retro virtual machine con el dsk asociado
 def rvm():
     
+ 
     download_retro_virtual_machine()
     print()
     project_data = Get_data_project_dict()
     
+    
     show_head("Run " + project_data["general"]["name"]+".dsk in the Emulator","white")
+    if not path.exists(PWD + project_data["general"]["name"]+".dsk"):
+        show_info("An error occurred not exist " + project_data["general"]["name"]+".dsk","red")
+        sys.exit(1)
     DSK = PWD + project_data["general"]["name"]+".dsk"
     print("[+] Version : " + project_data["compilation"]["version"])
     print("[+] Build   : " + project_data["compilation"]["build"])

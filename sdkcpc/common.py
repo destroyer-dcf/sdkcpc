@@ -21,17 +21,16 @@ console = Console(width=80,color_system="windows",force_terminal=True)
 
 # DEFINE VARIABLES
 
-PWD                = os.getcwd() + "/"
-MAKEFILE           = "Project.cfg"
-FOLDER_PROJECT_NEW = ["ascii","bin","src","obj"] 
-FOLDER_PROJECT_8BP = ["8bp_library","ascii","bin","src","obj"] 
-MODELS_CPC         = ["464","664","6128"]
-BAS_PATH           = PWD + "src"
-OBJ_PATH           = PWD + "obj"
-LOG_FILE           = "project.log"
-APP_PATH           = os.path.dirname(os.path.abspath(__file__))
-TEMPLATES          = APP_PATH + "/resources/templates/"
-SOFTWARE           = APP_PATH + "/resources/software/"
+PWD                 = os.getcwd() + "/"
+MAKEFILE            = "Project.cfg"
+FOLDERS_PROJECT_NEW = ["resources","ascii","bin","src","obj"] 
+MODELS_CPC          = ["464","664","6128"]
+BAS_PATH            = PWD + "src"
+OBJ_PATH            = PWD + "obj"
+LOG_FILE            = "project.log"
+APP_PATH            = os.path.dirname(os.path.abspath(__file__))
+TEMPLATES           = APP_PATH + "/resources/templates/"
+SOFTWARE            = APP_PATH + "/resources/software/"
 
 # Variables for platform
 if sys.platform == "darwin":

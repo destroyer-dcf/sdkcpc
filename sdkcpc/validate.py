@@ -17,6 +17,21 @@ CONFIG = {}
 RVM = {}
 M4 = {}
 
+def validate_project(verbose):
+    # validate if we are in a project folder
+    validate_Folder_Project()
+    
+    # Validate MAKEFILE
+    validate_makefile_project(verbose)
+    
+    # Validate project structure
+    validate_structure_project(FOLDERS_PROJECT_NEW,verbose)
+
+    # Validate 8:3 files
+    validate_83_files_project(FOLDERS_PROJECT_NEW,verbose)
+
+
+
 def conversions_error(error):
 
     show_info(MAKEFILE+" Validation","white")
@@ -69,13 +84,13 @@ def show_specific_key_error(section,diccionary):
             print("[red bold]\[*]   [yellow bold]" + key + ": [red bold]" + diccionary[key])
  
 def show_error_validate(error):
+    print (error)
     new_error = re.sub('[^a-zA-Z0-9:, \n\.]', '', error)
     new_error = new_error.replace(":", " >")
     new_error = new_error.replace(",", "\n")
     conversions_error(new_error)
 
-def validate_data_project():
-    validate_Folder_Project()
+def validate_makefile_project(verbose):
     
     schema = eval(open(APP_PATH + "/schema.py", 'r').read())
     v = Validator(schema)
@@ -87,32 +102,24 @@ def validate_data_project():
         print()
         sys.exit(1)
 
-
-    show_head(MAKEFILE + "","white")
-    print("[*] [blue bold]COMPILATION [/]")
-    print("[*]   compilation: " + project_data["compilation"]["build"]+ " [green bold][OK]")
-    print("[*]   version: " + project_data["compilation"]["version"]+ " [green bold][OK]")
-    print("[*] [blue bold]GENERAL [/]")
-    print("[*]   name: " + project_data["general"]["name"]+ " [green bold][OK]")
-    print("[*]   description: " + project_data["general"]["description"]+ " [green bold][OK]")
-    print("[*]   template: " + project_data["general"]["template"]+ " [green bold][OK]")
-    print("[*]   authors: " + project_data["general"]["authors"]+ " [green bold][OK]")
-    print("[*] [blue bold]CONFIG [/]")
-    print("[*]   concatenate.bas.files: " + project_data["config"]["concatenate.bas.files"]+ " [green bold][OK]")
-    print("[*]   name.bas.file: " + project_data["config"]["name.bas.file"]+ " [green bold][OK]")
-    print("[*] [blue bold]RETRO VIRTUAL MACHINE [/]")
-    print("[*]   model.cpc: " + project_data["rvm"]["model.cpc"]+ " [green bold][OK]")
-    print("[*] [blue bold]M4 BOARD [/]")
-    print("[*]   ip: " + project_data["m4"]["ip"] + " [green bold][OK]")
-    show_foot(MAKEFILE + " Successfull","green")
-    
-    if project_data["general"]["template"] == "8BP":
-        validate_Project_structure(FOLDER_PROJECT_8BP)
-        validate_83(FOLDER_PROJECT_8BP)
-    elif project_data["general"]["template"] == "BASIC":
-        validate_Project_structure(FOLDER_PROJECT_NEW)
-        validate_83(FOLDER_PROJECT_NEW)
-    
+    if verbose == False:
+        show_head(MAKEFILE + "","white")
+        print("[*] [blue bold]COMPILATION [/]")
+        print("[*]   compilation: " + project_data["compilation"]["build"]+ " [green bold][OK]")
+        print("[*]   version: " + project_data["compilation"]["version"]+ " [green bold][OK]")
+        print("[*] [blue bold]GENERAL [/]")
+        print("[*]   name: " + project_data["general"]["name"]+ " [green bold][OK]")
+        print("[*]   description: " + project_data["general"]["description"]+ " [green bold][OK]")
+        print("[*]   template: " + project_data["general"]["template"]+ " [green bold][OK]")
+        print("[*]   authors: " + project_data["general"]["authors"]+ " [green bold][OK]")
+        print("[*] [blue bold]CONFIG [/]")
+        print("[*]   concatenate.bas.files: " + project_data["config"]["concatenate.bas.files"]+ " [green bold][OK]")
+        print("[*]   name.bas.file: " + project_data["config"]["name.bas.file"]+ " [green bold][OK]")
+        print("[*] [blue bold]RETRO VIRTUAL MACHINE [/]")
+        print("[*]   model.cpc: " + project_data["rvm"]["model.cpc"]+ " [green bold][OK]")
+        print("[*] [blue bold]M4 BOARD [/]")
+        print("[*]   ip: " + project_data["m4"]["ip"] + " [green bold][OK]")
+        show_foot(MAKEFILE + " Successfull","green")
     
 # validate folder is poject
 def validate_Folder_Project():
@@ -122,30 +129,31 @@ def validate_Folder_Project():
 
 # Validamos que existan todas las carpetas del proyecto
 #   @Param: array carpetas 
-def validate_Project_structure(estructura):
-    show_head("Project Structure Validation","white")
-    print("[+] [blue bold]FOLDERS [/]")
+def validate_structure_project(estructura, verbose):
+    if verbose == False: show_head("Project Structure Validation","white")
     for i in estructura:
         if not os.path.isdir(PWD + i):
             print("[red bold][+]   " + i + " : Folder not exist in this project.")
             show_foot("Structure error","red")
             sys.exit(1)
         else:
-            print("[+]   " + i + " [green bold][OK]")
+            if verbose == False: print("[+]   " + i + " [green bold][OK]")
 
-    show_foot("Structure Successfull","green")
+    if verbose == False: show_foot("Structure Successfull","green")
 
 
-def validate_83(estructura):
-    show_head("Validate 8:3 Files","white")
+def validate_83_files_project(estructura, verbose):
+    if verbose == False: show_head("Validate 8:3 Files","white")
     for i in estructura:
-        print("[+] [blue bold]"+ i + " [/]")
+        if verbose == False: print("[+] [blue bold]"+ i + " [/]")
         arr = next(os.walk(PWD + i))[2]
-        if len(arr) == 0: print("[+]   No files in folder [yellow bold][WARNING]")
+        if len(arr) == 0:
+            if verbose == False: print("[+]   No files in folder [yellow bold][WARNING]")
         for x in range(0,len(arr)):
             if len(os.path.splitext(arr[x])[1]) != 4 or len(os.path.splitext(arr[x])[0]) > 8:
+                show_head("Validate 8:3 Files","white")
                 print("[red bold][+]   " + arr[x] + " : does not conform to 8:3 file format.")
                 sys.exit(1)
             else:
-                print("[+]   " + arr[x]  + " [green bold][OK]")
-    show_foot("8:3 Files Successfull","green")
+                if verbose == False: print("[+]   " + arr[x]  + " [green bold][OK]")
+    if verbose == False: show_foot("8:3 Files Successfull","green")

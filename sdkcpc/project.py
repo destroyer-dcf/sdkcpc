@@ -45,9 +45,9 @@ def createNewProject(nameProject,template):
 
         # create template bas file
         if template == "8BP":
-            copy_8bp_library(PWD + nameProject +"/8bp_library/8bp.dsk")
+            copy_resources(PWD + nameProject +"/resources/8bp.dsk")
             create_template(data,"8bp.j2",PWD + nameProject +"/src/" + nameProject + ".bas")
-        elif template == "Basic":
+        elif template == "BASIC":
             create_template(data,"basic.j2",PWD + nameProject +"/src/" + nameProject + ".bas")
 
         # Create a Git Versions and Vscode files
@@ -89,10 +89,10 @@ def create_template(data,template_name,file):
 # Crea estructura del proyecto
 def create_structure_project(project,template):
     
-    if template == "Basic":
-        estructura = FOLDER_PROJECT_NEW
+    if template == "BASIC":
+        estructura = FOLDERS_PROJECT_NEW
     elif template == "8BP":
-        estructura = FOLDER_PROJECT_8BP
+        estructura = FOLDERS_PROJECT_NEW
 
     for i in estructura:
         if not os.path.isdir(PWD + project + "/" + i):
@@ -109,7 +109,7 @@ def createVscode(project):
         sys.exit(1)
 
 # Copia 8bp defauld
-def copy_8bp_library(project):
+def copy_resources(project):
     try:
         shutil.copy(APP_PATH + "/resources/software/8bp.dsk",project)
         print("[+] Copy example 8bp library.")

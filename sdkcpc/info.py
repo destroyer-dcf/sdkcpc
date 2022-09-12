@@ -39,9 +39,9 @@ def info():
     print(" ")
     
     if project_data["general"]["template"] == "8BP":
-        info_files(FOLDER_PROJECT_8BP)
+        info_files(FOLDERS_PROJECT_NEW)
     elif project_data["general"]["template"] == "BASIC":
-        info_files(FOLDER_PROJECT_NEW)
+        info_files(FOLDERS_PROJECT_NEW)
 
 
 def info_files(estructura):
@@ -49,7 +49,7 @@ def info_files(estructura):
     TOTAL_FILES= 0
     TOTAL_SIZE = 0
     for i in estructura:
-        if not i == "8bp_library":
+        if not i == "resources":
             TOTAL_FILES = TOTAL_FILES + CountFilesFolderProject(i)
             print("[+] [blue bold]"+ i + " [/] (" + str(CountFilesFolderProject(i))+ " Files)")
             arr = next(os.walk(PWD + i))[2]

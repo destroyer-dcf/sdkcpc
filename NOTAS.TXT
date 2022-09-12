@@ -1,6 +1,8 @@
 - add Folder SD with files for m4
 - add m4 option
 
+- Arreglar run cuando no hay proyecto. Chequear antes de run si estamos en carpeta del proyecto. Si es verbose funciona bien.
+- Arreglar mostrar datos de version. Poner todo en un mismo color.
 
 
 

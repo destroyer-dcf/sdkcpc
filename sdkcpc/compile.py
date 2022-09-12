@@ -62,11 +62,11 @@ def build():
     #     except:
     #         show_info("BUILD ERROR - "+"iDSK does not exist.","red")
     #         sys.exit(1)
-    #     Folders = FOLDER_PROJECT_NEW
+    #     Folders = FOLDERS_PROJECT_NEW
     # else:
-    #     copy_file(PWD + "8bp_library/8bp.dsk",project_data["general"]["name"]+".dsk")
+    #     copy_file(PWD + "resources/8bp.dsk",project_data["general"]["name"]+".dsk")
     #     print("[+] Copy library 8BP to DSK")
-    #     Folders = FOLDER_PROJECT_8BP
+    #     Folders = FOLDERS_PROJECT_NEW
 
     FNULL = open(os.devnull, 'w')
     try:
@@ -75,16 +75,14 @@ def build():
     except:
         show_info("BUILD ERROR - "+"iDSK does not exist.","red")
         sys.exit(1)
-    Folders = FOLDER_PROJECT_NEW
 
     if project_data["general"]["template"] == "8BP":
-        if not path.exists(PWD + "8bp_library/8bp.dsk"):
-            show_foot("BUILD ERROR - 8bp_library/8bp.dsk does not exist.","red")
+        if not path.exists(PWD + "resources/8bp.dsk"):
+            show_foot("BUILD ERROR - resources/8bp.dsk does not exist.","red")
             sys.exit(1) 
         else:
             try:
-                retcode = subprocess.Popen([COMMANDO_IDSK, PWD+"8bp_library/8bp.dsk","-g","bin/8BP.BIN"], stdout=FNULL, stderr=subprocess.STDOUT)
-                Folders = FOLDER_PROJECT_8BP
+                retcode = subprocess.Popen([COMMANDO_IDSK, PWD+"resources/8bp.dsk","-g","bin/8BP.BIN"], stdout=FNULL, stderr=subprocess.STDOUT)
             except:
                 show_info("BUILD ERROR - "+"iDSK does not exist.","red")
                 sys.exit(1) 
@@ -92,21 +90,21 @@ def build():
         
     # Add files to DSK
     dsk  = PWD + project_data["general"]["name"]+".dsk"
-    for x in range(0,len(Folders)):
-        if Folders[x] == "obj" or Folders[x] == "bin" or Folders[x] == "ascii":
-            files = os.listdir(PWD + "/" + Folders[x])
+    for x in range(0,len(FOLDERS_PROJECT_NEW)):
+        if FOLDERS_PROJECT_NEW[x] == "obj" or FOLDERS_PROJECT_NEW[x] == "bin" or FOLDERS_PROJECT_NEW[x] == "ascii":
+            files = os.listdir(PWD + "/" + FOLDERS_PROJECT_NEW[x])
             for addfile in files:
-                if is_binary(PWD + Folders[x] + "/" + addfile):
+                if is_binary(PWD + FOLDERS_PROJECT_NEW[x] + "/" + addfile):
                     type_file = "1"
                 else:
                     type_file = "0"
                 
                 FNULL = open(os.devnull, 'w')
                 try:
-                    retcode = subprocess.run([COMMANDO_IDSK, dsk,"-i",PWD + Folders[x] + "/" + addfile,"-f","-t",type_file], stdout=FNULL, stderr=subprocess.STDOUT)
-                    print("[+] Add " + Folders[x] + "/" + addfile + " to DSK")
+                    retcode = subprocess.run([COMMANDO_IDSK, dsk,"-i",PWD + FOLDERS_PROJECT_NEW[x] + "/" + addfile,"-f","-t",type_file], stdout=FNULL, stderr=subprocess.STDOUT)
+                    print("[+] Add " + FOLDERS_PROJECT_NEW[x] + "/" + addfile + " to DSK")
                 except:
-                    show_info("BUILD ERROR - "+"Added file " + Folders[x] + "/" + addfile + " to DSK","red")
+                    show_info("BUILD ERROR - "+"Added file " + FOLDERS_PROJECT_NEW[x] + "/" + addfile + " to DSK","red")
                     sys.exit(1)
 
     Change_Version_makefile(new_version,new_compilation)
