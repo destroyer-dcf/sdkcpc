@@ -1,22 +1,8 @@
-#!/usr/bin/python
 
 import argparse
-import configparser
-import os
-import os.path
-import sys
-
-from . import __version__
-from .common import *
-
 from .about import *
-from .project import *
-from .validate import *
-# from .build import *
 from .compile import *
 from .run import *
-from .info import *
-
 from .validate import *
 
 
@@ -28,7 +14,7 @@ def main():
     subparsers = parser.add_subparsers(help='commands', dest='command')
 
     # AN about command
-    about_parser = subparsers.add_parser('about', help='Shows information about Basic SDK')
+    subparsers.add_parser('about', help='Shows information about Basic SDK')
 
     # A build command
     build_parser = subparsers.add_parser('make', help='make the DSK image of the project')
@@ -42,12 +28,12 @@ def main():
     deploy_parser.add_argument('--m4', action='store_true', help='Run in M4-Board')
 
     # A check command
-    check_parser = subparsers.add_parser('validate', help='Project data validation.')
+    subparsers.add_parser('validate', help='Project data validation.')
 
     # config_parser.print_help()
 
     # AN info command
-    info_parser = subparsers.add_parser('info', help='Show information of project')
+    subparsers.add_parser('info', help='Show information of project')
 
     # A new command
     new_parser = subparsers.add_parser('new', help='Create new basic project')
@@ -100,7 +86,7 @@ def main():
         validate_project(True)
         info()
     elif args.command == "validate":
-        validate_makefile_project()
+        validate_makefile_project(True)
     elif args.command == "make":
         validate_project(args.verbose)
         build()
