@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>None</loc>
+         <loc>https://github.com/destroyer-dcf/sdkcpc/</loc>
          <lastmod>2022-11-09</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
+         <loc>https://github.com/destroyer-dcf/sdkcpc/about/</loc>
          <lastmod>2022-11-09</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
+         <loc>https://github.com/destroyer-dcf/sdkcpc/authenticated/</loc>
+         <lastmod>2022-11-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://github.com/destroyer-dcf/sdkcpc/license/</loc>
+         <lastmod>2022-11-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://github.com/destroyer-dcf/sdkcpc/release-notes/</loc>
          <lastmod>2022-11-09</lastmod>
          <changefreq>daily</changefreq>
     </url>
