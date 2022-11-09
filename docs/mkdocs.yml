@@ -1,5 +1,10 @@
 site_name: SDKCPC
 site_url: https://destroyer-dcf.github.io/sdkcpc/
+repo_url: https://destroyer-dcf.github.io/sdkcpc/
+repo_name: GitHub
+site_author: Destroyer
+site_description: Esto es una prueba de descripcion
+copyright: Destroyer 2022
 nav:
   - Inicio: 'index.md'
   - Acerca de: 'about.md'
