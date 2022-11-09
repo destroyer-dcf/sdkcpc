@@ -1,5 +1,6 @@
 site_name: SDKCPC
 site_url: https://destroyer-dcf.github.io/sdkcpc/
+logo: img/about.png
 nav:
   - Inicio: 'index.md'
   - Acerca de: 'about.md'
