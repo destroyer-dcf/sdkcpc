@@ -1,18 +1,5 @@
 # Welcome to MkDocs
-hiolka como estas
-ghjfghjfgh
-sdafsd
-fa
-sdf
-f
-a
-sdfasdf
-as
-ddd
-df
-asd
-
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+ [mkdocs.org](https://www.mkdocs.org).
 
 ## Commands
 

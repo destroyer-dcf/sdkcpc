@@ -1,9 +1,5 @@
 # Welcome to MkDocs
-hola como estas
-adfasdfasdfasd
-fasdfasd
-
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+visit [mkdocs.org](https://www.mkdocs.org).
 
 ## Commands
 
