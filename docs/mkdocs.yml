@@ -1,8 +1,0 @@
-site_name: SDKCPC
-
-nav:
-  - Inicio: 'index.md'
-  - Acerca de: 'about.md'
-
-theme: readthedocs
-
