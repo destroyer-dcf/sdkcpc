@@ -1,9 +1,23 @@
-site_name: Documentación de Biblioteca
+# Project information
+site_name: SDKCPC
+site_url: https://github.com/destroyer-dcf/sdkcpc
+site_author: Destroyer
+
+# Repository
+repo_name: destroyer-dcf/sdkcpc
+repo_url: https://github.com/destroyer-dcf/sdkcpc
+edit_uri: ""
 
 nav:
-  - Inicio: 'index.md'
-  - 'Guía de Usuario':
-    - 'Sistema de Autenticación': 'authenticated.md'
-  - Acerca de: 'about.md'
-
+    - Home: 'index.md'
+    - 'User Guide':
+        - 'Writing your docs': 'writing-your-docs.md'
+        - 'Styling your docs': 'styling-your-docs.md'
+    - About:
+        - 'License': 'license.md'
+        - 'Release Notes': 'release-notes.md'
 theme: readthedocs
+logo: assets/about.png
+extra:
+  version: latest
+  homepage: https://example.com
