@@ -1,6 +1,5 @@
 name: Publish to pypi.org
-on:  
-  push:
+on:
   pull_request:
     branches:
       - main
