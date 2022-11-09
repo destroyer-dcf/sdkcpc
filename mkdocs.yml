@@ -1,12 +1,9 @@
-site_name: SDKCPC
-site_url: https://destroyer-dcf.github.io/sdkcpc/
-logo: img/about.png
+site_name: Documentación de Biblioteca
+
 nav:
   - Inicio: 'index.md'
+  - 'Guía de Usuario':
+    - 'Sistema de Autenticación': 'authenticated.md'
   - Acerca de: 'about.md'
-  - Acerca de mi: 'about.md'
-  - Acerca de ti: 'about.md'
 
-version: 1.0.2
 theme: readthedocs
-
