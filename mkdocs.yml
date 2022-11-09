@@ -6,12 +6,13 @@ site_author: Destroyer
 site_description: Esto es una prueba de descripcion
 copyright: Destroyer 2022
 nav:
-  - Inicio: 'index.md'
-  - Acerca de: 'about.md'
-  - Acerca de mi: 'about.md'
-  - Acerca de ti: 'about.md'
+    - Introduction: 'index.md'
+    - 'about.md'
+    - 'Issue Tracker': 'https://example.com/'
 
 version: 1.0.2
 theme: readthedocs
+  locale: es
+  highlightjs: true
   logo: assets/about.png
 
