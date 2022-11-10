@@ -16,7 +16,22 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://github.com/destroyer-dcf/sdkcpc/commands/</loc>
+         <lastmod>2022-11-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://github.com/destroyer-dcf/sdkcpc/getting-started/</loc>
+         <lastmod>2022-11-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://github.com/destroyer-dcf/sdkcpc/index1/</loc>
+         <lastmod>2022-11-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://github.com/destroyer-dcf/sdkcpc/instalation/</loc>
          <lastmod>2022-11-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
