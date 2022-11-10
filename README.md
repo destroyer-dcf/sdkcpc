@@ -2,9 +2,9 @@
 
 ![image](screenshot/about.png)
 
-**SDKCPC** son una serie de librerias y programas multiplataforma desarrollados en *[Python](https://www.python.org/downloads/)*. que nos sirve para facilitarnos la vida en la programación con Locomotive Amstrad Basic, en ordenadores actuales. **SDKCPC** se distribuye bajo licencia [LGPL v3](https://www.python.org/downloads/)
+**sdkcpc** son una serie de librerias y programas multiplataforma desarrollados en *[Python](https://www.python.org/downloads/)*, que nos sirven para facilitarnos la vida en la programación con Locomotive Amstrad Basic en ordenadores actuales. **sdkcpc** se distribuye bajo licencia [LGPL v3](https://www.python.org/downloads/)
 
-**SDKCPC** incluye: 
+**sdkcpc** incluye: 
 
 - Integración con Vscode
 - Snnipet integrado para Basic y para la libreria [8BP](https://github.com/jjaranda13/8BP)
@@ -49,7 +49,7 @@ Para que nuestra experiencia de programacion sea mas agradable, es recomendable 
 
 ## Instalación SDKCPC en tu sistema
 
-Para instalar **SDKCPC** en tu sistema por favor realice los siguientes pasos:
+Para instalar **sdkcpc** en tu sistema por favor realice los siguientes pasos:
 
 1. Instale los [Requisitos de Software](#Requisitos-de-Software) de su sistema.
 2. Una vez instalados ejecute el siguiente comando desde el cmd/terminal de sus sistema:

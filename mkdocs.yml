@@ -2,22 +2,25 @@
 site_name: SDKCPC
 site_url: https://github.com/destroyer-dcf/sdkcpc
 site_author: Destroyer
-
+copyright: © Copyright 2022, Destroyer. Revision 1.0.1
 # Repository
 repo_name: destroyer-dcf/sdkcpc
 repo_url: https://github.com/destroyer-dcf/sdkcpc
 edit_uri: ""
 
 nav:
-    - Home: 'index.md'
+    - Inicio: 'index.md'
     - 'User Guide':
-        - 'Writing your docs': 'writing-your-docs.md'
-        - 'Styling your docs': 'styling-your-docs.md'
+        - 'Instalación': 'instalation.md'
+        - 'Comandos': 'commands.md'
+        - 'Empezando': 'getting-started.md'
     - About:
-        - 'License': 'license.md'
+        - 'Licencia': 'license.md'
         - 'Release Notes': 'release-notes.md'
-theme: readthedocs
+
+theme:
+  name: readthedocs
+  include_sidebar: true
 logo: assets/about.png
 extra:
   version: latest
-  homepage: https://example.com
