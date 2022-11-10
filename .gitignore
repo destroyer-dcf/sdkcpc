@@ -5,6 +5,7 @@ __pycache__/
 .idea/*
 .gitignore
 NOTAS.TXT
+.idea
 # C extensions
 *.so
 cosas.txt
